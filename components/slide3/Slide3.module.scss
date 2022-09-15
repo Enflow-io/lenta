@@ -1,0 +1,16 @@
+.Slide{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 450px;
+  background: #EEEEEE;
+  p{
+    max-width: 900px;
+    //font-family: 'Futura PT';
+    font-family: 'Futura Light';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 30px;
+    line-height: 36px;
+  }
+}

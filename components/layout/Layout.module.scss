@@ -1,0 +1,97 @@
+@import "./SizeVars";
+
+.Header{
+  max-width: $mainWidth;
+  width: $mainWidth;
+  display: flex;
+  flex-direction: row;
+  height: 125px;
+}
+
+.HeaderContainer{
+  background: #35219A;
+  display: flex;
+  justify-content: center;
+}
+
+.Menu{
+  ul{
+    padding: 0;
+    margin: 13px 0 18px 0;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    font-family: 'Futura PT';
+    li{
+      margin-right: 26px;
+      a{
+        color: #FFFFFF;
+        text-decoration: none;
+        &:hover{
+          text-decoration: underline;
+
+        }
+      }
+
+    }
+  }
+}
+
+.RightPart{
+  display: flex;
+  flex-direction: row;
+}
+
+
+.Logo{
+  margin-right: 26px;
+  //margin-left: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  bottom: 2px
+}
+
+.Button{
+  button{
+    cursor: pointer;
+    font-family: 'Futura PT';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 31px;
+    letter-spacing: -0.015em;
+
+    color: #35219A;
+    background: #FFD200;
+    border-radius: 6px;
+    border: none;
+    height: 55px;
+    width: 800px;
+  }
+
+}
+
+.Phone{
+  padding: 0 28px;
+  font-family: 'Futura PT';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20.5px;
+  line-height: 26px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  a{
+    color: #FFFFFF;
+    text-decoration: none;
+    &:hover{
+      text-decoration: underline;
+    }
+  }
+}
+
+

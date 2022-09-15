@@ -1,0 +1,43 @@
+@import "./../layout/SizeVars";
+
+
+.Container{
+  background: white;
+  display: flex;
+  justify-content: center;
+}
+
+.Slide{
+  position: relative;
+  max-width: $mainWidth;
+  height: 380px;
+  width: 100%;
+
+  a{
+    position: absolute;
+    bottom: 35px;
+    left: 10px;
+    font-family: 'Futura PT';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 38px;
+    line-height: 32px;
+    color: #000000;
+  }
+}
+
+.Card{
+  position: absolute;
+}
+
+.CardContent{
+  border-left: 1px solid #FFD200;;
+  padding-left: 13px;
+}
+
+.Info{
+  text-decoration: none;
+  &:hover{
+    //text-decoration: underline;
+  }
+}

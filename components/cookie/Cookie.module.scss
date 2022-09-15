@@ -1,0 +1,77 @@
+@import "./../layout/SizeVars";
+
+.Cookie{
+  z-index: 99909;
+  background: #4836A2;
+  position: sticky;
+  bottom: 0;
+  left: 0;
+  height: 110px;
+
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  box-shadow: 0px 10px 5px black, 0px -1px 9px #4836A2;
+
+}
+.Long{
+  height: 210px;
+}
+.Short{
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+}
+
+p.LongText{
+  font-size: 14px !important;
+
+
+  color: #FFFFFF;
+}
+.Container{
+
+  width: $mainWidth;
+  background: #4836A2;
+
+  p{
+    font-family: 'Futura Light';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 22px;
+    color: #FFFFFF;
+  }
+
+  button{
+    cursor: pointer;
+    width: 120px;
+    height: 32px;
+    background: #00AB34;
+    font-family: 'Futura PT';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+
+    color: #FFFFFF;
+  }
+
+  a{
+    font-family: 'Futura Light';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 22px;
+    color: #FFFFFF;
+    font-weight: bold;
+    text-decoration: none;
+    &:hover{
+      text-decoration: underline;
+
+    }
+  }
+}
+
+.NotVisible{
+  display: none;
+}

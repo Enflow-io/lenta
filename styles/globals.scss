@@ -1,0 +1,32 @@
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: 'Futura PT';
+}
+
+@font-face {
+  font-family: 'Futura PT';
+  //src: url('/f/FuturaPT/FuturaPT-Heavy.woff');
+  src: url('/f/FuturaPT/FuturaPT-Medium.woff');
+  //src: url('/f/FuturaPT/FuturaPT-Light.woff');
+}
+
+@font-face {
+  font-family: 'Futura Light';
+  //src: url('/f/FuturaPT/FuturaPT-Heavy.woff');
+  src: url('/f/FuturaPT/FuturaPT-Light.woff');
+  //src: url('/f/FuturaPT/FuturaPT-Light.woff');
+}
+
+
+@font-face {
+  font-family: 'Futura PT2';
+  src: url('/f/FuturaPT/FuturaPT-MediumObl.woff');
+}
+
+@font-face {
+  font-family: 'Futura Heavy';
+  src: url('/f/FuturaPT/FuturaPT-Heavy.woff');
+}
+
