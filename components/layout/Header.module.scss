@@ -1,0 +1,164 @@
+@import "./SizeVars";
+
+.HeaderContainer{
+  background: #35219A;
+  display: flex;
+  justify-content: center;
+}
+
+.Header{
+  max-width: $mainWidth;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  height: 125px;
+  justify-content: center;
+
+  @media (max-width: 1180px) {
+    padding: 0 20px;
+  }
+
+  @media (max-width: 1000px) {
+    justify-content: space-between;
+
+  }
+}
+
+
+.Container{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+
+.Button{
+  width: calc(100% - 210px);
+  max-width: 800px;
+  min-width: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  button{
+    cursor: pointer;
+    font-family: 'Futura PT';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 31px;
+    letter-spacing: -0.015em;
+
+    color: #35219A;
+    background: #FFD200;
+    border-radius: 6px;
+    border: none;
+    height: 55px;
+    max-width: 800px;
+    width: 100%;
+    display: block;
+
+    @media (max-width: 1000px) {
+      font-size: 15px;
+      height: 30px;
+    }
+  }
+
+}
+
+.RightPart{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+
+.Menu{
+  ul{
+    @media (max-width: 1000px) {
+      display: none;
+
+    }
+    padding: 0;
+    margin: 13px 0 18px 0;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    font-family: 'Futura PT';
+    li{
+      font-size: 16px;
+      @media (max-width: 1180px) {
+        margin-right: 20px;
+        font-size: 14px;
+
+      }
+
+      margin-right: 26px;
+      a{
+        color: #FFFFFF;
+        text-decoration: none;
+        &:hover{
+          text-decoration: underline;
+
+        }
+      }
+
+    }
+  }
+}
+
+.Phone{
+  padding: 0 28px;
+  font-family: 'Futura PT';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20.5px;
+  line-height: 26px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  a{
+    color: #FFFFFF;
+    text-decoration: none;
+    &:hover{
+      text-decoration: underline;
+    }
+  }
+
+  @media (max-width: 1000px) {
+    font-size: 15px;
+  }
+}
+
+
+.Logo{
+  margin-right: 26px;
+  //margin-left: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  bottom: 2px;
+
+  @media (max-width: 1000px) {
+    margin-right: 0px;
+
+    img{
+      width: 50px;
+      height: 50px;
+    }
+
+  }
+}
+
+
+.Content{
+  display: flex;
+  flex-direction: column;
+
+  @media (max-width: 1000px) {
+    flex-direction: row;
+
+  }
+}

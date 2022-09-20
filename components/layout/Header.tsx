@@ -1,23 +1,26 @@
 import classes from "./Layout.module.scss"
+import classesHeader from "./Header.module.scss";
 import React from "react";
 import Image from 'next/image'
 import Link from "next/link";
-
+import Popup from "reactjs-popup";
+import 'reactjs-popup/dist/index.css';
+import Form from "../form/Form";
 interface HeaderInterface {
 
 }
 
 const Header = (props: HeaderInterface) => {
-    return <div className={classes.HeaderContainer}>
-        <div className={classes.Header}>
-            <div className={classes.Logo}>
+    return <div className={classesHeader.HeaderContainer}>
+        <div className={classesHeader.Header}>
+            <div className={classesHeader.Logo}>
                 <a href={'/'}>
                     <img src={'/i/lenta-big-logo.svg'} width={95} height={87}/>
                 </a>
                 {/*<Image src="/i/logo.png" alt="logo" width={95} height={87}/>*/}
             </div>
-            <div className={classes.Content}>
-                <div className={classes.Menu}>
+            <div className={classesHeader.Content}>
+                <div className={classesHeader.Menu}>
                     <ul>
                         <li>
                             <Link href="/">
@@ -51,11 +54,18 @@ const Header = (props: HeaderInterface) => {
                         </li>
                     </ul>
                 </div>
-                <div className={classes.RightPart}>
-                    <div className={classes.Button}>
-                        <button>Заполнить анкету</button>
+                <div className={classesHeader.RightPart}>
+                    <div className={classesHeader.Button}>
+                        <Popup contentStyle={{
+                            minWidth: '600px',
+                            maxWidth: '800px',
+                            width: '100%'
+                        }}  trigger={<button>Заполнить анкету</button>} modal>
+                            <Form />
+                        </Popup>
+
                     </div>
-                    <div className={classes.Phone}><a href={'tel:8 800 770-00-30'}>8 800 770-00-30</a></div>
+                    <div className={classesHeader.Phone}><a href={'tel:8 800 770-00-30'}>8 800 770-00-30</a></div>
                 </div>
             </div>
         </div>

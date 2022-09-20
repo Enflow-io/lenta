@@ -4,6 +4,7 @@ import React, {useState} from "react";
 import Table from "../table/Table";
 import Select from 'react-select'
 import makeAnimated from 'react-select/animated';
+import CustomPlacemark from "./CustomPlacemark";
 interface SearchProps {
 
 }
@@ -12,6 +13,7 @@ const Search = (props: SearchProps) => {
 
     const [isMap, setIsMap] = useState(true)
 
+    const [selectedVacancy, setSelectedVacancy] = useState<undefined | number>(undefined)
 
     const options = [
         { value: 'chocolate', label: 'Chocolate' },
@@ -96,7 +98,7 @@ const Search = (props: SearchProps) => {
                 }} className={isMap ? undefined : classes.Active} href={'#'}>Список</a>
             </div>
 
-            {isMap &&
+            {isMap && !selectedVacancy &&
             <div className={classes.Map}>
                 <YMaps>
                     <Map instanceRef={ref => {
@@ -117,26 +119,48 @@ const Search = (props: SearchProps) => {
 
 
                     >
-                        <Placemark
-                            geometry={[55.684758, 37.738521]}
-                            properties={{
-                                hintContent: "test",
-                            }}
-                            options={{
-                                iconLayout: 'default#image',
-                                iconImageHref: '/i/lenta-icon.svg',
-                                iconImageSize: [40, 40],
-                            }}
-                        />
+                        {/*<Placemark*/}
+                        {/*    geometry={[55.684758, 37.738521]}*/}
+                        {/*    properties={{*/}
+                        {/*        hintContent: "test",*/}
+                        {/*    }}*/}
+                        {/*    options={{*/}
+                        {/*        iconLayout: 'default#image',*/}
+                        {/*        iconImageHref: '/i/lenta-icon.svg',*/}
+                        {/*        iconImageSize: [40, 40],*/}
+                        {/*    }}*/}
+                        {/*/>*/}
+
+                        <CustomPlacemark geometry={[55.684758, 37.738521]}
+                                       options={{
+                                           iconLayout: 'default#image',
+                                           iconImageHref: '/i/lenta-icon.svg',
+                                           iconImageSize: [40, 40],
+
+                                           iconColor: '#ff0000',
+                                           hideIconOnBalloonOpen: false,
+                                           balloonMaxWidth: 200,
+                                       }}
+                                       user={{
+                                           id: 0,
+                                       }}
+                                       myClick={() => alert('!')}/>
                     </Map>
 
                 </YMaps>
 
             </div>
             }
-            {!isMap && <div className={classes.Table}>
+            {!isMap && !selectedVacancy && <div className={classes.Table}>
                 <Table />
             </div>}
+
+
+            {selectedVacancy && <div className={classes.Vacancy}>
+                <h2>Название вакансии</h2>
+            </div>}
+
+
 
         </div>
     </div>
