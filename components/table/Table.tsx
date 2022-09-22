@@ -10,7 +10,11 @@ import {
     useReactTable,
 } from '@tanstack/react-table'
 
-const Table = ()=>{
+interface TableProps {
+    onSelect: (id: string)=>void
+
+}
+const Table = (props: TableProps)=>{
     const data = React.useMemo(
         () => [
             {
@@ -98,6 +102,9 @@ const Table = ()=>{
 
 
 
+    const selectRow = (id: any)=>{
+        props.onSelect(id)
+    };
 
     return <div className={classes.Container}>
 
@@ -111,7 +118,7 @@ const Table = ()=>{
                     <tr key={headerGroup.id}>
                         {headerGroup.headers.map(header => {
                             return (
-                                <th key={header.id} colSpan={header.colSpan}>
+                                <th key={header.id} data-id={header.id} colSpan={header.colSpan}>
                                     {header.isPlaceholder ? null : (
                                         <div
                                             {...{
@@ -153,10 +160,12 @@ const Table = ()=>{
                     .rows.slice(0, 10)
                     .map(row => {
                         return (
-                            <tr key={row.id}>
+                            <tr key={row.id} onClick={e=>{
+                                selectRow(row.id)
+                            }} >
                                 {row.getVisibleCells().map(cell => {
                                     return (
-                                        <td key={cell.id}>
+                                        <td key={cell.id} data-id={cell.column.id}>
                                             {flexRender(
                                                 cell.column.columnDef.cell,
                                                 cell.getContext()

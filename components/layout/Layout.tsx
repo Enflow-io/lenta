@@ -7,6 +7,7 @@ import Slide3 from "../slide3/Slide3";
 import Slide5 from "../slide5/Slide5";
 import Slide4 from "../slide4/Slide4";
 import Cookie from "../cookie/Cookie";
+import FooterMobile from "./FooterMobile";
 
 interface LayoutProps {
     children: any
@@ -22,6 +23,7 @@ const Layout = (props: LayoutProps) => {
         <Slide4 />
         <Slide5 />
         <Footer />
+        <FooterMobile />
         <Cookie />
     </>
 

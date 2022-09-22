@@ -3,7 +3,7 @@ import Link from "next/link";
 import React from "react";
 
 const Footer = () => {
-    return <div className={classes.Container}>
+    return <div className={`${classes.Container} ${classes.FooterDesktop}`}>
         <div className={classes.Footer}>
             <div className={classes.Line1}>
                 <ul className={classes.Menu}>

@@ -1,9 +1,9 @@
 @import "./../layout/SizeVars";
 .Banner{
-
+  padding: 0 20px;
   position: relative;
-  height: 290px;
-  width: 100%;
+  min-height: 290px;
+  width: calc(100% - 40px);
   max-width: $mainWidth;
 
   h2, p{
@@ -45,6 +45,10 @@
   background: url("/i/bg_banner.png") 100% 100% no-repeat; background-size: cover;
   position: relative;
 
+  @media (max-width: 876px) {
+    min-height: 364px;
+  }
+
 }
 
 .BG{
@@ -58,7 +62,8 @@
 
 .Content{
   position: absolute;
-  width: 100%;
+  width: calc(100% - 40px);
+
   z-index: 9999;
 }
 
@@ -85,4 +90,38 @@
   position: absolute;
   right: 5px;
   bottom: -37px;
+}
+
+.Banner {
+  @media (max-width: 876px) {
+    h2, p{
+      text-align: center;
+    }
+    .Button{
+      position: relative;
+      bottom: 5px;
+      font-size: 20px;
+      height: 40px;
+
+    }
+
+    .Content{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    h2{
+      font-size: 30px;
+
+    }
+
+    p{
+      margin-top: 0;
+      font-size: 24px;
+
+    }
+  }
+
 }
