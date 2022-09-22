@@ -28,7 +28,7 @@ const Cookie = () => {
                     Lockr.set('cookie', true);
                     setIsVisible(false)
                 }
-                }>Согаслен
+                }>Согласен
                 </button>
             </div>
 
