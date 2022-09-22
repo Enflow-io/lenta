@@ -42,7 +42,7 @@ var styles = {
         height: '100%'
     },
     bmMenu: {
-        background: '#373a47',
+        background: '#35219A',
         padding: '2.5em 1.5em 0',
         fontSize: '1.15em'
     },
@@ -54,7 +54,7 @@ var styles = {
         padding: '0.8em'
     },
     bmItem: {
-        display: 'inline-block'
+        display: 'block'
     },
     bmOverlay: {
         background: 'rgba(0, 0, 0, 0.3)'
@@ -65,17 +65,25 @@ const Layout = (props: LayoutProps) => {
     return <>
         <Menu right={true} styles={styles}>
             <Link href="/">
-                <a id="home" className="menu-item" href="/">Home</a>
+                <a id="home" className="bm-item-list" href="/">О компании</a>
+            </Link>
+         <Link href="/">
+                <a id="home" className="bm-item-list" href="/">Работа в магазине</a>
+            </Link>
+         <Link href="/">
+                <a id="home" className="bm-item-list" href="/">Распределительные центры
+                    и автохозяйство</a>
             </Link>
             <Link href="/">
-                <a id="home" className="menu-item" href="/">Home</a>
+                <a id="home" className="bm-item-list" href="/">Производство и кулинария</a>
             </Link>
-            <Link href="/">
-                <a id="home" className="menu-item" href="/">Home</a>
+<Link href="/">
+                <a id="home" className="bm-item-list" href="/">Офис</a>
             </Link>
-            <Link href="/">
-                <a id="home" className="menu-item" href="/">Home</a>
+<Link href="/">
+                <a id="home" className="bm-item-list" href="/">Студентам</a>
             </Link>
+
 
         </Menu>
         <Header/>

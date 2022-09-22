@@ -6,7 +6,7 @@ import Card from "./Card";
 const Slide4 = () => {
     return <div className={classes.Container}>
         <div className={classes.Slide}>
-            <Card top={-110} left={0}/>
+            <Card  top={-110} left={0}/>
             <Card top={40} left={250}/>
             <Card top={-110} left={500}/>
             <Card top={40} left={750}/>

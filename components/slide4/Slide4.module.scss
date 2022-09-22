@@ -5,14 +5,33 @@
   background: white;
   display: flex;
   justify-content: center;
-  overflow-y: hidden;
+  //overflow-y: hidden;
 }
+
+
 
 .Slide{
   position: relative;
   max-width: $mainWidth;
   height: 380px;
   width: 100%;
+
+  @media (max-width: 1000px) {
+      &{
+        display: flex !important;
+        justify-content: center;
+      }
+      .Card:nth-child(4), .Card:nth-child(3), .Card:nth-child(5), .Card:nth-child(2){
+        display: none;
+      }
+
+    .Card:nth-child(1){
+      position: relative;
+      top: 0 !important;
+      right: 0;
+    }
+
+  }
 
   a{
     position: absolute;

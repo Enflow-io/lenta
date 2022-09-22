@@ -30,3 +30,23 @@ body {
   src: url('/f/FuturaPT/FuturaPT-Heavy.woff');
 }
 
+
+
+.bm-item-list{
+  display: block;
+  color: white;
+  margin-bottom: 1em;
+  font-family: 'Futura PT';
+  text-decoration: none;
+  &:hover{
+    text-decoration: underline;
+
+  }
+}
+.bm-burger-button{
+  display: none;
+  @media (max-width: 1000px) {
+    display: unset;
+
+  }
+}
