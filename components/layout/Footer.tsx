@@ -103,7 +103,7 @@ const Footer = () => {
                     <div><a href={'#'}>Пользовательское соглашение</a></div>
                     <div><a href={'#'}>Политика конфиденциальности</a></div>
                 </div>
-                <a href={'https://lenta.com'} target={'_blank'} className={classes.LentaName}>lenta.com</a>
+                <a href={'https://lenta.com'} target={'_blank'} rel="noreferrer" className={classes.LentaName}>lenta.com</a>
             </div>
         </div>
     </div>

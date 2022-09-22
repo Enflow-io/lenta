@@ -28,6 +28,7 @@ interface CustomPlacemarkProps {
 
 const CustomPlacemark = (props: any) => {
 
+    // @ts-ignore
     const UserPlacemarkCore = React.memo(({ymaps}: any) => {
         const makeLayout = (layoutFactory: any) => {
             const Layout = layoutFactory.createClass(

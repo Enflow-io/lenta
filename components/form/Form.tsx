@@ -37,8 +37,8 @@ const PreviewsWithClear = () => {
     }, [previewMethodsRef]);
 
     return <>
-        {previews.map((el: any)=>{
-            return <div>{el?.name}</div>
+        {previews.map((el: any, index: number)=>{
+            return <div key={index}>{el?.name}</div>
         })}
         {/*<button onClick={onClear}>*/}
         {/*    Clear {previews.length} previews*/}

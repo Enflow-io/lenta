@@ -9,6 +9,7 @@ import Slide4 from "../slide4/Slide4";
 import Cookie from "../cookie/Cookie";
 import FooterMobile from "./FooterMobile";
 import {slide as Menu} from "react-burger-menu";
+import Link from "next/link";
 
 interface LayoutProps {
     children: any
@@ -62,22 +63,31 @@ var styles = {
 
 const Layout = (props: LayoutProps) => {
     return <>
-        <Menu right={true} styles={ styles } >
-            <a id="home" className="menu-item" href="/">Home</a>
-            <a id="about" className="menu-item" href="/about">About</a>
-            <a id="contact" className="menu-item" href="/contact">Contact</a>
-            <a onClick={()=>{}} className="menu-item--small" href="">Settings</a>
+        <Menu right={true} styles={styles}>
+            <Link href="/">
+                <a id="home" className="menu-item" href="/">Home</a>
+            </Link>
+            <Link href="/">
+                <a id="home" className="menu-item" href="/">Home</a>
+            </Link>
+            <Link href="/">
+                <a id="home" className="menu-item" href="/">Home</a>
+            </Link>
+            <Link href="/">
+                <a id="home" className="menu-item" href="/">Home</a>
+            </Link>
+
         </Menu>
         <Header/>
         {props.children}
-        <Slide1 />
-        <Banner2 />
-        <Slide3 />
-        <Slide4 />
-        <Slide5 />
-        <Footer />
-        <FooterMobile />
-        <Cookie />
+        <Slide1/>
+        <Banner2/>
+        <Slide3/>
+        <Slide4/>
+        <Slide5/>
+        <Footer/>
+        <FooterMobile/>
+        <Cookie/>
     </>
 
 }
