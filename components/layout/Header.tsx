@@ -6,6 +6,8 @@ import Link from "next/link";
 import Popup from "reactjs-popup";
 import 'reactjs-popup/dist/index.css';
 import Form from "../form/Form";
+import { slide as Menu } from 'react-burger-menu'
+
 interface HeaderInterface {
 
 }
@@ -69,6 +71,8 @@ const Header = (props: HeaderInterface) => {
                 </div>
             </div>
         </div>
+
+
     </div>
 }
 
