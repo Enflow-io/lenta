@@ -87,6 +87,11 @@
     justify-content: space-between;
     flex-direction: row;
     font-family: 'Futura PT';
+    li{
+
+      padding: 3px 5px;
+
+    }
 
     li:nth-child(1) {
       -webkit-transition: all 0.3s ease;;
