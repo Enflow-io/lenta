@@ -58,6 +58,7 @@
     line-height: 14px;
 
     td {
+        padding-left: 14px;
       padding-bottom: 10px;
       border-bottom: 1px solid #EEEEEE;
 
@@ -85,7 +86,11 @@
     margin-right: 12px;
 
     input {
-      margin-left: 4px;
+      margin-right: 4px;
+      cursor: pointer;
+    }
+    label{
+      cursor: pointer;
     }
   }
 }
@@ -103,10 +108,12 @@
   align-items: center;
 
   a {
+    font-family: "Futura Light";
     text-decoration: none;
     font-weight: 300;
     font-size: 11px;
     color: #000000;
+    margin-bottom: 1em;
   }
 
   div > a {

@@ -122,13 +122,13 @@ const Table = (props: TableProps) => {
 
         <div className="p-2">
             <div className="h-2"/>
-            <table className={classes.Table}>
+            <table cellspacing="0" cellpadding="0" className={classes.Table}>
                 <thead>
                 {table.getHeaderGroups().map(headerGroup => (
-                    <tr key={headerGroup.id}>
+                    <tr  key={headerGroup.id}>
                         {headerGroup.headers.map(header => {
                             return (
-                                <th key={header.id} data-id={header.id} colSpan={header.colSpan}>
+                                <th  key={header.id} data-id={header.id} colSpan={header.colSpan}>
                                     {header.isPlaceholder ? null : (
                                         <div
                                             {...{
@@ -158,10 +158,20 @@ const Table = (props: TableProps) => {
                 <tr className={classes.ControlsTr}>
                     <td colSpan={columns.length}>
                         <ul className={classes.PageSizer}>
-                            <li>5 <input type={'radio'}/></li>
-                            <li>10 <input type={'radio'}/></li>
-                            <li>20 <input type={'radio'}/></li>
-                            <li>50 <input type={'radio'}/></li>
+                            <li><input
+                                id="pageSizer5"
+                                name={'pageSizer'} type={'radio'}/><label htmlFor="pageSizer5">5</label></li>
+                            <li><input
+                                id="pageSizer10"
+
+                                name={'pageSizer'} type={'radio'}/><label htmlFor="pageSizer10">10</label></li>
+                            <li><input
+                                id="pageSizer20"
+                                name={'pageSizer'} type={'radio'}/><label htmlFor="pageSizer20">20</label></li>
+                            <li><input
+                                id="pageSizer50"
+
+                                name={'pageSizer'} type={'radio'}/><label htmlFor="pageSizer50">50</label></li>
                         </ul>
                     </td>
                 </tr>

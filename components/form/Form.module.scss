@@ -2,7 +2,7 @@
   padding: 10px 40px;
 
   h1{
-    margin: 0;
+    margin: 0 0 .5em  0;
     padding: 0;
 
     font-family: 'Futura PT';
@@ -20,9 +20,19 @@
     font-size: 16px;
     line-height: 24px;
     padding: 0;
-    margin: 0;
+    margin: 0 0 .6em 0;
   }
 
+  .Rating{
+    margin: 0 0 .6em 0;
+
+  }
+
+  .BtnCont{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
   button{
     background: #00AB34;
     border-radius: 4px;
@@ -34,6 +44,8 @@
     color: white;
     padding: 21px 33px;
     border: none;
+    width: 169px;
+    height: 55px;
 
   }
 
@@ -45,7 +57,7 @@
 }
 
 .Text{
-  width: 100%;
+  width: calc(100% - 20px);
   height: 150px;
   background: #F5F5F5;
   border: 1px solid rgba(84, 84, 84, 0.21);
@@ -76,5 +88,15 @@
 
 .Footer{
   display: flex;
-  justify-content: space-between
+  justify-content: space-between;
+  p{
+    margin-top: .7em;
+  }
+}
+
+.CloseBtn{
+  cursor: pointer;
+  position: absolute;
+  top: 15px;
+  right:15px;
 }

@@ -60,9 +60,16 @@ const Form = () => {
     }
 
     return <div className={classes.Form}>
+        <div className={classes.CloseBtn}>
+            <svg width="20" height="20" viewBox="0 0 27 27" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M20.1733 20.3139L6.73828 6.87891" stroke="#35219A" stroke-width="1.28528" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M6.68216 20.1792L20.1172 6.74414" stroke="#35219A" stroke-width="1.28528" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </div>
+
         <h1>Оцените карьерную страницу</h1>
         <p>Пожалуйста, поставьте Вашу оценку. Обратная связь от Вас поможет нам стать лучше: *</p>
-        <Rating style={{
+        <Rating className={classes.Rating} style={{
             position: 'relative',
             left: -3
         }} size={25} onClick={handleRating} ratingValue={rating} /* Available Props */ />
@@ -77,7 +84,10 @@ const Form = () => {
                 </Uploady>
                 <p>Размер файла не более 1 Мб (png, jpeg)</p>
             </div>
-            <button>Отправить</button>
+            <div className={classes.BtnCont}>
+                <button>Отправить</button>
+            </div>
+
         </div>
     </div>
 }
