@@ -1,5 +1,7 @@
 import React from "react";
 import classes from "./Table.module.scss"
+import closeIconSrc from "../../public/i/close-icon.svg"
+import Image from 'next/image'
 
 import {
     ColumnDef,
@@ -11,10 +13,11 @@ import {
 } from '@tanstack/react-table'
 
 interface TableProps {
-    onSelect: (id: string)=>void
+    onSelect: (id: string) => void
 
 }
-const Table = (props: TableProps)=>{
+
+const Table = (props: TableProps) => {
     const data = React.useMemo(
         () => [
             {
@@ -49,7 +52,8 @@ const Table = (props: TableProps)=>{
     )
 
     const rerender = React.useReducer(() => ({}), {})[1]
-    const refreshData = () => {}
+    const refreshData = () => {
+    }
 
     const columns = React.useMemo(
         () => [
@@ -58,7 +62,7 @@ const Table = (props: TableProps)=>{
                 accessorKey: 'vacancy', // accessor is the "key" in the data
             },
             {
-                header: 'Зарплата от',
+                header: 'Зарплата',
                 accessorKey: 'salaryFrom',
             },
             {
@@ -101,17 +105,23 @@ const Table = (props: TableProps)=>{
     });
 
 
-
-    const selectRow = (id: any)=>{
+    const selectRow = (id: any) => {
         props.onSelect(id)
     };
 
     return <div className={classes.Container}>
+        <div className={classes.aboveTable}>
+            <a href={'#'}>
+                Всего вакансий: 2 000
+            </a>
+            <div>
+                <a href={'#'}>Сбросить</a>
+                <Image src={closeIconSrc}/>
+            </div>
+        </div>
 
-        <a href={'#'}>Всего вакансий: 2 000</a>
-        <a href={'#'}>Сбросить</a>
         <div className="p-2">
-            <div className="h-2" />
+            <div className="h-2"/>
             <table className={classes.Table}>
                 <thead>
                 {table.getHeaderGroups().map(headerGroup => (
@@ -148,10 +158,10 @@ const Table = (props: TableProps)=>{
                 <tr className={classes.ControlsTr}>
                     <td colSpan={columns.length}>
                         <ul className={classes.PageSizer}>
-                            <li>5 <input type={'radio'} /></li>
-                            <li>10 <input type={'radio'} /></li>
-                            <li>20 <input type={'radio'} /></li>
-                            <li>50 <input type={'radio'} /></li>
+                            <li>5 <input type={'radio'}/></li>
+                            <li>10 <input type={'radio'}/></li>
+                            <li>20 <input type={'radio'}/></li>
+                            <li>50 <input type={'radio'}/></li>
                         </ul>
                     </td>
                 </tr>
@@ -160,9 +170,9 @@ const Table = (props: TableProps)=>{
                     .rows.slice(0, 10)
                     .map(row => {
                         return (
-                            <tr key={row.id} onClick={e=>{
+                            <tr key={row.id} onClick={e => {
                                 selectRow(row.id)
-                            }} >
+                            }}>
                                 {row.getVisibleCells().map(cell => {
                                     return (
                                         <td key={cell.id} data-id={cell.column.id}>

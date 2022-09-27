@@ -4,6 +4,10 @@
   background: #35219A;
   display: flex;
   justify-content: center;
+  @media (max-width: 1000px) {
+    height: 63px;
+    align-items: center;
+  }
 }
 
 .Header {
@@ -13,7 +17,7 @@
   flex-direction: row;
   height: 125px;
   justify-content: space-between;
-
+  //background: #00AB34;
 
   @media (max-width: 1180px) {
     padding: 0 20px;
@@ -21,7 +25,11 @@
 
   @media (max-width: 1000px) {
     justify-content: space-between;
+  }
 
+  @media (max-width: 1000px) {
+    justify-content: start;
+    padding-right: 10px;
   }
 }
 
@@ -36,7 +44,7 @@
 .Button {
   width: calc(100% - 210px);
   max-width: 800px;
-  min-width: 150px;
+  min-width: 125px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -63,6 +71,17 @@
       font-size: 15px;
       height: 30px;
     }
+
+    @media (max-width: 1000px) {
+      font-size: 13px;
+      margin-right: 10px;
+      height: 28px;
+      width: 125px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
   }
 
 }
@@ -71,6 +90,9 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  @media (max-width: 1000px) {
+    justify-content: center;
+  }
 }
 
 
@@ -87,7 +109,8 @@
     justify-content: space-between;
     flex-direction: row;
     font-family: 'Futura PT';
-    li{
+
+    li {
 
       padding: 3px 5px;
 
@@ -101,7 +124,8 @@
 
       &:hover {
         box-shadow: inset 0 0 0 1px white;
-        a{
+
+        a {
           text-decoration: none;
 
         }
@@ -131,6 +155,7 @@
       padding: 3px 5px;
       border-radius: 4px;
     }
+
     li:nth-child(3) {
       -webkit-transition: all 0.3s ease;;
       -moz-transition: all 0.3s ease;;
@@ -149,6 +174,7 @@
       padding: 3px 5px;
       border-radius: 4px;
     }
+
     li:nth-child(4) {
       -webkit-transition: all 0.3s ease;;
       -moz-transition: all 0.3s ease;;
@@ -212,12 +238,22 @@
 
     &:hover {
       text-decoration: underline;
+      color: #FFD200;;
     }
   }
 
   @media (max-width: 1000px) {
     font-size: 15px;
   }
+
+  @media (max-width: 1000px) {
+    padding: 0;
+  }
+
+  @media (max-width: 358px) {
+    font-size: 10px;
+  }
+
 }
 
 
@@ -236,6 +272,15 @@
     img {
       width: 50px;
       height: 50px;
+    }
+
+  }
+
+  @media (max-width: 1000px) {
+    margin-right: 7px;
+    img {
+      width: 42px;
+      height: 57px;
     }
 
   }

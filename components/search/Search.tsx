@@ -1,18 +1,24 @@
 import classes from "./Search.module.scss";
 import {Map, Placemark, YMaps} from "@pbe/react-yandex-maps";
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import Table from "../table/Table";
 import Select from 'react-select'
 import makeAnimated from 'react-select/animated';
 import CustomPlacemark from "./CustomPlacemark";
+import useWindowDimensions from '../../hooks/useWindowDimensions';
+import searchIconSrc from '../../public/i/search-icon.svg'
+import Image from "next/image"
+import DesktopSelectors from './DesktopSelectors';
+import MobileSelectors from './MobileSelectors';
+import {useIsMobile} from '../../hooks/useIsMobile';
 
 interface SearchProps {
 
 }
 
 const Search = (props: SearchProps) => {
-
     const [isMap, setIsMap] = useState(false)
+    const {isMobile} = useIsMobile()
 
     const [selectedVacancy, setSelectedVacancy] = useState<undefined | number | string>(undefined)
 
@@ -43,57 +49,7 @@ const Search = (props: SearchProps) => {
 
     return <div className={classes.Container}>
         <div className={classes.Search}>
-            <div className={classes.Selectors}>
-
-                <div className={classes.Line}>
-                    <div className={classes.Selector}>
-                        <label>Ключевое слово</label>
-
-                        <Select
-                            placeholder={<div className={classes.Placeholder}>Ключевое слово</div>}
-                            className={classes.ReactSelect}
-                            options={options}/>
-                    </div>
-                    <div className={classes.Selector}>
-                        <label>Вакансия</label>
-                        <input/>
-                    </div>
-                    <div className={classes.Selector}>
-                        <label>Направление деятельности</label>
-                        <Select
-                            placeholder={<div className={classes.Placeholder}>Направление деятельности</div>}
-
-
-                            className={classes.ReactSelect}
-                            options={options}/>
-                    </div>
-                </div>
-                <div className={classes.Line}>
-                    <div className={classes.Selector}>
-                        <label>Город</label>
-                        <Select
-                            placeholder={<div className={classes.Placeholder}>Город</div>}
-
-                            className={classes.ReactSelect}
-                            options={options}/>
-                    </div>
-                    <div className={classes.Selector}>
-                        <label>Метро</label>
-                        <Select
-                            placeholder={<div className={classes.Placeholder}>Метро</div>}
-
-                            className={classes.ReactSelect}
-                            options={options}/>
-                    </div>
-
-                    <div className={classes.Selector}>
-                        <label>&nbsp;</label>
-                        <button>Поиск</button>
-                    </div>
-
-                </div>
-
-            </div>
+            {isMobile ? <MobileSelectors/> : <DesktopSelectors/>}
 
             <div className={classes.Switcher}>
                 <a onClick={e => {
@@ -107,57 +63,57 @@ const Search = (props: SearchProps) => {
             </div>
 
             {isMap && !selectedVacancy &&
-            <div className={classes.Map}>
-                <YMaps>
-                    <Map instanceRef={ref => {
-                        // @ts-ignore
-                        ref && ref.behaviors.disable('scrollZoom');
-                    }}
-                         defaultState={{
-                             center: [55.684758, 37.738521],
-                             zoom: 14,
+                <div className={classes.Map}>
+                    <YMaps>
+                        <Map instanceRef={ref => {
+                            // @ts-ignore
+                            ref && ref.behaviors.disable('scrollZoom');
+                        }}
+                             defaultState={{
+                                 center: [55.684758, 37.738521],
+                                 zoom: 14,
 
-                         }}
-                         width={'100%'}
-                         height={500}
-                        // options={{
-                        //     scrollZoom: false
-                        // }
-                        // }
+                             }}
+                             width={'100%'}
+                             height={500}
+                            // options={{
+                            //     scrollZoom: false
+                            // }
+                            // }
 
 
-                    >
-                        {/*<Placemark*/}
-                        {/*    geometry={[55.684758, 37.738521]}*/}
-                        {/*    properties={{*/}
-                        {/*        hintContent: "test",*/}
-                        {/*    }}*/}
-                        {/*    options={{*/}
-                        {/*        iconLayout: 'default#image',*/}
-                        {/*        iconImageHref: '/i/lenta-icon.svg',*/}
-                        {/*        iconImageSize: [40, 40],*/}
-                        {/*    }}*/}
-                        {/*/>*/}
+                        >
+                            {/*<Placemark*/}
+                            {/*    geometry={[55.684758, 37.738521]}*/}
+                            {/*    properties={{*/}
+                            {/*        hintContent: "test",*/}
+                            {/*    }}*/}
+                            {/*    options={{*/}
+                            {/*        iconLayout: 'default#image',*/}
+                            {/*        iconImageHref: '/i/lenta-icon.svg',*/}
+                            {/*        iconImageSize: [40, 40],*/}
+                            {/*    }}*/}
+                            {/*/>*/}
 
-                        <CustomPlacemark geometry={[55.684758, 37.738521]}
-                                         options={{
-                                             iconLayout: 'default#image',
-                                             iconImageHref: '/i/lenta-icon.svg',
-                                             iconImageSize: [40, 40],
+                            <CustomPlacemark geometry={[55.684758, 37.738521]}
+                                             options={{
+                                                 iconLayout: 'default#image',
+                                                 iconImageHref: '/i/lenta-icon.svg',
+                                                 iconImageSize: [40, 40],
 
-                                             iconColor: '#ff0000',
-                                             hideIconOnBalloonOpen: false,
-                                             balloonMaxWidth: 200,
-                                         }}
-                                         user={{
-                                             id: 0,
-                                         }}
-                                         myClick={() => alert('!')}/>
-                    </Map>
+                                                 iconColor: '#ff0000',
+                                                 hideIconOnBalloonOpen: false,
+                                                 balloonMaxWidth: 200,
+                                             }}
+                                             user={{
+                                                 id: 0,
+                                             }}
+                                             myClick={() => alert('!')}/>
+                        </Map>
 
-                </YMaps>
+                    </YMaps>
 
-            </div>
+                </div>
             }
             {!isMap && !selectedVacancy && <div className={classes.Table}>
                 <Table onSelect={(id: string) => {
@@ -222,9 +178,10 @@ const Search = (props: SearchProps) => {
                     </div>
                     <div className={classes.BtnCont}>
                         <button className={classes.Share}>Поделиться</button>
-                        <button onClick={()=>{
+                        <button onClick={() => {
                             setSelectedVacancy(undefined)
-                        }} className={classes.Back}>Назад к списку вакансий</button>
+                        }} className={classes.Back}>Назад к списку вакансий
+                        </button>
                     </div>
                 </div>
             </div>}

@@ -7,6 +7,8 @@ body {
 
 @font-face {
   font-family: 'Futura PT';
+  font-weight: 300;
+  font-style: normal;
   //src: url('/f/FuturaPT/FuturaPT-Heavy.woff');
   src: url('/f/FuturaPT/FuturaPT-Medium.woff');
   //src: url('/f/FuturaPT/FuturaPT-Light.woff');
@@ -31,19 +33,21 @@ body {
 }
 
 
-
-.bm-item-list{
+.bm-item-list {
   display: block;
   color: white;
   margin-bottom: 1em;
   font-family: 'Futura PT';
   text-decoration: none;
-  &:hover{
-    text-decoration: underline;
 
+
+  &:hover {
+    border-bottom: 3px solid #FFFFFF;
+    color: #FFD200;
   }
 }
-.bm-burger-button{
+
+.bm-burger-button {
   display: none;
   @media (max-width: 1000px) {
     display: unset;

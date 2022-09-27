@@ -1,7 +1,14 @@
 @import "./SizeVars";
 
 
-
+.socials {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 30px;
+  svg {
+    margin-right: 14px;
+  }
+}
 
 
 

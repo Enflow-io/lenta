@@ -6,7 +6,7 @@ import Link from "next/link";
 import Popup from "reactjs-popup";
 import 'reactjs-popup/dist/index.css';
 import Form from "../form/Form";
-import { slide as Menu } from 'react-burger-menu'
+import {slide as Menu} from 'react-burger-menu'
 
 interface HeaderInterface {
 
@@ -40,7 +40,7 @@ const Header = (props: HeaderInterface) => {
                             </Link>
                         </li>
                         <li>
-                            <Link href="/">
+                            <Link href="/production">
                                 <a>Производство и кулинария</a>
                             </Link>
                         </li>
@@ -62,8 +62,8 @@ const Header = (props: HeaderInterface) => {
                             minWidth: '600px',
                             maxWidth: '800px',
                             width: '100%'
-                        }}  trigger={<button>Заполнить анкету</button>} modal>
-                            <Form />
+                        }} trigger={<button>Заполнить анкету</button>} modal>
+                            <Form/>
                         </Popup>
 
                     </div>

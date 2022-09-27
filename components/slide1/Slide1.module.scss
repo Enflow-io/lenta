@@ -49,9 +49,14 @@
     min-height: 364px;
   }
 
+  @media (max-width: 1000px) {
+    min-height: 250px;
+    min-width: 320px;
+  }
+
 }
 
-.BG{
+.BG {
   position: absolute;
   background: rgba(53, 33, 154, 0.5);
   width: 100%;
@@ -102,7 +107,11 @@
       bottom: 5px;
       font-size: 20px;
       height: 40px;
-
+      @media (max-width: 1000px) {
+        font-size: 14px;
+        height: 36px;
+        width: 220px;
+      }
     }
 
     .Content{
@@ -114,13 +123,18 @@
 
     h2{
       font-size: 30px;
-
+      @media (max-width: 1000px) {
+        font-size: 24px;
+      }
     }
 
     p{
       margin-top: 0;
       font-size: 24px;
-
+      @media (max-width: 1000px) {
+        font-size: 18px;
+        line-height: 20px;
+      }
     }
   }
 
