@@ -1,7 +1,8 @@
 @import "./../layout/SizeVars";
 
 
-.Container{
+.Container {
+  position: relative;
   background: white;
   display: flex;
   justify-content: center;
@@ -9,23 +10,22 @@
 }
 
 
-
-.Slide{
+.Slide {
   position: relative;
   max-width: $mainWidth;
   height: 380px;
   width: 100%;
 
   @media (max-width: 1000px) {
-      &{
-        display: flex !important;
-        justify-content: center;
-      }
-      .Card:nth-child(4), .Card:nth-child(3), .Card:nth-child(5), .Card:nth-child(2){
-        display: none;
-      }
+    & {
+      display: flex !important;
+      justify-content: center;
+    }
+    .Card:nth-child(4), .Card:nth-child(3), .Card:nth-child(5), .Card:nth-child(2) {
+      display: none;
+    }
 
-    .Card:nth-child(1){
+    .Card:nth-child(1) {
       position: relative;
       top: 0 !important;
       right: 0;
@@ -33,9 +33,9 @@
 
   }
 
-  a{
+  a {
     position: absolute;
-    bottom: 35px;
+    bottom: 0px;
     left: 10px;
     font-family: 'Futura PT';
     font-style: normal;
@@ -43,21 +43,113 @@
     font-size: 38px;
     line-height: 32px;
     color: #000000;
+    @media (max-width: 1000px) {
+      font-size: 24px;
+    }
   }
 }
 
-.Card{
+.Card {
   position: absolute;
 }
 
-.CardContent{
-  border-left: 1px solid #FFD200;;
+.CardContent {
+  border-left: 1px solid #FFD200;
   padding-left: 13px;
+  opacity: 0.6;
 }
 
-.Info{
+.Info {
+  display: flex;
+  align-items: center;
+  width: 100%;
   text-decoration: none;
-  &:hover{
+
+  .Icon {
+    width: 20px;
+    height: 16px;
+  }
+
+
+  p {
+    margin-right: 17px;
+    @media (max-width: 1000px) {
+      font-size: 17px;
+    }
+  }
+
+  &:hover {
     //text-decoration: underline;
   }
+}
+
+.Slider {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 310px;
+  width: 100%;
+
+  button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 20px;
+    width: 37px;
+    border-radius: 6px;
+    background: #FFD200;
+    border: none;
+  }
+
+  .card {
+    position: absolute;
+    top: -90px;
+    left: 15%;
+    right: 15%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+
+    .CardContent {
+      margin: 55px auto 0;
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 20px;
+
+      span {
+        font-size: 32px;
+      }
+    }
+  }
+
+  .about {
+    position: absolute;
+    bottom: 41px;
+    left: 15%;
+
+    p {
+      margin: 0 17px 0 0;
+      font-weight: 450;
+      font-size: 24px;
+      line-height: 32px;
+      color: #000000;
+    }
+
+  }
+}
+
+.switch {
+  width: 100%;
+  position: absolute;
+  top: 97px;
+  .prev {
+    position: absolute;
+    left: -5px;
+  }
+
+  .next {
+    position: absolute;
+    right: -5px;
+  }
+
 }

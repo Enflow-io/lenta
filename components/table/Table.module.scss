@@ -1,11 +1,11 @@
-.Table{
+.Table {
   width: 100%;
 
-  thead{
+  thead {
     background: #EEEEEE;
-
   }
-  th{
+
+  th {
     height: 41px;
     font-family: 'Futura PT';
     font-style: normal;
@@ -13,30 +13,39 @@
     font-size: 14px;
     @media (max-width: 1100px) {
       font-size: 10px;
-
+    }
+    @media (max-width: 1000px) {
+      background: white;
+      font-size: 11px;
     }
     line-height: 12px;
     background: #EEEEEE;
     border: 1px #EEEEEE;
-    >div{
+
+    > div {
       text-align: left;
       padding-left: 14px;
+      @media (max-width: 1000px) {
+        padding-left: 0;
+      }
     }
   }
 
-  tr:nth-child(1){
-    td{
+  tr:nth-child(1) {
+    td {
       border-bottom: 0;
       padding-bottom: 0px;
     }
   }
-  tr:last-child{
-    td{
+
+  tr:last-child {
+    td {
       border-bottom: 0;
       padding-bottom: 0px;
     }
   }
-  tr{
+
+  tr {
     height: 41px;
     font-family: 'Futura Light';
     font-style: normal;
@@ -48,7 +57,7 @@
     }
     line-height: 14px;
 
-    td{
+    td {
       padding-bottom: 10px;
       border-bottom: 1px solid #EEEEEE;
 
@@ -56,31 +65,53 @@
   }
 
 
-  th[data-id=salaryTo], th[data-id=activity], th[data-id=salaryTo],td[data-id=salaryTo], td[data-id=activity], td[data-id=salaryTo] {
+  th[data-id=salaryTo], th[data-id=activity], th[data-id=salaryTo], td[data-id=salaryTo], td[data-id=activity], td[data-id=salaryTo] {
     @media (max-width: 1100px) {
       display: none;
     }
   }
 }
 
-.PageSizer{
+.PageSizer {
   list-style: none;
   display: flex;
   flex-direction: row;
   margin-left: 0;
   padding-left: 0px;
-  li{
+
+  li {
     display: flex;
     flex-direction: row;
     margin-right: 12px;
-    input{
+
+    input {
       margin-left: 4px;
     }
   }
 }
 
-.Container{
+.Container {
   padding: 40px;
+  @media (max-width: 1000px) {
+    padding: 21px 12px
+  }
 }
 
+.aboveTable {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  a {
+    text-decoration: none;
+    font-weight: 300;
+    font-size: 11px;
+    color: #000000;
+  }
+
+  div > a {
+    margin-right: 10px;
+  }
+
+}
 

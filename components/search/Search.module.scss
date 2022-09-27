@@ -13,16 +13,20 @@
   min-height: 400px;
   padding-top: 70px;
 
+  @media (max-width: 1000px) {
+    padding-top: 0
+  }
 
 
 }
 
 
-.Selectors{
+.Selectors {
   @media (max-width: 1180px) {
     padding: 30px 20px;
   }
 }
+
 .Selector {
   display: flex;
   flex-direction: row;
@@ -39,13 +43,15 @@
     max-width: 105px;
     display: block;
     width: 110px;
-
   }
 
   input {
     height: 35px;
-
     width: 200px;
+
+    @media (max-width: 1000px) {
+      height: 34px;
+    }
   }
 
   button {
@@ -66,6 +72,11 @@
 
     letter-spacing: 0.01em;
     color: #35219A;
+
+    @media (max-width: 1000px) {
+      width: 100%;
+      font-size: 16px;
+    }
   }
 }
 
@@ -74,9 +85,6 @@
   display: flex;
   flex-direction: row;
   margin-bottom: 20px;
-
-
-
 
 
   > div {
@@ -94,7 +102,7 @@
 
     }
 
-    label{
+    label {
       display: none;
     }
     .ReactSelect, input {
@@ -105,11 +113,17 @@
 }
 
 .Switcher {
+  margin-top: 45px;
 
   @media (max-width: 1180px) {
-    padding: 0px 20px;
+    padding: 0 20px;
   }
-  margin-top: 45px;
+
+  @media (max-width: 1000px) {
+    display: flex;
+    justify-content: center;
+    margin-top: 0;
+  }
 
 
   a {
@@ -144,7 +158,8 @@
 
   a.Active {
     opacity: 0.7;
-    &:hover{
+
+    &:hover {
       text-decoration: none;
 
     }
@@ -156,11 +171,14 @@
   margin-bottom: 112px;
 }
 
-.Table{
+.Table {
   margin-top: 18px;
   margin-bottom: 112px;
   background: white;
   width: 100%;
+  @media (max-width: 1000px) {
+    margin-bottom: 41px;
+  }
 }
 
 
@@ -169,7 +187,7 @@
 }
 
 
-.Vacancy{
+.Vacancy {
   font-family: 'Futura PT';
 
 
@@ -179,8 +197,7 @@
   width: calc(100% - 128px);
   padding: 64px 89px 64px 89px;
 
-
-  h2{
+  h2 {
     font-family: 'Futura PT';
     font-style: normal;
     font-weight: 500;
@@ -190,21 +207,22 @@
   }
 }
 
-.VacancyCont{
+.VacancyCont {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+
 }
 
-.Lists, .Infos{
+.Lists, .Infos {
   width: 50%;
   min-width: 300px;
 }
 
 
-.List{
+.List {
 
-  label{
+  label {
     font-family: 'Futura PT';
     font-style: normal;
     font-weight: 400;
@@ -212,7 +230,8 @@
     line-height: 24px;
     margin-bottom: 15px;
   }
-  ul{
+
+  ul {
     list-style: none;
     font-family: 'Futura Light';
     font-style: normal;
@@ -221,11 +240,12 @@
     line-height: 24px;
     padding-left: 20px;
   }
+
   margin-bottom: 20px;
 }
 
-.Info{
-  label{
+.Info {
+  label {
     font-family: 'Futura Light';
     font-style: normal;
     font-weight: 400;
@@ -234,7 +254,8 @@
     margin-bottom: 2px;
     display: block;
   }
-  >div{
+
+  > div {
     font-family: 'Futura PT';
     font-style: normal;
     font-weight: 400;
@@ -245,15 +266,16 @@
 
     color: #35219A;
   }
+
   margin-bottom: 15px;
 }
 
-.VacancyFooter{
+.VacancyFooter {
   margin-top: 3em;
   display: flex;
   justify-content: space-between;
 
-  .Submit{
+  .Submit {
     cursor: pointer;
 
     background: #FFD200;
@@ -271,7 +293,7 @@
 
   }
 
-  .Share, .Back{
+  .Share, .Back {
     cursor: pointer;
     background: #00AB34;
     border-radius: 4px;
@@ -289,14 +311,46 @@
     margin-left: 1em;
   }
 
-  .Back{
+  .Back {
 
   }
 }
 
-.Placeholder{
+.Placeholder {
+  font-size: 14px;
+  color: #231F20;
+  font-weight: 300;
+  font-style: normal;
   @media (max-width: 1180px) {
     display: block;
   }
   display: none;
+}
+
+.Input {
+  display: flex;
+  flex-direction: row;
+  height: 35px;
+  align-items: center;
+  justify-content: end;
+
+  input {
+    padding-left: 18px;
+    min-height: 34px;
+    border-radius: 2px;
+    border: none;
+    outline: none;
+
+    &::placeholder {
+      font-size: 14px;
+      color: #231F20;
+      font-weight: 300;
+    }
+  }
+
+  .icon {
+    position: absolute;
+    //right: 24px;
+    padding-right: 12px;
+  }
 }
