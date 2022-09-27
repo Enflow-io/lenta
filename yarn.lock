@@ -344,6 +344,11 @@
   "resolved" "https://registry.npmjs.org/@humanwhocodes/object-schema/-/object-schema-1.2.1.tgz"
   "version" "1.2.1"
 
+"@iconfu/svg-inject@^1.2.3":
+  "integrity" "sha512-3v1MUAJqmJS4jmhHoCkSxt+EdJrjPHlLXrWocCT25kCxnxJto8028Z6CC406EL11KA53SDZgI/QQA5GEJAoiRw=="
+  "resolved" "https://registry.npmjs.org/@iconfu/svg-inject/-/svg-inject-1.2.3.tgz"
+  "version" "1.2.3"
+
 "@jridgewell/gen-mapping@^0.1.0":
   "integrity" "sha512-sQXCasFk+U8lWYEe66WxRDOE9PjVz4vSM51fTu3Hw+ClTpUSQb718772vH3pyS5pShp6lvQM7SxgIDXXXmOX7w=="
   "resolved" "https://registry.npmjs.org/@jridgewell/gen-mapping/-/gen-mapping-0.1.1.tgz"

@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@iconfu/svg-inject": "^1.2.3",
     "@pbe/react-yandex-maps": "^1.1.8",
     "@rpldy/upload-button": "^1.1.0",
     "@rpldy/upload-preview": "^1.1.0",
