@@ -13,6 +13,7 @@ interface HeaderInterface {
 }
 
 const Header = (props: HeaderInterface) => {
+    // @ts-ignore
     return <div className={classesHeader.HeaderContainer}>
         <div className={classesHeader.Header}>
             <div className={classesHeader.Logo}>
@@ -59,11 +60,15 @@ const Header = (props: HeaderInterface) => {
                 <div className={classesHeader.RightPart}>
                     <div className={classesHeader.Button}>
                         <Popup contentStyle={{
-                            minWidth: '600px',
+                            // minWidth: '600px',
                             maxWidth: '800px',
                             width: '100%'
                         }} trigger={<button>Заполнить анкету</button>} modal>
-                            <Form/>
+                            {
+                                // @ts-ignore
+                                (close: any) => (<Form close={()=>{close()}} />)
+                            }
+
                         </Popup>
 
                     </div>

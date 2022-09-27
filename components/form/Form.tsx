@@ -52,7 +52,11 @@ const PreviewsWithClear = () => {
     </>;
 };
 
-const Form = () => {
+interface PropsForm {
+    close: ()=>void
+}
+
+const Form = (props: PropsForm) => {
     const [rating, setRating] = useState(0);
     const handleRating = (rate: number) => {
         setRating(rate)
@@ -60,7 +64,7 @@ const Form = () => {
     }
 
     return <div className={classes.Form}>
-        <div className={classes.CloseBtn}>
+        <div className={classes.CloseBtn} onClick={props.close}>
             <svg width="20" height="20" viewBox="0 0 27 27" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M20.1733 20.3139L6.73828 6.87891" stroke="#35219A" stroke-width="1.28528" stroke-linecap="round" stroke-linejoin="round"/>
                 <path d="M6.68216 20.1792L20.1172 6.74414" stroke="#35219A" stroke-width="1.28528" stroke-linecap="round" stroke-linejoin="round"/>
