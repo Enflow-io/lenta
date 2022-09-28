@@ -82,12 +82,14 @@ const Layout = (props: LayoutProps) => {
             <Link href="/production">
                 <a id="production" className="bm-item-list" href="/">Производство и кулинария</a>
             </Link>
-            <Link href="/">
-                <a id="home" className="bm-item-list" href="/">Офис</a>
+            <Link  href="https://spb.hh.ru/employer/7172" passHref >
+                <a className="bm-item-list" target="_blank" rel="noopener noreferrer" href="https://spb.hh.ru/employer/7172">Офис</a>
             </Link>
-            <Link href="/">
-                <a id="home" className="bm-item-list" href="/">Студентам</a>
+
+            <Link  href="https://spb.hh.ru/employer/7172" passHref >
+                <a className="bm-item-list" target="_blank" rel="noopener noreferrer" href="https://spb.hh.ru/employer/7172">Студентам</a>
             </Link>
+
 
             <div className={classes.socials}>
                 <svg width="34" height="34" viewBox="0 0 34 34" fill="#FFFFFF" xmlns="http://www.w3.org/2000/svg">

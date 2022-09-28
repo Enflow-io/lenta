@@ -46,15 +46,16 @@ const Header = (props: HeaderInterface) => {
                             </Link>
                         </li>
                         <li>
-                            <Link href="/">
-                                <a>Офис</a>
+                            <Link  href="https://spb.hh.ru/employer/7172" passHref >
+                                <a target="_blank" rel="noopener noreferrer" href="https://spb.hh.ru/employer/7172">Офис</a>
                             </Link>
                         </li>
                         <li>
-                            <Link href="/">
-                                <a>Студентам</a>
+                            <Link  href="https://spb.hh.ru/employer/7172" passHref >
+                                <a target="_blank" rel="noopener noreferrer" href="https://spb.hh.ru/employer/7172">Студентам</a>
                             </Link>
                         </li>
+
                     </ul>
                 </div>
                 <div className={classesHeader.RightPart}>

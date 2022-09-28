@@ -60,6 +60,13 @@
 
     color: #35219A;
     background: #FFD200;
+
+
+    &:hover{
+      color: white;
+      background: #00AB34;
+    }
+
     border-radius: 6px;
     border: none;
     height: 55px;
