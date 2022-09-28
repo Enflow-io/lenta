@@ -13,17 +13,17 @@ const Footer = () => {
                         </Link>
                     </li>
                     <li>
-                        <Link href="/">
+                        <Link href="/stores">
                             <a>Работа в магазине</a>
                         </Link>
                     </li>
                     <li>
-                        <Link href="/">
+                        <Link href="/production">
                             <a>Производство и кулинария</a>
                         </Link>
                     </li>
                     <li>
-                        <Link href="/">
+                        <Link href="/economy">
                             <a>Распределительные центры и автохозяйство</a>
                         </Link>
                     </li>
