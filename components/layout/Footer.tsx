@@ -101,7 +101,7 @@ const Footer = () => {
                 <div>
                     <div>© 2022 ООО «ЛЕНТА»</div>
                     <div><a href={'#'}>Пользовательское соглашение</a></div>
-                    <div><a href={'#'}>Политика конфиденциальности</a></div>
+                    <div><a target={"_blank"} rel={''} href={'https://lenta.com/info/personal-data-policy/'}>Политика конфиденциальности</a></div>
                 </div>
                 <a href={'https://lenta.com'} target={'_blank'} rel="noreferrer" className={classes.LentaName}>lenta.com</a>
             </div>
