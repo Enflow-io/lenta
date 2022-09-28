@@ -417,7 +417,7 @@ const Card = (props: CardProps) => {
 
 
         <Icon/>
-        {/*<marks src={"/i/slide41.svg"}  />*/}
+        {/*<img src={"/i/slide41.svg"}  />*/}
 
         {/*<div className={classes.Svg1} ></div>*/}
 

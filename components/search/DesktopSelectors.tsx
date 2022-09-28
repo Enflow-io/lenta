@@ -14,6 +14,7 @@ const DesktopSelectors = () => {
             <div className={classes.Line}>
                 <div className={classes.Selector}>
                     <label>Ключевое слово</label>
+
                     <Select
                         placeholder={<div className={classes.Placeholder}>Ключевое слово</div>}
                         className={classes.ReactSelect}

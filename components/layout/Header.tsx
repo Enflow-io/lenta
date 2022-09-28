@@ -20,23 +20,23 @@ const Header = (props: HeaderInterface) => {
                 <a href={'/'}>
                     <img src={'/i/lenta-big-logo.svg'} width={95} height={87}/>
                 </a>
-                {/*<Image src="/i/logo.marks" alt="logo" width={95} height={87}/>*/}
+                {/*<Image src="/i/logo.png" alt="logo" width={95} height={87}/>*/}
             </div>
             <div className={classesHeader.Content}>
                 <div className={classesHeader.Menu}>
                     <ul>
                         <li>
-                            <Link href="/about">
+                            <Link href="/">
                                 <a>О компании</a>
                             </Link>
                         </li>
                         <li>
-                            <Link href="/stores">
+                            <Link href="/">
                                 <a>Работа в магазине</a>
                             </Link>
                         </li>
                         <li>
-                            <Link href="/economy">
+                            <Link href="/">
                                 <a>Распределительные центры и автохозяйство</a>
                             </Link>
                         </li>

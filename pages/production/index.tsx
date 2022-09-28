@@ -1,19 +1,14 @@
 import React from 'react';
 import Header from '../../components/layout/Header';
-import Block1 from '../../components/Block1/Block1';
-import Block2 from '../../components/Block2/Block2';
-import Footer from '../../components/layout/Footer';
-import stickerSrc from '../../public/i/stickers/sticker2.svg'
-import Block3 from '../../components/Block3/Block3';
+import Slide1 from './components/Slide1';
+import Slide2 from './components/Slide2';
 
 const ProductionPage = () => {
     return (
         <div>
             <Header/>
-            <Block1 stickerSrc={stickerSrc}/>
-            <Block2 youtubeSrc='https://www.youtube.com/embed/cpFRDVivFFg'/>
-            <Block3/>
-            <Footer/>
+            <Slide1/>
+            <Slide2/>
         </div>
     );
 };
