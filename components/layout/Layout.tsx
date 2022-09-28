@@ -72,15 +72,15 @@ const Layout = (props: LayoutProps) => {
             <Link href="/">
                 <a id="home" className="bm-item-list" href="/">О компании</a>
             </Link>
-            <Link href="/">
-                <a id="home" className="bm-item-list" href="/">Работа в магазине</a>
+            <Link href="/stores">
+                <a id="stores" className="bm-item-list" href="/">Работа в магазине</a>
             </Link>
-            <Link href="/">
-                <a id="home" className="bm-item-list" href="/">Распределительные центры
+            <Link href="/economy">
+                <a id="economy" className="bm-item-list" href="/">Распределительные центры
                     и автохозяйство</a>
             </Link>
             <Link href="/production">
-                <a id="home" className="bm-item-list" href="/">Производство и кулинария</a>
+                <a id="production" className="bm-item-list" href="/">Производство и кулинария</a>
             </Link>
             <Link href="/">
                 <a id="home" className="bm-item-list" href="/">Офис</a>

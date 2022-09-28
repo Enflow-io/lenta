@@ -4,7 +4,7 @@ import Card from './Card';
 import Image from 'next/image';
 import prevSrc from '../../public/i/prev.svg';
 import nextSrc from '../../public/i/next.svg';
-import firstSrc from '../../public/i/slider/online_shopping.svg'
+import firstSrc from '../../public/i/stickers/sticker1.svg'
 
 const MobileSlider: FC<{ children: any }> = ({children}) => {
 
