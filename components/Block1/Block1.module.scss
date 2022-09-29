@@ -23,7 +23,7 @@
     align-items: center;
   }
 
-  h2  {
+  h2 {
     color: #FFD200;
     font-family: 'Futura PT';
     font-style: normal;
@@ -44,7 +44,7 @@
   }
 
   p {
-    font-family: 'Futura Light';
+    font-family: 'Futura PT';
 
     margin-top: 44px;
     margin-bottom: 0;
@@ -59,6 +59,7 @@
   }
 
   button {
+    cursor: pointer;
     background: #FFD200;
     border-radius: 10px;
     font-weight: 500;
@@ -71,7 +72,7 @@
 
     margin: 74px auto 0 auto;
 
-    &:hover{
+    &:hover {
       background: #00AB34;
       color: white;
     }
@@ -90,14 +91,14 @@
   justify-content: start;
 }
 
-.Header{
+.Header {
 
 
   @media (max-width: 1000px) {
     display: flex;
     justify-content: space-around;
     align-items: flex-end;
-    span{
+    span {
       position: relative;
       top: 32px;
       left: 43px;
@@ -105,15 +106,56 @@
   }
 }
 
-.MobileIcon{
+.MobileIcon {
   display: none;
   @media (max-width: 1000px) {
     display: block;
   }
 }
-.DesktopIcon{
+
+.DesktopIcon {
   display: block;
   @media (max-width: 1000px) {
     display: none;
   }
+}
+
+
+.About1Line {
+  display: flex;
+  justify-content: space-between;
+  padding-right: 10%;
+  max-width: calc(977px - 10%);
+  width: 100%;
+
+}
+
+.Lists {
+  display: flex;
+  flex-direction: row;
+  ul{
+    list-style: none;
+    li{
+      font-size: 24px;
+      font-family: "Futura Light";
+      margin-bottom: .3em;
+      svg{
+        padding-right: 20px;
+        position: relative;
+        top: 5px;
+
+      }
+    }
+  }
+}
+
+.AboutContainer {
+  //max-width: 1160px;
+  max-width: 977px;
+  width: 100%;
+  //height: 125px;
+  justify-content: space-between;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }

@@ -1,0 +1,52 @@
+.Container {
+  background: white;
+  display: flex;
+  justify-content: center;
+  //flex-direction: column;
+  @media (max-width: 1000px) {
+    height: 63px;
+    align-items: center;
+  }
+
+  > div {
+    max-width: 900px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+
+
+
+  h2 {
+
+    font-family: 'Futura PT';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 34px;
+    line-height: 28px;
+
+
+  }
+
+  p{
+    font-family: "Futura Light";
+    font-size: 24px;
+  }
+
+  ul{
+    list-style: none;
+    li{
+      font-size: 24px;
+      font-family: "Futura Light";
+      margin-bottom: 1em;
+      svg{
+        padding-right: 20px;
+        position: relative;
+        top: 5px;
+
+      }
+    }
+  }
+}

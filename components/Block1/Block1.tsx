@@ -1,16 +1,18 @@
 import React, {FC} from 'react';
 import classes from './Block1.module.scss'
 import Image from 'next/image'
+import Link from "next/link";
 
 interface IBlock1Props {
     stickerSrc: string
+    label: string
 }
 
-const Block1: FC<IBlock1Props> = ({stickerSrc}) => {
+const Block1: FC<IBlock1Props> = ({stickerSrc, label}) => {
     return (
         <div className={classes.Block1}>
             <div className={classes.container}>
-                <h1>Почему классно работать на производстве «ЛЕНТЫ»?</h1>
+                <h1>{label || "Почему классно работать на производстве «ЛЕНТЫ»?"}</h1>
                 <div className={classes.Header}>
                     <h2>ЛЕНТА</h2>
                     <div className={classes.MobileIcon}>
@@ -27,7 +29,9 @@ const Block1: FC<IBlock1Props> = ({stickerSrc}) => {
                     <div className={`${classes.Image} ${classes.DesktopIcon}`}><Image  src={stickerSrc}/></div>
                 </div>
             </div>
-            <button>К списку вакансий</button>
+            <Link href={"/"}>
+                <button>К списку вакансий</button>
+            </Link>
         </div>
     );
 };

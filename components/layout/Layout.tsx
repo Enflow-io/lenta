@@ -69,7 +69,7 @@ const Layout = (props: LayoutProps) => {
             right={true}
             styles={MenuStyles}
         >
-            <Link href="/">
+            <Link href="/about">
                 <a id="home" className="bm-item-list" href="/">О компании</a>
             </Link>
             <Link href="/stores">

@@ -1,0 +1,45 @@
+.Openable{
+  width: 960px;
+  height: 30px;
+  background: #EEEEEE;
+  border-radius: 6px;
+  padding: 20px 55px;
+
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  span{
+    font-family: 'Futura PT';
+    font-style: normal;
+    font-size: 24px;
+    line-height: 28px;
+    /* or 117% */
+
+
+    color: #000000;
+  }
+
+  a{
+    width: 27px;
+    display: block;
+  }
+
+  &.Opened{
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+}
+
+.Opened{
+  width: 960px;
+  height: 30px;
+  background: #EEEEEE;
+  border-radius: 6px;
+  padding: 20px 55px;
+  border-top: 1px solid white;
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+  font-family: "Futura Light";
+
+}

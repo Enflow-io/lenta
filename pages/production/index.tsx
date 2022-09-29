@@ -10,7 +10,7 @@ const ProductionPage = () => {
     return (
         <div>
             <Header/>
-            <Block1 stickerSrc={stickerSrc}/>
+            <Block1 stickerSrc={stickerSrc} label={"Почему классно работать на производстве «ЛЕНТЫ»?"}/>
             <Block2 youtubeSrc='https://www.youtube.com/embed/cpFRDVivFFg'/>
             <Block3/>
             <Footer/>

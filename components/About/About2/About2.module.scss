@@ -1,0 +1,61 @@
+.Container {
+  background: white;
+  display: flex;
+  justify-content: center;
+  //flex-direction: column;
+  @media (max-width: 1000px) {
+    height: 63px;
+    align-items: center;
+  }
+  padding-bottom: 4em;
+
+  >div{
+    max-width: 900px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  h2 {
+
+    font-family: 'Futura PT';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 38px;
+
+    display: flex;
+    align-items: center;
+
+    color: #35219A;
+    margin-bottom: 0;
+  }
+
+  h3{
+    font-family: 'Futura PT';
+    font-style: normal;
+    font-size: 34px;
+    /* identical to box height */
+
+    display: flex;
+    align-items: center;
+
+    color: #000000;
+
+  }
+
+  ul{
+    list-style: none;
+    li{
+      font-size: 24px;
+      font-family: "Futura Light";
+      margin-bottom: .3em;
+      svg{
+        padding-right: 20px;
+        position: relative;
+        top: 5px;
+
+      }
+    }
+  }
+}
