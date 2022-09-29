@@ -17,7 +17,7 @@ interface LayoutProps {
 }
 
 
-var styles = {
+export const MenuStyles = {
     bmBurgerButton: {
         position: 'fixed',
         width: '30px',
@@ -67,7 +67,7 @@ const Layout = (props: LayoutProps) => {
         <Menu
             customBurgerIcon={<img src='/i/menu_mobile.svg'/>}
             right={true}
-            styles={styles}
+            styles={MenuStyles}
         >
             <Link href="/">
                 <a id="home" className="bm-item-list" href="/">О компании</a>

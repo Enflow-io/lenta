@@ -5,6 +5,11 @@
 
   h1 {
     margin-bottom: 70px;
+    @media (max-width: 1000px) {
+      margin: 0 20px;
+      margin-bottom: 20px;
+
+    }
   }
 
   .content {
@@ -32,6 +37,29 @@
     font-weight: 400;
     font-size: 24px;
     line-height: 25px;
+    font-family: "Futura Light";
+    padding: 0;
+    //margin: 0;
+    @media (max-width: 1000px) {
+      margin-left: 5%;
+      width: 55%;
+
+    }
   }
 }
 
+
+
+.List{
+  svg{
+    height: 86px;
+  }
+
+  @media (max-width: 1000px) {
+    svg{
+      width: 40%;
+      height: unset;
+    }
+
+  }
+}

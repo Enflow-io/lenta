@@ -8,6 +8,11 @@
 
   .container {
     align-items: center;
+
+    @media (max-width: 1000px) {
+      margin: 20px;
+      font-size: 15px;
+    }
   }
 
   .content {
@@ -39,6 +44,8 @@
   }
 
   p {
+    font-family: 'Futura Light';
+
     margin-top: 44px;
     margin-bottom: 0;
     font-size: 24px;
@@ -63,10 +70,50 @@
     border: none;
 
     margin: 74px auto 0 auto;
+
+    &:hover{
+      background: #00AB34;
+      color: white;
+    }
+
+    @media (max-width: 1000px) {
+      margin: 0 20px;
+      width: calc(100% - 40px);
+      margin-bottom: 2em;
+
+    }
   }
 }
 
 .left {
   display: flex;
   justify-content: start;
+}
+
+.Header{
+
+
+  @media (max-width: 1000px) {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-end;
+    span{
+      position: relative;
+      top: 32px;
+      left: 43px;
+    }
+  }
+}
+
+.MobileIcon{
+  display: none;
+  @media (max-width: 1000px) {
+    display: block;
+  }
+}
+.DesktopIcon{
+  display: block;
+  @media (max-width: 1000px) {
+    display: none;
+  }
 }
