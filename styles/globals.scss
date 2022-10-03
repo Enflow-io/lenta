@@ -74,13 +74,13 @@ a.bm-item-list {
 
 
   &:hover {
-    box-shadow: inset 0 0 0 1px white;
+    box-shadow: inset 0 0 0 1px  #FFD201;
 
-      color: white !important;
+      color: #FFD201 !important;
       text-decoration: none;
 
     svg{
-      fill: white;
+      fill: #FFD201 !important;
     }
   }
 
