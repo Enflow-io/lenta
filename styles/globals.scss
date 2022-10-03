@@ -33,18 +33,35 @@ body {
 }
 
 
-.bm-item-list {
+a.bm-item-list {
   display: block;
   color: white;
   margin-bottom: 1em;
   font-family: 'Futura PT';
   text-decoration: none;
+  padding: 5px;
+
+  -webkit-transition: all 0.3s ease;;
+  -moz-transition: all 0.3s ease;;
+  -o-transition: all 0.3s ease;;
+  transition: all 0.3s ease;
+  border-radius: 4px;
+
+
+
+  //&:hover {
+  //  border-bottom: 3px solid #FFFFFF;
+  //  color: #FFD200;
+  //}
 
 
   &:hover {
-    border-bottom: 3px solid #FFFFFF;
-    color: #FFD200;
+    box-shadow: inset 0 0 0 1px #FFD200;
+
+      color: #FFD200 !important;
+      text-decoration: none;
   }
+
 }
 
 .bm-burger-button {
