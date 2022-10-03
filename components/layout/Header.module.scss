@@ -75,12 +75,11 @@
     display: block;
 
     @media (max-width: 1000px) {
-      font-size: 11px;
       height: 30px;
     }
 
     @media (max-width: 1000px) {
-      font-size: 13px;
+      font-size: 11px;
       margin-right: 10px;
       height: 28px;
       width: 125px;
