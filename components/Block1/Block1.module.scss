@@ -124,8 +124,8 @@
 .About1Line {
   display: flex;
   justify-content: space-between;
-  padding-right: 10%;
-  max-width: calc(977px - 10%);
+  //padding-right: 10%;
+  max-width: calc(1100px - 10%);
   width: 100%;
 
 }
@@ -133,7 +133,13 @@
 .Lists {
   display: flex;
   flex-direction: row;
+  max-width: calc(1100px - 40px);
+  width: 100%;
+  ul:nth-child(2){
+    padding-left: 40px;
+  }
   ul{
+    padding-left: 0;
     list-style: none;
     li{
       font-size: 24px;
