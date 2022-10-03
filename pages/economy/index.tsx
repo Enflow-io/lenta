@@ -5,13 +5,15 @@ import Block2 from '../../components/Block2/Block2';
 import Footer from '../../components/layout/Footer';
 import stickerSrc from '../../public/i/stickers/sticker4.svg'
 import Block3 from '../../components/Block3/Block3';
+import {MenuAll} from "../../components/layout/Layout";
 
 const EconomyPage = () => {
     return (
         <div>
+            <MenuAll />
             <Header/>
-            <Block1 stickerSrc={stickerSrc}/>
-            <Block2 youtubeSrc='https://www.youtube.com/embed/j9BQGEYs88g'/>
+            <Block1 stickerSrc={stickerSrc} label={"Почему классно работать на производстве «ЛЕНТЫ»?"}/>
+            <Block2 youtubeSrc='https://www.youtube.com/embed/j9BQGEYs88g' />
             <Block3/>
             <Footer/>
         </div>

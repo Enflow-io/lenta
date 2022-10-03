@@ -4,8 +4,16 @@
   justify-content: center;
   //flex-direction: column;
   @media (max-width: 1000px) {
-    height: 63px;
+    //height: 63px;
     align-items: center;
+
+    align-items: center;
+    margin: 20px;
+
+
+    ul{
+      padding: 0;
+    }
   }
 
   > div {
@@ -19,7 +27,7 @@
 
 
 
-  h2 {
+  h3 {
 
     font-family: 'Futura PT';
     font-style: normal;
@@ -37,6 +45,7 @@
 
   ul{
     list-style: none;
+    padding-left: 0;
     li{
       font-size: 24px;
       font-family: "Futura Light";
@@ -47,6 +56,25 @@
         top: 5px;
 
       }
+    }
+  }
+}
+
+
+.H3Line{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  h3{
+    font-size: 22px !important;
+    line-height: 130% !important;
+  }
+  >svg{
+    min-width: 35%;
+    display: none;
+    @media (max-width: 600px) {
+      display: block;
+      min-height: 148px;
     }
   }
 }

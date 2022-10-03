@@ -34,19 +34,37 @@ body {
 
 
 a.bm-item-list {
-  display: block;
+
+  display: flex;
+  align-items: center;
+
+  //display: block;
+  //display: block;
   color: white;
   margin-bottom: 1em;
   font-family: 'Futura PT';
   text-decoration: none;
   padding: 5px;
 
+  //max-width: calc(100% - 50px);
   -webkit-transition: all 0.3s ease;;
   -moz-transition: all 0.3s ease;;
   -o-transition: all 0.3s ease;;
   transition: all 0.3s ease;
   border-radius: 4px;
 
+
+  > span{
+    display: inline-block;
+    width: min-content;
+    min-width: 94px;
+
+  }
+  svg{
+    width: 60px;
+    display: inline-block;
+    fill: white;
+  }
 
 
   //&:hover {
@@ -56,10 +74,14 @@ a.bm-item-list {
 
 
   &:hover {
-    box-shadow: inset 0 0 0 1px #FFD200;
+    box-shadow: inset 0 0 0 1px white;
 
-      color: #FFD200 !important;
+      color: white !important;
       text-decoration: none;
+
+    svg{
+      fill: white;
+    }
   }
 
 }
@@ -70,4 +92,8 @@ a.bm-item-list {
     display: unset;
 
   }
+}
+
+.bm-menu-wrap{
+  z-index: 121100;
 }

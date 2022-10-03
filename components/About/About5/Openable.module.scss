@@ -1,9 +1,19 @@
 .Openable{
-  width: 960px;
+  max-width: 960px;
+  width: calc(100% - 110px);
   height: 30px;
   background: #EEEEEE;
   border-radius: 6px;
   padding: 20px 55px;
+
+  @media (max-width: 600px) {
+    width: calc(100% - 40px);
+
+
+    line-height: 14px;
+    padding: 14px 20px;
+
+  }
 
 
   display: flex;
@@ -14,7 +24,12 @@
     font-style: normal;
     font-size: 24px;
     line-height: 28px;
-    /* or 117% */
+
+
+    @media (max-width: 600px) {
+      font-size: 14px;
+    }
+      /* or 117% */
 
 
     color: #000000;
@@ -31,12 +46,23 @@
   }
 }
 
-.Opened{
-  width: 960px;
+.Opened {
+  //width: 960px;
   height: 30px;
+  width: calc(100% - 110px);
   background: #EEEEEE;
   border-radius: 6px;
   padding: 20px 55px;
+
+
+  @media (max-width: 600px) {
+    width: calc(100% - 40px);
+
+
+    line-height: 14px;
+    padding: 14px 20px;
+
+  }
   border-top: 1px solid white;
   border-top-right-radius: 0;
   border-top-left-radius: 0;

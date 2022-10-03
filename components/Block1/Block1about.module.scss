@@ -2,9 +2,13 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: #EEEEEE;
   position: relative;
   min-height: 660px;
+  background: #EEEEEE;
+  @media (max-width: 1000px) {
+    padding: 20px;
+    font-size: 15px;
+  }
 
   .container {
     align-items: center;
@@ -121,6 +125,33 @@
 }
 
 
+.MobileLine {
+  > svg {
+    display: none;
+  }
+
+  > svg {
+    @media (max-width: 600px) {
+      display: block;;
+    }
+  }
+
+  @media (max-width: 600px) {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+
+    > p {
+      width: 50%;
+    }
+    > svg {
+      width: 50%;
+      position: relative;
+      top: 7px;
+    }
+  }
+}
+
 .About1Line {
   display: flex;
   justify-content: space-between;
@@ -128,6 +159,25 @@
   max-width: calc(1100px - 10%);
   width: 100%;
 
+
+  > svg {
+    @media (max-width: 600px) {
+      display: none;;
+    }
+  }
+
+  > div {
+    @media (max-width: 600px) {
+      width: 100%;
+    }
+  }
+
+  h1 {
+    @media (max-width: 600px) {
+      width: 100%;
+      margin-top: 1.5em;
+    }
+  }
 }
 
 .Lists {
@@ -135,17 +185,42 @@
   flex-direction: row;
   max-width: calc(1100px - 40px);
   width: 100%;
-  ul:nth-child(2){
+
+
+  @media (max-width: 600px) {
+    margin-top: 1.5em;
+    flex-direction: column;
+    ul:nth-child(2) {
+      padding: 0 !important;
+    }
+
+    ul {
+      margin-bottom: 0;
+      margin-top: 0;
+
+      li {
+        font-size: 20px !important;
+        margin-bottom: 1em !important;
+      }
+    }
+
+
+  }
+
+  ul:nth-child(2) {
     padding-left: 40px;
   }
-  ul{
+
+  ul {
     padding-left: 0;
     list-style: none;
-    li{
+
+    li {
       font-size: 24px;
       font-family: "Futura Light";
       margin-bottom: .3em;
-      svg{
+
+      svg {
         padding-right: 20px;
         position: relative;
         top: 5px;
@@ -165,5 +240,18 @@
   flex-direction: column;
   align-items: center;
 
+  @media (max-width: 600px) {
+    button {
+      margin: 0;
+      width: 100%;
+      margin-top: 1em;
+    }
+  }
 
+}
+
+.LabelCont {
+  > div {
+
+  }
 }
