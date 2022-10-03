@@ -163,10 +163,12 @@
   }
 
   a.Active {
-    opacity: 0.7;
+    text-decoration: underline;
+    color: #FFD201;
+    opacity: 1 !important;
 
     &:hover {
-      text-decoration: none;
+      //text-decoration: none;
 
     }
   }
