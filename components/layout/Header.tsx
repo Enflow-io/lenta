@@ -67,7 +67,7 @@ const Header = (props: HeaderInterface) => {
                             maxWidth: '800px',
                                 borderRadius: 6,
 
-                            width: '100%'
+                            width: 'calc(100% - 10px)'
                         }} trigger={<button>Заполнить анкету</button>} modal>
                             {
                                 // @ts-ignore
