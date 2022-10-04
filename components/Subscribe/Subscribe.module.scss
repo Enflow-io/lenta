@@ -1,0 +1,100 @@
+.CloseBtn{
+  cursor: pointer;
+  position: absolute;
+  top: 15px;
+  right:15px;
+}
+
+
+.Subscribe{
+
+  padding: 50px 30px;
+  background: #35219A;
+  border-radius: 6px;
+  max-width: 540px;
+
+
+  h3{
+    font-family: 'Futura PT';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 38px;
+    margin: 0;
+    color: white;
+
+    padding: 0;
+  }
+  label{
+    color: white;
+    font-size: 20px;
+    margin-bottom: .6em;
+    display: block;
+  }
+
+  p{
+    color: white;
+    margin: 0em 0;
+    margin-bottom: 3em;
+
+    font-family: "Futura Light";
+  }
+
+  input{
+    width: calc(100% - 10px);
+    height: 32px;
+
+    font-family: 'Futura Light';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    padding-left: 7px;
+    background: #F5F5F5;
+    border: 1px solid rgba(84, 84, 84, 0.21);
+    border-radius: 3px;
+    margin-bottom: 1em;
+  }
+
+  button{
+    cursor: pointer;
+    width: 100%;
+    font-family: 'Futura PT';
+    font-style: normal;
+    font-size: 24px;
+    line-height: 12px;
+    background: #00AB34;
+    border-radius: 4px;
+    height: 55px;
+    border: none;
+    color: white;
+  }
+
+
+  @media (max-width: 600px) {
+    h3{
+      margin-top: 0;
+      padding-top: 0;
+      font-size: 30px;
+    }
+
+    label{
+      font-size: 18px;
+    }
+
+    &{
+      padding: 20px 10px;
+
+    }
+  }
+
+
+}
+
+.Divider{
+  margin-top: 5px;
+  margin-bottom: 20px;
+  border-top: 1px solid white;
+}
+
+.Email{
+
+}
