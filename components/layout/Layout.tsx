@@ -20,7 +20,7 @@ interface LayoutProps {
 
 export const MenuStyles = {
     bmBurgerButton: {
-        position: 'fixed',
+        position: 'absolute',
         width: '30px',
         height: '26px',
         right: '12px',

@@ -11,6 +11,9 @@ import Image from "next/image"
 import DesktopSelectors from './DesktopSelectors';
 import MobileSelectors from './MobileSelectors';
 import {useIsMobile} from '../../hooks/useIsMobile';
+import Form from "../form/Form";
+import Popup from "reactjs-popup";
+import ShareVacancy from "../ShareVacancy/ShareVacancy";
 
 interface SearchProps {
 
@@ -20,7 +23,7 @@ const Search = (props: SearchProps) => {
     const [isMap, setIsMap] = useState(false)
     const {isMobile} = useIsMobile()
 
-    const [selectedVacancy, setSelectedVacancy] = useState<undefined | number | string>(undefined)
+    const [selectedVacancy, setSelectedVacancy] = useState<undefined | number | string>(1)
 
     const options = [
         {value: 'chocolate', label: 'Chocolate'},
@@ -177,7 +180,25 @@ const Search = (props: SearchProps) => {
                         <button className={classes.Submit}>Откликнуться</button>
                     </div>
                     <div className={classes.BtnCont}>
-                        <button className={classes.Share}>Поделиться</button>
+                        <Popup
+                            lockScroll={ true}
+                            contentStyle={{
+                                // minWidth: '600px',
+                                maxWidth: '450px',
+                                height: 200,
+                                borderRadius: 6,
+                                marginRight: 10,
+                                marginLeft: 10,
+
+                                width: 'calc(100% - 10px)'
+                            }} trigger={<button className={classes.Share}>Поделиться</button>} modal>
+                            {
+                                // @ts-ignore
+                                (close: any) => (<ShareVacancy close={()=>{close()}} />)
+                            }
+
+                        </Popup>
+
                         <button onClick={() => {
                             setSelectedVacancy(undefined)
                         }} className={classes.Back}>Назад к списку вакансий
