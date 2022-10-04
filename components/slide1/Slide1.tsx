@@ -19,6 +19,7 @@ const Slide1 = () => {
                         // minWidth: '600px',
                         // maxWidth: '800px',
                         // borderRadius: 6,
+                        zIndex: 9999999,
                         background: "#35219A",
                         borderRadius: 6,
                         maxWidth: 500,
