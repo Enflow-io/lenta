@@ -16,7 +16,7 @@ const DivUploadButton = asUploadButton((props: any) => {
     </div>
 });
 
-const  Preview = (props: any)=>{
+const Preview = (props: any) => {
     return <div>{props.name}</div>
 }
 
@@ -37,7 +37,10 @@ const PreviewsWithClear = () => {
     }, [previewMethodsRef]);
 
     return <>
-        {previews.map((el: any, index: number)=>{
+        <div style={{
+            paddingLeft: '1em'
+        }} className={classes.FileName}>Название файла</div>
+        {previews.map((el: any, index: number) => {
             return <div key={index}>{el?.name}</div>
         })}
         {/*<button onClick={onClear}>*/}
@@ -53,21 +56,30 @@ const PreviewsWithClear = () => {
 };
 
 interface PropsForm {
-    close: ()=>void
+    close: () => void
 }
 
 const Form = (props: PropsForm) => {
     const [rating, setRating] = useState(0);
+    const [leftChars, setLeftChars] = useState(0)
     const handleRating = (rate: number) => {
         setRating(rate)
         // other logic
     }
 
+    const changed = (e: any) => {
+        const typed = e.target.value.length;
+        const max = 1000;
+        const left = max - typed;
+        setLeftChars(typed)
+    }
     return <div className={classes.Form}>
         <div className={classes.CloseBtn} onClick={props.close}>
             <svg width="20" height="20" viewBox="0 0 27 27" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M20.1733 20.3139L6.73828 6.87891" stroke="#35219A" stroke-width="1.28528" stroke-linecap="round" stroke-linejoin="round"/>
-                <path d="M6.68216 20.1792L20.1172 6.74414" stroke="#35219A" stroke-width="1.28528" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M20.1733 20.3139L6.73828 6.87891" stroke="#35219A" stroke-width="1.28528"
+                      stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M6.68216 20.1792L20.1172 6.74414" stroke="#35219A" stroke-width="1.28528"
+                      stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
         </div>
 
@@ -78,14 +90,30 @@ const Form = (props: PropsForm) => {
             left: -3
         }} size={25} onClick={handleRating} ratingValue={rating} /* Available Props */ />
 
-        <textarea className={classes.Text} placeholder={'Ваш отзыв'}></textarea>
+        <div style={{
+            position: "relative"
+        }}>
+            <span className={classes.Counter}>{leftChars}/1000</span>
+            <textarea onChange={changed} style={{
+                resize: "none"
+            }} className={classes.Text} placeholder={'Ваш отзыв'}>
+
+        </textarea>
+
+        </div>
+
 
         <div className={classes.Footer}>
             <div>
-                <Uploady destination={{url: "https://my-server.com/upload"}}>
-                    <DivUploadButton/>
-                    <PreviewsWithClear />
-                </Uploady>
+                <div style={{
+                    display: "flex",
+                    alignItems: "center"
+                }}>
+                    <Uploady destination={{url: "https://localhost"}}>
+                        <DivUploadButton/>
+                        <PreviewsWithClear/>
+                    </Uploady>
+                </div>
                 <p>Размер файла не более 1 Мб (png, jpeg)</p>
             </div>
             <div className={classes.BtnCont}>

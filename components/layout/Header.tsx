@@ -60,9 +60,13 @@ const Header = (props: HeaderInterface) => {
                 </div>
                 <div className={classesHeader.RightPart}>
                     <div className={classesHeader.Button}>
-                        <Popup contentStyle={{
+                        <Popup
+                            lockScroll={ true}
+                            contentStyle={{
                             // minWidth: '600px',
                             maxWidth: '800px',
+                                borderRadius: 6,
+
                             width: '100%'
                         }} trigger={<button>Заполнить анкету</button>} modal>
                             {

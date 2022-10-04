@@ -1,5 +1,7 @@
 .Form{
   padding: 10px 40px;
+  z-index: 99999;
+  border-radius: 6px;
 
   @media (max-width: 500px) {
     padding: 10px 10px;
@@ -108,4 +110,36 @@
   position: absolute;
   top: 15px;
   right:15px;
+}
+
+.Counter{
+  position: absolute;
+  right: 10px;
+  bottom: 44px;
+  font-size: 20px;
+
+
+  color: rgba(0, 0, 0, 0.34);
+}
+.FileName{
+  font-family: 'Futura Light';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 24px;
+  /* identical to box height, or 120% */
+
+
+  color: #35219A;
+
+}
+
+@media (max-width: 600px) {
+  .FileName{
+    font-size: 20px;
+  }
+
+  .UploadBtn{
+    font-size: 20px;
+  }
 }
