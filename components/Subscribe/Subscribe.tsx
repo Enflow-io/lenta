@@ -106,10 +106,10 @@ const Subscribe = (props: SubscribeProps) => {
             <h3>Спасибо!</h3>
             <br />
             <p>Вы успешно подписаны на рассылку!</p>
-            <button onClick={e=>{
-                props.close()
-            }
-            }>Закрыть</button>
+            {/*<button onClick={e=>{*/}
+            {/*    props.close()*/}
+            {/*}*/}
+            {/*}>Закрыть</button>*/}
 
         </>}
     </div>

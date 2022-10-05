@@ -17,6 +17,37 @@
     padding-top: 0
   }
 
+  .BtnCont {
+    button {
+      @media (max-width: 600px) {
+        font-size: 12px;
+        height: 36px;
+        width: 100%;
+        margin-bottom: 20px;
+        padding: 0;
+
+      }
+    }
+
+  }
+
+  .BtnCont2 {
+    @media (max-width: 600px) {
+      display: flex;
+      flex-direction: row;
+
+      button:nth-child(1) {
+        margin-left: 0;
+      }
+      button {
+        font-size: 10px;
+        height: 24px;
+        line-height: unset;
+        padding: 0;
+      }
+    }
+  }
+
 
 }
 
@@ -207,7 +238,8 @@
 
 
   @media (max-width: 600px) {
-    padding: 10px;
+    padding: 10px 20px;
+    width: calc(100% - 40px);
 
   }
 
@@ -218,6 +250,10 @@
     font-size: 24px;
     line-height: 24px;
     margin-bottom: 50px;
+    @media (max-width: 600px) {
+      margin-bottom: 20px;
+
+    }
   }
 }
 
@@ -226,10 +262,9 @@
   flex-direction: row;
   justify-content: space-between;
   @media (max-width: 600px) {
-    flex-direction: column;
+    flex-direction: column-reverse;
 
   }
-
 
 
 }
@@ -243,12 +278,38 @@
   }
 }
 
+.Infos {
+  @media (max-width: 600px) {
+    border-bottom: 1px solid #35219A;
+    margin-bottom: 2em;
+    padding-bottom: 1em;
+  }
+    .Info{
+    @media (max-width: 600px) {
+      display: flex;
+      flex-direction: row;
+      label{
+        margin-right: .5em;
 
+      }
+
+      label::after{
+        content: ":"
+      }
+      >div{
+        font-family: "Futura Light";
+      }
+
+    }
+  }
+
+}
 .List {
   @media (max-width: 600px) {
     flex-direction: column;
 
   }
+
   label {
     font-family: 'Futura PT';
     font-style: normal;
@@ -266,6 +327,10 @@
     font-size: 16px;
     line-height: 24px;
     padding-left: 20px;
+    @media (max-width: 600px) {
+      padding-left: 0;
+
+    }
   }
 
   margin-bottom: 20px;
@@ -386,3 +451,4 @@
     padding-right: 12px;
   }
 }
+

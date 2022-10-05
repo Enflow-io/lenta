@@ -179,7 +179,7 @@ const Search = (props: SearchProps) => {
                     <div className={classes.BtnCont}>
                         <button className={classes.Submit}>Откликнуться</button>
                     </div>
-                    <div className={classes.BtnCont}>
+                    <div className={`${classes.BtnCont} ${classes.BtnCont2}` }>
                         <Popup
                             lockScroll={ true}
                             contentStyle={{
