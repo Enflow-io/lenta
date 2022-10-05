@@ -15,7 +15,7 @@ const Slide4 = () => {
         {isMobile
             ? <MobileSlider>
                 {
-                    <a className={classes.Info} href={'#'}>
+                    <a className={classes.Info} href={'/about'}>
                         <p>Информация о нас</p>
                         <Image className={classes.Icon} src={arrowIconSrc}/>
                     </a>
@@ -23,7 +23,7 @@ const Slide4 = () => {
             </MobileSlider>
             : <DesktopSlide>
                 {
-                    <a className={classes.Info} href={'#'}>
+                    <a className={classes.Info} href={'/about'}>
                         <p>Информация о нас</p>
                         <Image className={classes.Icon} src={arrowIconSrc}/>
                     </a>

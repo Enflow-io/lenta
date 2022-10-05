@@ -16,7 +16,7 @@ const Footer = () => {
                         </Link>
                     </li>
                     <li>
-                        <Link href="/stores">
+                        <Link href="/production">
                             <a>Работа в магазине</a>
                         </Link>
                     </li>
@@ -36,7 +36,7 @@ const Footer = () => {
                         </Link>
                     </li>
                     <li>
-                        <Link href="/">
+                        <Link href="https://spb.hh.ru/employer/7172 " target={"_blank"}>
                             <a>Студентам</a>
                         </Link>
                     </li>

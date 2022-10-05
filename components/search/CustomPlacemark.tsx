@@ -14,7 +14,7 @@ function UserPlacemarkBalloon(props: any) {
         
               <label>Открытые вакансии</label>
               <ul class="${classes.Vacancies}">
-                  <li id="placemark-balloon__profile-btn_user-id_${props.user.id}">Кассир-продавец</li>
+                  <li   id="placemark-balloon__profile-btn_user-id_${props.user.id}">Кассир-продавец</li>
                   <li>Продавец</li>
         </ul>
 

@@ -115,14 +115,17 @@ const Table = (props: TableProps) => {
                 Всего вакансий: 2 000
             </a>
             <div>
-                <a href={'#'}>Сбросить</a>
+                <a onClick={(e)=>{
+                    e.preventDefault();
+                    setSorting([])
+                }} href={'#'}>Сбросить</a>
                 <Image src={closeIconSrc}/>
             </div>
         </div>
 
         <div className="p-2">
             <div className="h-2"/>
-            <table cellspacing="0" cellpadding="0" className={classes.Table}>
+            <table cellSpacing="0" cellpadding="0" className={classes.Table}>
                 <thead>
                 {table.getHeaderGroups().map(headerGroup => (
                     <tr  key={headerGroup.id}>
@@ -143,8 +146,14 @@ const Table = (props: TableProps) => {
                                                 header.getContext()
                                             )}
                                             {{
-                                                asc: ' 🔼',
-                                                desc: ' 🔽',
+                                                asc: <>&nbsp;<svg width="8" height="6" viewBox="0 0 8 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M1.3225 0.958984L4 3.70075L6.6775 0.958984L7.5 1.80306L4 5.39489L0.5 1.80306L1.3225 0.958984Z" fill="black"/>
+                                                </svg></>
+                                                ,
+                                                desc: <>&nbsp;<svg width="8" height="6" viewBox="0 0 8 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M1.3225 0.958984L4 3.70075L6.6775 0.958984L7.5 1.80306L4 5.39489L0.5 1.80306L1.3225 0.958984Z" fill="black"/>
+                                                </svg></>
+                                                ,
                                             }[header.column.getIsSorted() as string] ?? null}
                                         </div>
                                     )}

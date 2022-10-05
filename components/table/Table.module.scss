@@ -5,6 +5,17 @@
     background: #EEEEEE;
   }
 
+
+  tbody{
+    tr{
+      &:hover{
+        td{
+          color: #FEBE10;
+          cursor: pointer;
+        }
+      }
+    }
+  }
   th {
     height: 41px;
     font-family: 'Futura PT';

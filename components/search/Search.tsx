@@ -20,10 +20,21 @@ interface SearchProps {
 }
 
 const Search = (props: SearchProps) => {
-    const [isMap, setIsMap] = useState(false)
+    const [isMap, setIsMap] = useState(true)
     const {isMobile} = useIsMobile()
 
-    const [selectedVacancy, setSelectedVacancy] = useState<undefined | number | string>(1)
+    const [selectedVacancy, setSelectedVacancy] = useState<undefined | number | string>(undefined)
+
+    const size = useWindowSize();
+
+    useEffect(()=>{
+        if((size?.width || 1000) < 600){
+            setIsMap(false);
+        }else{
+            setIsMap(true);
+
+        }
+    }, [size]);
 
     const options = [
         {value: 'chocolate', label: 'Chocolate'},
@@ -126,6 +137,17 @@ const Search = (props: SearchProps) => {
 
 
             {selectedVacancy && <div className={classes.Vacancy}>
+                <div className={classes.CloseBtn} onClick={()=>{
+                    setSelectedVacancy(undefined)
+
+                }}>
+                    <svg width="20" height="20" viewBox="0 0 27 27" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M20.1733 20.3139L6.73828 6.87891" stroke="#35219A" stroke-width="1.28528"
+                              stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M6.68216 20.1792L20.1172 6.74414" stroke="#35219A" stroke-width="1.28528"
+                              stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
                 <h2>Название вакансии</h2>
 
                 <div className={classes.VacancyCont}>
@@ -214,3 +236,34 @@ const Search = (props: SearchProps) => {
 }
 
 export default Search;
+
+
+
+function useWindowSize() {
+    // Initialize state with undefined width/height so server and client renders match
+    // Learn more here: https://joshwcomeau.com/react/the-perils-of-rehydration/
+    const [windowSize, setWindowSize] = useState({
+        width: undefined,
+        height: undefined,
+    });
+    useEffect(() => {
+        // Handler to call on window resize
+        function handleResize() {
+            // Set window width/height to state
+            // @ts-ignore
+            setWindowSize({
+                // @ts-ignore
+                width: window.innerWidth,
+                // @ts-ignore
+                height: window.innerHeight,
+            });
+        }
+        // Add event listener
+        window.addEventListener("resize", handleResize);
+        // Call handler right away so state gets updated with initial window size
+        handleResize();
+        // Remove event listener on cleanup
+        return () => window.removeEventListener("resize", handleResize);
+    }, []); // Empty array ensures that effect is only run on mount
+    return windowSize;
+}

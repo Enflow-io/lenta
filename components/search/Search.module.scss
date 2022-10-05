@@ -227,6 +227,7 @@
 
 
 .Vacancy {
+  position: relative;
   font-family: 'Futura PT';
 
 
@@ -335,6 +336,12 @@
 
   margin-bottom: 20px;
 }
+.CloseBtn {
+  cursor: pointer;
+  position: absolute;
+  top: 15px;
+  right: 15px;
+}
 
 .Info {
   label {
@@ -406,10 +413,15 @@
     padding: 12px;
     border: none;
     margin-left: 1em;
+    &:hover{
+      background: #35219A;
+    }
   }
 
   .Back {
-
+    &:hover{
+      background: #35219A;
+    }
   }
 }
 
