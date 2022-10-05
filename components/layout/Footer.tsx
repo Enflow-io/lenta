@@ -42,7 +42,7 @@ const Footer = () => {
                     </li>
                 </ul>
                 <div className={classes.Buttons}>
-                    <a href={'#'}>Есть вопросы?</a>
+                    <a href={'/about#faq'}>Есть вопросы?</a>
                     <Popup contentStyle={{
                         // minWidth: '600px',
                         maxWidth: '800px',

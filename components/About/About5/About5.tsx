@@ -4,10 +4,10 @@ import React from "react";
 import Openable from "./Openable";
 
 const About5 = () => {
-    return <div>
-        <div className={classes.Container}>
+    return <div >
+        <div  className={classes.Container}>
             <div>
-                <div className={classes.H3Line}>
+                <div  className={classes.H3Line}>
                     <h3>Есть вопросы? У нас найдутся ответы!</h3>
 
                     <svg width="129" height="97" viewBox="0 0 129 97" fill="none" xmlns="http://www.w3.org/2000/svg">
