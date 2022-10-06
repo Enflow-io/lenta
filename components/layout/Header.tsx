@@ -45,7 +45,10 @@ const Header = (props: HeaderInterface) => {
                                 <a>Производство и кулинария</a>
                             </Link>
                         </li>
-                        <li>
+                        <li style={{
+                            position: "relative",
+                            left: "-1px"
+                        }}>
                             <Link  href="https://spb.hh.ru/employer/7172" passHref >
                                 <a target="_blank" rel="noopener noreferrer" href="https://spb.hh.ru/employer/7172">Офис</a>
                             </Link>

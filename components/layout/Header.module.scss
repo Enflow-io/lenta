@@ -43,7 +43,7 @@
 
 .Button {
 
-  width: calc(100% - 196px);
+  width: calc(100% - 195px);
   max-width: 900px;
   min-width: 125px;
   display: flex;
@@ -55,6 +55,7 @@
     letter-spacing: -0.015em;
     position: relative;
     left: -17px;
+    padding-left: 0px;
     cursor: pointer;
     font-family: 'Futura PT';
     font-style: normal;
@@ -109,6 +110,7 @@
 
 .Menu {
   ul {
+    max-width: 1037px;
     position: relative;
     left: -1px;
     @media (max-width: 1000px) {
