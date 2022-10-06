@@ -16,7 +16,7 @@
   display: flex;
   flex-direction: row;
   height: 125px;
-  justify-content: space-between;
+  justify-content: flex-start;
   //background: #00AB34;
 
   @media (max-width: 1180px) {
@@ -43,7 +43,7 @@
 
 .Button {
   width: calc(100% - 210px);
-  max-width: 800px;
+  max-width: 900px;
   min-width: 125px;
   display: flex;
   justify-content: center;
@@ -69,8 +69,7 @@
 
     border-radius: 6px;
     border: none;
-    height: 55px;
-    max-width: 800px;
+    height: 53px;
     width: 100%;
     display: block;
 
@@ -210,7 +209,7 @@
 
       }
 
-      margin-right: 26px;
+      //margin-right: 26px;
 
       a {
         color: #FFFFFF;
@@ -227,7 +226,7 @@
 }
 
 .Phone {
-  padding: 0 28px;
+  padding: 0 0 0 28px;
   font-family: 'Futura PT';
   font-style: normal;
   font-weight: 500;
@@ -264,7 +263,7 @@
 
 
 .Logo {
-  margin-right: 26px;
+  margin-right: 19px;
   //margin-left: 26px;
   display: flex;
   align-items: center;
@@ -296,7 +295,7 @@
 .Content {
   display: flex;
   flex-direction: column;
-
+  width: 100%;
   @media (max-width: 1000px) {
     flex-direction: row;
 
