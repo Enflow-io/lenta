@@ -55,6 +55,7 @@
     letter-spacing: -0.015em;
     position: relative;
     left: -17px;
+    top: -3px;
     padding-left: 0px;
     cursor: pointer;
     font-family: 'Futura PT';
@@ -101,7 +102,7 @@
   flex-direction: row;
   justify-content: space-between;
   position: relative;
-  top: -3px;
+  right: -5px;
   @media (max-width: 1000px) {
     justify-content: center;
   }
@@ -249,7 +250,7 @@
 
   position: relative;
   top: -5px;
-  left: -15px;
+  left: -20px;
 
   a {
     color: #FFFFFF;
