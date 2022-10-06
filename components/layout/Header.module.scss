@@ -42,14 +42,19 @@
 
 
 .Button {
-  width: calc(100% - 210px);
+
+  width: calc(100% - 196px);
   max-width: 900px;
   min-width: 125px;
   display: flex;
   justify-content: center;
   align-items: center;
-
+  position: relative;
+  left: 14px;
   button {
+    letter-spacing: -0.015em;
+    position: relative;
+    left: -17px;
     cursor: pointer;
     font-family: 'Futura PT';
     font-style: normal;
@@ -60,7 +65,6 @@
 
     color: #35219A;
     background: #FFD200;
-
 
     &:hover{
       color: white;
@@ -95,6 +99,8 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  position: relative;
+  top: -3px;
   @media (max-width: 1000px) {
     justify-content: center;
   }
@@ -103,6 +109,8 @@
 
 .Menu {
   ul {
+    position: relative;
+    left: -1px;
     @media (max-width: 1000px) {
       display: none;
 
@@ -116,7 +124,7 @@
     font-family: 'Futura PT';
 
     li {
-
+      font-size: 18px;
       padding: 3px 5px;
 
     }
@@ -202,7 +210,7 @@
 
     li {
 
-      font-size: 16px;
+      font-size: 18px;
       @media (max-width: 1180px) {
         margin-right: 20px;
         font-size: 14px;
@@ -237,6 +245,10 @@
   align-items: center;
   justify-content: center;
 
+  position: relative;
+  top: -5px;
+  left: -15px;
+
   a {
     color: #FFFFFF;
     text-decoration: none;
@@ -269,7 +281,8 @@
   align-items: center;
   justify-content: center;
   position: relative;
-  bottom: 2px;
+  bottom: -3px;
+  left: -4px;
 
   @media (max-width: 1000px) {
     margin-right: 0px;
