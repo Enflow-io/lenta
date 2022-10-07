@@ -89,8 +89,15 @@ const FooterMobile = ()=>{
 
             <div className={classes.LentaCopy}>© 2022 ООО «ЛЕНТА»</div>
             <div className={classes.Links}>
-                <a href={'#'}>Пользовательское соглашение</a>
-                <a href={'#'}>Политика конфиденциальности</a>
+                <Link  href="/cookie" >
+                    <a href={'#'}>Пользовательское соглашение</a>
+                </Link>
+
+
+                <Link  href="https://lenta.com/info/personal-data-policy/" passHref >
+                    <a target="_blank" rel="noopener noreferrer" href={'https://lenta.com/info/personal-data-policy/'}>Политика конфиденциальности</a>
+
+                </Link>
             </div>
 
         </div>

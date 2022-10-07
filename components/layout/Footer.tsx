@@ -36,8 +36,8 @@ const Footer = () => {
                         </Link>
                     </li>
                     <li>
-                        <Link href="https://spb.hh.ru/employer/7172 " target={"_blank"}>
-                            <a>Студентам</a>
+                        <Link href="https://spb.hh.ru/employer/7172 "  passHref target={"_blank"}>
+                            <a href="https://spb.hh.ru/employer/7172 " target={"_blank"} >Студентам</a>
                         </Link>
                     </li>
                 </ul>
@@ -126,7 +126,10 @@ const Footer = () => {
             <div className={classes.Line3}>
                 <div>
                     <div>© 2022 ООО «ЛЕНТА»</div>
-                    <div><a href={'#'}>Пользовательское соглашение</a></div>
+                    <div><Link  href="/cookie" >
+                        <a href={'#'}>Пользовательское соглашение</a>
+                    </Link>
+                    </div>
                     <div><a target={"_blank"} rel={''} href={'https://lenta.com/info/personal-data-policy/'}>Политика
                         конфиденциальности</a></div>
                 </div>

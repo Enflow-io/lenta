@@ -1,0 +1,39 @@
+.Container{
+  background: white;
+  display: flex;
+  justify-content: center;
+  //flex-direction: column;
+  @media (max-width: 1000px) {
+    //height: 63px;
+    align-items: center;
+    margin: 20px;
+
+
+  }
+
+}
+
+.CookiePage{
+  h2{
+    font-size: 38px;
+  }
+  padding-top: 3em;
+  margin-bottom: 3em;
+  max-width: 1080px;
+  width: 100%;
+  font-family: 'Futura PT';
+
+
+  p{
+    font-size: 14px;
+    font-family: "Futura Light";
+    font-size: 14px;
+    line-height: 130%;
+  }
+}
+
+
+.Label{
+  font-family: 'Futura PT';
+  font-size: 20px;
+}
