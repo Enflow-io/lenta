@@ -12,9 +12,12 @@
   width: 100%;
   min-height: 400px;
   padding-top: 70px;
+  padding-left: 65px;
 
   @media (max-width: 1000px) {
-    padding-top: 0
+    padding-top: 0;
+    padding-left: 0px;
+
   }
 
   .BtnCont {
@@ -209,6 +212,19 @@
 .Map {
   margin-top: 18px;
   margin-bottom: 112px;
+
+  width: calc(100% - 65px);
+
+
+  @media (max-width: 1000px) {
+    width: calc(100%);
+
+
+  }
+
+  &.Loading {
+    opacity: .7;
+  }
 }
 
 .Table {
@@ -230,18 +246,21 @@
 .Vacancy {
   position: relative;
   font-family: 'Futura PT';
-
+  box-sizing: border-box;
 
   margin-top: 18px;
   margin-bottom: 112px;
   background: white;
-  width: calc(100% - 128px);
+  //width: calc(100% - 128px);
+  width: calc(100% - 68px);
+
   padding: 64px 89px 64px 89px;
 
 
   @media (max-width: 600px) {
     padding: 10px 20px;
-    width: calc(100% - 40px);
+    //width: calc(100% - 40px);
+    width: 100%;
 
   }
 
@@ -286,19 +305,20 @@
     margin-bottom: 2em;
     padding-bottom: 1em;
   }
-    .Info{
+
+  .Info {
     @media (max-width: 600px) {
       display: flex;
       flex-direction: row;
-      label{
+      label {
         margin-right: .5em;
 
       }
 
-      label::after{
+      label::after {
         content: ":"
       }
-      >div{
+      > div {
         font-family: "Futura Light";
       }
 
@@ -306,6 +326,7 @@
   }
 
 }
+
 .List {
   @media (max-width: 600px) {
     flex-direction: column;
@@ -337,6 +358,7 @@
 
   margin-bottom: 20px;
 }
+
 .CloseBtn {
   cursor: pointer;
   position: absolute;
@@ -414,13 +436,14 @@
     padding: 12px;
     border: none;
     margin-left: 1em;
-    &:hover{
+
+    &:hover {
       background: #35219A;
     }
   }
 
   .Back {
-    &:hover{
+    &:hover {
       background: #35219A;
     }
   }
@@ -467,8 +490,7 @@
 }
 
 
-
-.SimpleInput{
+.SimpleInput {
   border-radius: 2px;
   width: 196px;
   height: 35px;
@@ -483,14 +505,14 @@
   font-family: "Futura Light";
   padding-left: 12px;
 
-  &:focus, &:focus-visible{
+  &:focus, &:focus-visible {
     outline: none;
     border-color: inherit;
     -webkit-box-shadow: none;
     box-shadow: none;
   }
 
-  input:focus-visible{
+  input:focus-visible {
     outline: none;
     border-color: inherit;
     -webkit-box-shadow: none;

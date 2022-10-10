@@ -14,8 +14,8 @@ function UserPlacemarkBalloon(props: any) {
         
               <label>Открытые вакансии</label>
               <ul class="${classes.Vacancies}">
-                  <li   id="placemark-balloon__profile-btn_user-id_${props.user.id}">Кассир-продавец</li>
-                  <li>Продавец</li>
+                  <li class="vacancy" data-id="1"  id="placemark-balloon__profile-btn_user-id_${props.user.id}">Кассир-продавец</li>
+                  <li class="vacancy" data-id="1">Продавец</li>
         </ul>
 
     </div>
@@ -40,12 +40,14 @@ const CustomPlacemark = (props: any) => {
                         // this.element = $('.map__placemark-balloon', this.getParentElement());
                         this.element = $(this.getParentElement());
 
-                        // this.element
-                        //     .find('#placemark-balloon__profile-btn_user-id_' + props.user.id)
-                        //     .on('click', {user: this.user}, ()=>{
-                        //         // this.events.fire('userclose');
-                        //         // $.proxy(this.myClick, this)
-                        //     });
+                        this.element
+                            .find('.vacancy')
+                            .on('click', {user: this.user}, (event: any)=>{
+
+                                // this.events.fire('userclose');
+                                props.openModel(event.target.getAttribute("data-id"));
+                                // $.proxy(this.myClick, this)
+                            });
 
 
 
@@ -53,7 +55,8 @@ const CustomPlacemark = (props: any) => {
 
                     clear: function () {
                         this.element
-                            .find('#placemark-balloon__profile-btn_user-id_' + props.user.id)
+                            // .find('#placemark-balloon__profile-btn_user-id_' + props.user.id)
+                            .find('.vacancy')
                             .off('click');
 
                         Layout.superclass.clear.call(this);
@@ -87,11 +90,14 @@ const CustomPlacemark = (props: any) => {
 
 
                     this.element.find('.close')
-                        .on('click', () => {
+                        .on('click', (e:any) => {
+                            e.preventDefault();
                             // const thisis = this;
                             // debugger
                             // this.onCloseClick()
-                            alert('close')
+                            const test = this;
+                            test.events.fire('userclose')
+                            // debugger
                         });
                 }
             })

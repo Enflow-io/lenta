@@ -13,13 +13,17 @@ const options = [
     {value: 'vanilla', label: 'Vanilla'}
 ]
 
-const DesktopSelectors = () => {
+interface DesktopSelectorsProps {
+    onSearch: ()=>void
+}
+
+const DesktopSelectors = (props: DesktopSelectorsProps) => {
     return (
         <div className={classes.Selectors}>
             <div className={classes.Line}>
                 <div className={classes.Selector}>
                     <label>Ключевое слово</label>
-                    <input className={classes.SimpleInput}/>
+                    <input placeholder={"Поиск"} className={classes.SimpleInput}/>
 
                 </div>
                 <div className={classes.Selector}>
@@ -51,7 +55,7 @@ const DesktopSelectors = () => {
 
                 <div className={classes.Selector}>
                     <label>&nbsp;</label>
-                    <button>Поиск</button>
+                    <button onClick={props.onSearch}>Поиск</button>
                 </div>
 
             </div>

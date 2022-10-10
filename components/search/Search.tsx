@@ -21,6 +21,7 @@ interface SearchProps {
 
 const Search = (props: SearchProps) => {
     const [isMap, setIsMap] = useState(true)
+    const [isLoading, setIsLoading] = useState(false)
     const {isMobile} = useIsMobile()
 
     const [selectedVacancy, setSelectedVacancy] = useState<undefined | number | string>(undefined)
@@ -65,7 +66,13 @@ const Search = (props: SearchProps) => {
         <div className={classes.Search}>
             {/*{isMobile ? <MobileSelectors/> : <DesktopSelectors/>}*/}
 
-            <DesktopSelectors/>
+            <DesktopSelectors onSearch={()=>{
+                setIsLoading(true)
+                setTimeout(()=>{
+                    setIsLoading(false)
+
+                }, 500)
+            }}/>
             <div className={classes.Switcher}>
                 <a onClick={e => {
                     e.preventDefault();
@@ -78,7 +85,8 @@ const Search = (props: SearchProps) => {
             </div>
 
             {isMap && !selectedVacancy &&
-                <div className={classes.Map}>
+                <div className={`${classes.Map} ${isLoading ? classes.Loading : undefined}`}>
+
                     <YMaps>
                         <Map instanceRef={ref => {
                             // @ts-ignore
@@ -90,7 +98,7 @@ const Search = (props: SearchProps) => {
 
                              }}
                              width={'100%'}
-                             height={500}
+                             height={435}
                             // options={{
                             //     scrollZoom: false
                             // }
@@ -98,17 +106,7 @@ const Search = (props: SearchProps) => {
 
 
                         >
-                            {/*<Placemark*/}
-                            {/*    geometry={[55.684758, 37.738521]}*/}
-                            {/*    properties={{*/}
-                            {/*        hintContent: "test",*/}
-                            {/*    }}*/}
-                            {/*    options={{*/}
-                            {/*        iconLayout: 'default#image',*/}
-                            {/*        iconImageHref: '/i/lenta-icon.svg',*/}
-                            {/*        iconImageSize: [40, 40],*/}
-                            {/*    }}*/}
-                            {/*/>*/}
+
 
                             <CustomPlacemark geometry={[55.684758, 37.738521]}
                                              options={{
@@ -122,6 +120,10 @@ const Search = (props: SearchProps) => {
                                              }}
                                              user={{
                                                  id: 0,
+                                             }}
+                                             openModel={(id: any)=>{
+                                                 // alert(id)
+                                                 setSelectedVacancy(2)
                                              }}
                                              myClick={() => alert('!')}/>
                         </Map>
