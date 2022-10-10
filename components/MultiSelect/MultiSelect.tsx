@@ -13,8 +13,10 @@ interface MultiSelectProps {
     options: Option[]
     placeholder: string
     customHeight?: number
+    multi?: boolean
 }
 const MultiSelect = (props: MultiSelectProps) => {
+    const isMulti = props.multi === undefined ? true : props.multi;
     const ref = useRef(null)
     const [isOpened, setIsOpened] = useState(false);
     const handleClickOutside = () => {
@@ -49,7 +51,13 @@ const MultiSelect = (props: MultiSelectProps) => {
                 placeholder={props.placeholder}
                 onClick={() => {
                     setIsOpened(!isOpened);
-                }}/>
+                }}
+                value={props.options.filter(el=>{
+                    return selectedItems.includes(el.id)
+                }).map(el=>{
+                    return el.label
+                }).join(', ')}
+            />
 
 
             <svg className={`${classes.IsOpenIcon} ${!isOpened ? classes.rotated : undefined}`} width="18"
@@ -73,7 +81,15 @@ const MultiSelect = (props: MultiSelectProps) => {
                     return <div onClick={(e)=>{
                         e.preventDefault();
                         e.stopPropagation();
-                        setSelectedItems([item.id])
+                        if(isMulti){
+                            if(selectedItems.includes(item.id)){
+                                setSelectedItems(selectedItems.filter(el=>el!==item.id));
+                            }else{
+                                setSelectedItems([...selectedItems, item.id]);
+                            }
+                        }else{
+                            setSelectedItems([item.id])
+                        }
                     }} key={index} className={classes.ListItem}>
                         <div className={classes.LeftPart}>
                             {/*<input className={classes.Checkbox} type={'checkbox'}/>*/}

@@ -24,7 +24,7 @@ const DesktopSelectors = () => {
                 </div>
                 <div className={classes.Selector}>
                     <label>Вакансия</label>
-                    <MultiSelect placeholder={'Вакансия'} options={Vacancies}/>
+                    <MultiSelect  placeholder={'Вакансия'} options={Vacancies}/>
                 </div>
                 <div className={classes.Selector}>
                     <label>Направление деятельности</label>
@@ -42,7 +42,7 @@ const DesktopSelectors = () => {
             <div className={classes.Line}>
                 <div className={classes.Selector}>
                     <label>Город</label>
-                    <MultiSelect placeholder={'Город'} options={Cites}/>
+                    <MultiSelect multi={false} placeholder={'Город'} options={Cites}/>
                 </div>
                 <div className={classes.Selector}>
                     <label>Метро</label>
