@@ -5,8 +5,29 @@
     background: #EEEEEE;
   }
 
+  @media (max-width: 600px) {
+    thead{
+      tr{
+        height: 25px;
+        th{
+          height: 25px;
+
+        }
+      }
+    }
+
+    tbody{
+      tr:nth-child(1){
+        height: 30px;
+      }
+    }
+    .PageSizer{
+      margin: 5px 0;
+    }
+  }
 
   tbody{
+
     tr{
       &:hover{
         td{
@@ -17,6 +38,7 @@
     }
   }
   th {
+    padding: 0 5px;
     height: 41px;
     font-family: 'Futura PT';
     font-style: normal;
@@ -102,6 +124,8 @@
     }
     label{
       cursor: pointer;
+      color: #231F20;
+      font-size: 12px;
     }
   }
 }

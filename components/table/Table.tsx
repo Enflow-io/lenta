@@ -125,7 +125,7 @@ const Table = (props: TableProps) => {
 
         <div className="p-2">
             <div className="h-2"/>
-            <table cellSpacing="0" cellpadding="0" className={classes.Table}>
+            <table cellSpacing="0" cellPadding="0" className={classes.Table}>
                 <thead>
                 {table.getHeaderGroups().map(headerGroup => (
                     <tr  key={headerGroup.id}>
