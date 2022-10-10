@@ -63,8 +63,9 @@ const Search = (props: SearchProps) => {
 
     return <div className={classes.Container}>
         <div className={classes.Search}>
-            {isMobile ? <MobileSelectors/> : <DesktopSelectors/>}
+            {/*{isMobile ? <MobileSelectors/> : <DesktopSelectors/>}*/}
 
+            <DesktopSelectors/>
             <div className={classes.Switcher}>
                 <a onClick={e => {
                     e.preventDefault();
