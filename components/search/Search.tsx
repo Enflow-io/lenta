@@ -65,25 +65,40 @@ const Search = (props: SearchProps) => {
 
         // @ts-ignore
         var location = inst.geolocation.get(
-            { provider: "yandex", mapStateAutoApply: true }
+            {provider: "yandex", mapStateAutoApply: true}
         )
         // Асинхронная обработка ответа.
         location.then(
-            function(result: any) {
+            function (result: any) {
+
+
                 // Добавление местоположения на карту.
-                console.log('location ', result)
-                debugger
+                // alert(result.geoObjects.get(0).getLocalities()[0])
+                // console.log(result.geoObjects.position)
+                // debugger
+                setCenter(result.geoObjects.position)
+
                 // result.geoObjects.options.set('preset', 'islands#redCircleIcon');
                 // result.geoObjects.get(0).properties.set({
                 //     balloonContentBody: 'Мое местоположение'
                 // });
                 // inst.geoObjects.add(result.geoObjects);
-                },
-            function(err: any) {
+            },
+            function (err: any) {
+                console.log(err)
+                debugger
+
                 console.log('Ошибка: ' + err)
             },
         )
     }
+    const [center, setCenter] = React.useState(
+        [55.684758, 37.738521],
+        // [41.008857, 28.96747],
+    );
+
+
+
     return <div className={classes.Container}>
         <div className={classes.Search}>
             {/*{isMobile ? <MobileSelectors/> : <DesktopSelectors/>}*/}
@@ -120,12 +135,18 @@ const Search = (props: SearchProps) => {
                         onLoad={(inst) => onLoadMap(inst)}
                         instanceRef={ref => {
                             // @ts-ignore
-                            ref && ref.behaviors.disable('scrollZoom');
+                            ref && ref.behaviors.enable('scrollZoom');
                         }}
-                        defaultState={{
-                            center: [55.684758, 37.738521],
-                            zoom: 14,
+                        // defaultState={{
+                        //     center: center,
+                        //     zoom: 14,
+                        //
+                        // }}
 
+                        // center={center}
+                        state={{
+                            center: center,
+                            zoom: 14
                         }}
                         width={'100%'}
                         height={435}
@@ -138,7 +159,7 @@ const Search = (props: SearchProps) => {
                     >
 
 
-                        <CustomPlacemark geometry={[55.684758, 37.738521]}
+                        <CustomPlacemark geometry={center}
                                          options={{
                                              iconLayout: 'default#image',
                                              iconImageHref: '/i/lenta-icon.svg',
