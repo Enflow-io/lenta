@@ -64,11 +64,18 @@
     font-size: 22px !important;
     line-height: 130% !important;
   }
-  >svg{
-    display: none;
-    @media (max-width: 600px) {
-      display: block;
-      min-height: 148px;
+  >span{
+    max-width: 200px;
+    >svg{
+      width: 100%;
+
+      //display: none;
+      @media (max-width: 600px) {
+
+        display: block;
+        min-height: 148px;
+      }
     }
   }
+
 }

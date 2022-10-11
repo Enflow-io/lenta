@@ -1,13 +1,18 @@
 import classes from "./Openable.module.scss";
 import {useState} from "react";
 
-const Openable = () => {
+
+interface OpenableProps {
+    question: string
+    answer: string
+}
+const Openable = (props: OpenableProps) => {
     const [isOpened, setIsOpened] = useState(false)
     return <div style={{
         marginBottom: 20
     }}>
         <div className={`${classes.Openable} ${isOpened ? classes.Opened : undefined}`}>
-            <span>В «ЛЕНТЕ» можно работать без оформления?</span>
+            <span>{props.question}</span>
             <a href={'#'} onClick={(e) => {
                 e.preventDefault();
                 setIsOpened(!isOpened)
@@ -38,7 +43,7 @@ const Openable = () => {
             </a>
         </div>
         {isOpened &&
-        <div className={classes.Opened}>Да, мы практикуем испытательный срок до 3-х месяцев.</div>
+        <div className={classes.Opened}>{props.answer}</div>
         }
 
     </div>

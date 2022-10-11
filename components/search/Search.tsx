@@ -28,10 +28,10 @@ const Search = (props: SearchProps) => {
 
     const size = useWindowSize();
 
-    useEffect(()=>{
-        if((size?.width || 1000) < 600){
+    useEffect(() => {
+        if ((size?.width || 1000) < 600) {
             setIsMap(false);
-        }else{
+        } else {
             setIsMap(true);
 
         }
@@ -61,14 +61,36 @@ const Search = (props: SearchProps) => {
         }
     }
 
+    const onLoadMap = (inst: any) => {
 
+        // @ts-ignore
+        var location = inst.geolocation.get(
+            { provider: "yandex", mapStateAutoApply: true }
+        )
+        // Асинхронная обработка ответа.
+        location.then(
+            function(result: any) {
+                // Добавление местоположения на карту.
+                console.log('location ', result)
+                debugger
+                // result.geoObjects.options.set('preset', 'islands#redCircleIcon');
+                // result.geoObjects.get(0).properties.set({
+                //     balloonContentBody: 'Мое местоположение'
+                // });
+                // inst.geoObjects.add(result.geoObjects);
+                },
+            function(err: any) {
+                console.log('Ошибка: ' + err)
+            },
+        )
+    }
     return <div className={classes.Container}>
         <div className={classes.Search}>
             {/*{isMobile ? <MobileSelectors/> : <DesktopSelectors/>}*/}
 
-            <DesktopSelectors onSearch={()=>{
+            <DesktopSelectors onSearch={() => {
                 setIsLoading(true)
-                setTimeout(()=>{
+                setTimeout(() => {
                     setIsLoading(false)
 
                 }, 500)
@@ -85,52 +107,60 @@ const Search = (props: SearchProps) => {
             </div>
 
             {isMap && !selectedVacancy &&
-                <div className={`${classes.Map} ${isLoading ? classes.Loading : undefined}`}>
+            <div className={`${classes.Map} ${isLoading ? classes.Loading : undefined}`}>
 
-                    <YMaps>
-                        <Map instanceRef={ref => {
+                <YMaps query={{
+                    apikey: 'c733189d-e58b-4b16-a6ce-50860ef72788',
+                }}
+
+                    // onApiAvaliable={(ymaps: any) => handleApiAvaliable(ymaps)}
+                >
+                    <Map
+                        modules={["geolocation", "geocode"]}
+                        onLoad={(inst) => onLoadMap(inst)}
+                        instanceRef={ref => {
                             // @ts-ignore
                             ref && ref.behaviors.disable('scrollZoom');
                         }}
-                             defaultState={{
-                                 center: [55.684758, 37.738521],
-                                 zoom: 14,
+                        defaultState={{
+                            center: [55.684758, 37.738521],
+                            zoom: 14,
 
-                             }}
-                             width={'100%'}
-                             height={435}
-                            // options={{
-                            //     scrollZoom: false
-                            // }
-                            // }
-
-
-                        >
+                        }}
+                        width={'100%'}
+                        height={435}
+                        // options={{
+                        //     scrollZoom: false
+                        // }
+                        // }
 
 
-                            <CustomPlacemark geometry={[55.684758, 37.738521]}
-                                             options={{
-                                                 iconLayout: 'default#image',
-                                                 iconImageHref: '/i/lenta-icon.svg',
-                                                 iconImageSize: [40, 40],
+                    >
 
-                                                 iconColor: '#ff0000',
-                                                 hideIconOnBalloonOpen: false,
-                                                 balloonMaxWidth: 200,
-                                             }}
-                                             user={{
-                                                 id: 0,
-                                             }}
-                                             openModel={(id: any)=>{
-                                                 // alert(id)
-                                                 setSelectedVacancy(2)
-                                             }}
-                                             myClick={() => alert('!')}/>
-                        </Map>
 
-                    </YMaps>
+                        <CustomPlacemark geometry={[55.684758, 37.738521]}
+                                         options={{
+                                             iconLayout: 'default#image',
+                                             iconImageHref: '/i/lenta-icon.svg',
+                                             iconImageSize: [40, 40],
 
-                </div>
+                                             iconColor: '#ff0000',
+                                             hideIconOnBalloonOpen: false,
+                                             balloonMaxWidth: 200,
+                                         }}
+                                         user={{
+                                             id: 0,
+                                         }}
+                                         openModel={(id: any) => {
+                                             // alert(id)
+                                             setSelectedVacancy(2)
+                                         }}
+                                         myClick={() => alert('!')}/>
+                    </Map>
+
+                </YMaps>
+
+            </div>
             }
             {!isMap && !selectedVacancy && <div className={classes.Table}>
                 <Table onSelect={(id: string) => {
@@ -140,7 +170,7 @@ const Search = (props: SearchProps) => {
 
 
             {selectedVacancy && <div className={classes.Vacancy}>
-                <div className={classes.CloseBtn} onClick={()=>{
+                <div className={classes.CloseBtn} onClick={() => {
                     setSelectedVacancy(undefined)
 
                 }}>
@@ -204,9 +234,9 @@ const Search = (props: SearchProps) => {
                     <div className={classes.BtnCont}>
                         <button className={classes.Submit}>Откликнуться</button>
                     </div>
-                    <div className={`${classes.BtnCont} ${classes.BtnCont2}` }>
+                    <div className={`${classes.BtnCont} ${classes.BtnCont2}`}>
                         <Popup
-                            lockScroll={ true}
+                            lockScroll={true}
                             contentStyle={{
                                 // minWidth: '600px',
                                 maxWidth: '450px',
@@ -219,7 +249,9 @@ const Search = (props: SearchProps) => {
                             }} trigger={<button className={classes.Share}>Поделиться</button>} modal>
                             {
                                 // @ts-ignore
-                                (close: any) => (<ShareVacancy close={()=>{close()}} />)
+                                (close: any) => (<ShareVacancy close={() => {
+                                    close()
+                                }}/>)
                             }
 
                         </Popup>
@@ -241,7 +273,6 @@ const Search = (props: SearchProps) => {
 export default Search;
 
 
-
 function useWindowSize() {
     // Initialize state with undefined width/height so server and client renders match
     // Learn more here: https://joshwcomeau.com/react/the-perils-of-rehydration/
@@ -261,6 +292,7 @@ function useWindowSize() {
                 height: window.innerHeight,
             });
         }
+
         // Add event listener
         window.addEventListener("resize", handleResize);
         // Call handler right away so state gets updated with initial window size
