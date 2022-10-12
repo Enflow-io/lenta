@@ -16,7 +16,7 @@ import Popup from "reactjs-popup";
 import ShareVacancy from "../ShareVacancy/ShareVacancy";
 
 interface SearchProps {
-
+    onLocation: (location: string) => void
 }
 
 const Search = (props: SearchProps) => {
@@ -73,6 +73,9 @@ const Search = (props: SearchProps) => {
 
 
                 // Добавление местоположения на карту.
+                if(result.geoObjects.get(0).getLocalities()[0]){
+                    props.onLocation(result.geoObjects.get(0).getLocalities()[0]);
+                }
                 // alert(result.geoObjects.get(0).getLocalities()[0])
                 // console.log(result.geoObjects.position)
                 // debugger
@@ -96,7 +99,6 @@ const Search = (props: SearchProps) => {
         [55.684758, 37.738521],
         // [41.008857, 28.96747],
     );
-
 
 
     return <div className={classes.Container}>

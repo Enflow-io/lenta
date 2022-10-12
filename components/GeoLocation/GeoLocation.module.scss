@@ -1,0 +1,89 @@
+.GeoLocation{
+  position: absolute;
+  z-index: 999;
+  width: 288px;
+  height: 127px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: #EEEEEE;
+  top: 27px;
+  left: 20px;
+
+  box-shadow: 0px 3px 30px rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+
+  p{
+    padding-top: 0;
+    margin-top: 0;
+    font-family: 'Futura Light';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 24px;
+    color: #000000;
+
+    text-shadow: 0px 4px 20px rgba(0, 0, 0, 0.25);
+    text-align: center;
+  }
+}
+
+
+.Primary{
+  width: 70px;
+  height: 26px;
+
+  background: #35219A;
+  border-radius: 4px;
+  font-family: 'Futura Light';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 14px;
+  /* or 117% */
+
+
+  border: none;
+  color: #FFFFFF;
+
+  text-shadow: 0px 4px 20px rgba(0, 0, 0, 0.25);
+  margin-right: 15px;
+}
+
+.Cancel{
+  box-sizing: border-box;
+
+  width: 130px;
+  height: 26px;
+
+  border: 1px solid #35219A;
+  border-radius: 4px;
+
+  font-family: 'Futura Light';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 14px;
+  /* or 117% */
+
+
+  color: #333333;
+
+  text-shadow: 0px 4px 20px rgba(0, 0, 0, 0.25);
+}
+
+.Buttons{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  >button{
+    cursor: pointer;
+  }
+}
+
+.CloseBtn {
+  cursor: pointer;
+  position: absolute;
+  top: 8px;
+  right: 8px;
+}

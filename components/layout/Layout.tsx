@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import Header from "./Header";
 import Footer from "./Footer";
 import Slide1 from "../slide1/Slide1";
@@ -12,9 +12,11 @@ import {slide as Menu} from "react-burger-menu";
 import Link from "next/link";
 import classes from "./Layout.module.scss"
 import MenuArrow from "./Arrow";
+import GeoLocation from "../GeoLocation/GeoLocation";
 
 interface LayoutProps {
     children: any
+    location: string | undefined
 }
 
 
@@ -115,7 +117,21 @@ export const MenuAll  = ()=>{
 }
 
 const Layout = (props: LayoutProps) => {
+    const [isLocationShown, setIsLocationShown] = useState(false)
+    const [isLocationSaved, setIsLocationSaved] = useState(false)
+    useEffect(()=>{
+
+        if(props.location){
+            setIsLocationShown(true);
+        }
+    }, [props.location])
     return <>
+        {isLocationShown && !isLocationSaved && <GeoLocation
+            onLocationSaved={()=>{setIsLocationSaved(true)}}
+            location={props.location}
+            close={()=>{setIsLocationShown(false)}}
+        />}
+
 
         <MenuAll />
 

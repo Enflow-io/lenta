@@ -4,12 +4,17 @@ import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 import Layout from "../components/layout/Layout";
 import Search from "../components/search/Search";
-import React from "react";
+import React, {useState} from "react";
+import GeoLocation from "../components/GeoLocation/GeoLocation";
 
 const Home: NextPage = () => {
+    const [loc, setLoc] = useState<string | undefined>(undefined)
+    const onLocation = (loc: string)=>{
+        setLoc(loc)
+    }
     return (
-        <Layout>
-            <Search />
+        <Layout location={loc}>
+            <Search onLocation={onLocation} />
         </Layout>
     )
 }
