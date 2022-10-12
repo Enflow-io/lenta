@@ -205,8 +205,8 @@
   border-radius: 4px !important;;
 
   @media (max-width: 600px) {
-    display: none;
-    visibility: hidden;
+    //display: none;
+    //visibility: hidden;
   }
 }
 
@@ -215,5 +215,9 @@
   align-items: center;
   svg{
     margin-right: .5em;
+    @media (max-width: 600px) {
+      display: none;
+      visibility: hidden;
+    }
   }
 }
