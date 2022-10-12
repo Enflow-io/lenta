@@ -6,11 +6,12 @@ import Image from 'next/image'
 import {
     ColumnDef,
     flexRender,
-    getCoreRowModel,
+    getCoreRowModel, getPaginationRowModel,
     getSortedRowModel,
     SortingState,
     useReactTable,
 } from '@tanstack/react-table'
+import ReactPaginate from "react-paginate";
 
 interface TableProps {
     onSelect: (id: string) => void
@@ -101,6 +102,7 @@ const Table = (props: TableProps) => {
         onSortingChange: setSorting,
         getCoreRowModel: getCoreRowModel(),
         getSortedRowModel: getSortedRowModel(),
+        getPaginationRowModel: getPaginationRowModel(),
         debugTable: true,
     });
 
@@ -209,6 +211,19 @@ const Table = (props: TableProps) => {
                     })}
                 </tbody>
             </table>
+            <div                 className={classes.Paginator}
+            >
+            <ReactPaginate
+                activeClassName={classes.ActiveLi}
+                breakLabel="..."
+                nextLabel="»"
+                onPageChange={()=>{}}
+                pageRangeDisplayed={5}
+                pageCount={25}
+                previousLabel="«"
+                renderOnZeroPageCount={()=>{}}
+            />
+            </div>
             {/*<div>{table.getRowModel().rows.length} Rows</div>*/}
             {/*<div>*/}
             {/*    <button onClick={() => rerender()}>Force Rerender</button>*/}

@@ -163,3 +163,30 @@
 
 }
 
+
+.Paginator{
+  display: flex;
+  justify-content: flex-end;
+  ul{
+    list-style: none;
+    display: flex;
+    li{
+      padding: 5px 7px;
+      font-family: "Futura Light";
+      font-size: 12px;
+      border: 1px solid lightgray;
+      border-right: none;
+      cursor: pointer;
+    }
+
+    li:last-child{
+      border-right: 1px solid lightgray;
+
+    }
+  }
+  .ActiveLi{
+    background: #35219A;
+    color: white;
+    font-family: "Futura PT";
+  }
+}
