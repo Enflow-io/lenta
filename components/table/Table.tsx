@@ -210,7 +210,9 @@ const Table = (props: TableProps) => {
                                         <td data-tip={index === 0 ? "Нажми, чтобы узнать больше" : undefined}
                                              key={cell.id} data-id={cell.column.id}>
                                             <div className={classes.Row}>{index === 0 ?
-                                                <svg width="30" height="30" viewBox="0 0 27 26" fill="none"
+                                                <svg onClick={e => {
+                                                    selectRow(row.id)
+                                                }} width="30" height="30" viewBox="0 0 27 26" fill="none"
                                                      xmlns="http://www.w3.org/2000/svg">
                                                     <circle cx="13.0039" cy="13" r="13" fill="#35219A"/>
                                                     <g clip-path="url(#clip0_480_457)">
