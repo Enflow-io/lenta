@@ -1,7 +1,7 @@
-.GeoLocation{
+.GeoLocation {
   position: absolute;
   z-index: 999;
-  width: 288px;
+  min-width: 300px;
   height: 127px;
   display: flex;
   flex-direction: column;
@@ -13,7 +13,7 @@
   box-shadow: 0px 3px 30px rgba(0, 0, 0, 0.2);
   border-radius: 8px;
 
-  p{
+  p {
     padding-top: 0;
     margin-top: 0;
     font-family: 'Futura Light';
@@ -29,7 +29,7 @@
 }
 
 
-.Primary{
+.Primary {
   width: 70px;
   height: 26px;
 
@@ -50,7 +50,7 @@
   margin-right: 15px;
 }
 
-.Cancel{
+.Cancel {
   box-sizing: border-box;
 
   width: 130px;
@@ -72,11 +72,12 @@
   text-shadow: 0px 4px 20px rgba(0, 0, 0, 0.25);
 }
 
-.Buttons{
+.Buttons {
   display: flex;
   align-items: center;
   justify-content: center;
-  >button{
+
+  > button {
     cursor: pointer;
   }
 }
@@ -86,4 +87,98 @@
   position: absolute;
   top: 8px;
   right: 8px;
+}
+
+
+/* CitySelector */
+
+.CitySelector {
+  width: 389px;
+  height: 230px;
+
+  background: #EEEEEE;
+  /* popup */
+
+  box-shadow: 0px 3px 30px rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  padding: 26px 20px;
+  box-sizing: border-box;
+
+  label {
+    font-family: 'Futura Light';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 24px;
+    /* or 133% */
+
+
+    color: #000000;
+
+    text-shadow: 0px 4px 20px rgba(0, 0, 0, 0.25);
+    display: block;
+    margin-bottom: 20px;
+
+
+  }
+
+
+  input {
+    border: 1px solid #35219A;
+    border-radius: 4px;
+    width: 100%;
+    box-sizing: border-box;
+    height: 34px;
+    background: #EEEEEE;
+    font-family: 'Futura Light';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 13px;
+    line-height: 14px;
+    padding-left: 14px;
+    /* or 108% */
+
+
+    color: #231F20;
+
+
+    margin-bottom: 15px;
+  }
+
+
+  .CitiesList {
+    height: 88px;
+    //overflow: scroll;
+    .ListItem {
+      cursor: pointer;
+      font-family: 'Futura Light';
+      font-size: 13px;
+      line-height: 14px;
+      /* or 108% */
+
+
+      color: #231F20;
+
+      text-shadow: 0px 4px 20px rgba(0, 0, 0, 0.25);
+      margin-bottom: 4px;
+      >span{
+        font-family: 'Futura PT';
+
+      }
+    }
+  }
+
+  .Info{
+    font-family: 'Futura Light';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 18px;
+    /* or 120% */
+
+
+    color: #231F20;
+
+    text-shadow: 0px 4px 20px rgba(0, 0, 0, 0.25);
+  }
 }
