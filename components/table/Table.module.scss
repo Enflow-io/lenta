@@ -190,3 +190,15 @@
     font-family: "Futura PT";
   }
 }
+
+.Tooltip{
+  background: white !important;
+  color: #35219A !important;;
+  border: 1px solid #35219A !important;;
+  border-radius: 4px !important;;
+
+  @media (max-width: 600px) {
+    display: none;
+    visibility: hidden;
+  }
+}
