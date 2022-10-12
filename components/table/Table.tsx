@@ -151,8 +151,10 @@ const Table = (props: TableProps) => {
                                                 </svg></>
                                                 ,
                                                 desc: <>&nbsp;<svg width="8" height="6" viewBox="0 0 8 6" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M1.3225 0.958984L4 3.70075L6.6775 0.958984L7.5 1.80306L4 5.39489L0.5 1.80306L1.3225 0.958984Z" fill="black"/>
-                                                </svg></>
+                                                    <path d="M6.6775 5.04102L4 2.29925L1.3225 5.04102L0.5 4.19694L4 0.605106L7.5 4.19694L6.6775 5.04102Z" fill="black"/>
+                                                </svg>
+
+                                                </>
                                                 ,
                                             }[header.column.getIsSorted() as string] ?? null}
                                         </div>

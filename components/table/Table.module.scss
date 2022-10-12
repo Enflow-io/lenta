@@ -3,6 +3,12 @@
 
   thead {
     background: #EEEEEE;
+
+    th{
+      >div{
+        cursor: pointer;
+      }
+    }
   }
 
   @media (max-width: 600px) {
