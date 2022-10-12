@@ -211,7 +211,7 @@ const Table = (props: TableProps) => {
                     })}
                 </tbody>
             </table>
-            <ReactTooltip className='extraClass' delayHide={1000} effect='solid'/>
+            <ReactTooltip globalEventOff={'click'} className='extraClass' delayHide={1000} effect='solid'/>
             <div                 className={classes.Paginator}
             >
             <ReactPaginate
