@@ -56,6 +56,7 @@
     @media (max-width: 1000px) {
       background: white;
       font-size: 11px;
+      padding-left: 0;
     }
     line-height: 12px;
     background: #EEEEEE;
@@ -101,6 +102,12 @@
       padding-bottom: 10px;
       border-bottom: 1px solid #EEEEEE;
 
+    }
+    @media (max-width: 1000px) {
+      td{
+        padding-left: 0;
+        padding-right: 5px;
+      }
     }
   }
 
@@ -200,5 +207,13 @@
   @media (max-width: 600px) {
     display: none;
     visibility: hidden;
+  }
+}
+
+.Row{
+  display: flex;
+  align-items: center;
+  svg{
+    margin-right: .5em;
   }
 }
