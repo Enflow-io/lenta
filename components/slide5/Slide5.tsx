@@ -7,7 +7,7 @@ const Slide5 = () => {
         <div className={classes.Content}>
             <div className={classes.ContentCenter}>
                 <p>Присоединяйтесь к команде ЛЕНТЫ</p>
-                <button>К списку вакансий</button>
+                <a href={'#search'} >К списку вакансий</a>
             </div>
         </div>
     </div>

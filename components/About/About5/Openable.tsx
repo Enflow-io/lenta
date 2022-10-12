@@ -43,7 +43,7 @@ const Openable = (props: OpenableProps) => {
             </a>
         </div>
         {isOpened &&
-        <div className={classes.Opened}>{props.answer}</div>
+        <div className={classes.Opened} dangerouslySetInnerHTML={{__html: props.answer}}></div>
         }
 
     </div>

@@ -101,7 +101,7 @@ const Search = (props: SearchProps) => {
     );
 
 
-    return <div className={classes.Container}>
+    return <div id={'search'} className={classes.Container}>
         <div className={classes.Search}>
             {/*{isMobile ? <MobileSelectors/> : <DesktopSelectors/>}*/}
 
