@@ -2,7 +2,7 @@ import React from "react";
 import classes from "./Table.module.scss"
 import closeIconSrc from "../../public/i/close-icon.svg"
 import Image from 'next/image'
-
+import ReactTooltip from 'react-tooltip';
 import {
     ColumnDef,
     flexRender,
@@ -196,9 +196,9 @@ const Table = (props: TableProps) => {
                             <tr key={row.id} onClick={e => {
                                 selectRow(row.id)
                             }}>
-                                {row.getVisibleCells().map(cell => {
+                                {row.getVisibleCells().map((cell, index) => {
                                     return (
-                                        <td key={cell.id} data-id={cell.column.id}>
+                                        <td data-tip={index===0 ? "Нажми, чтобы узнать больше" : undefined} key={cell.id} data-id={cell.column.id}>
                                             {flexRender(
                                                 cell.column.columnDef.cell,
                                                 cell.getContext()
@@ -211,6 +211,7 @@ const Table = (props: TableProps) => {
                     })}
                 </tbody>
             </table>
+            <ReactTooltip className='extraClass' delayHide={1000} effect='solid'/>
             <div                 className={classes.Paginator}
             >
             <ReactPaginate
