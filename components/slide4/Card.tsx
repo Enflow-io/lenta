@@ -401,7 +401,7 @@ const icon5 = () => <span dangerouslySetInnerHTML={{
 }}/>;
 
 
-const Icons = [
+export const Icons = [
     Icon1, icon2, icon3, icon4, icon5
 ]
 

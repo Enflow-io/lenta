@@ -102,10 +102,10 @@
   }
 
   .card {
-    position: absolute;
-    top: -90px;
-    left: 15%;
-    right: 15%;
+    //position: absolute;
+    //top: -90px;
+    //left: 15%;
+    //right: 15%;
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -123,10 +123,13 @@
   }
 
   .about {
-    position: absolute;
-    bottom: 41px;
-    left: 15%;
+    margin-top: 0em;
+    margin-bottom: 2em;
+    //position: absolute;
 
+    a{
+      justify-content: center;
+    }
     p {
       margin: 0 17px 0 0;
       font-weight: 450;
@@ -142,18 +145,25 @@
   width: 100%;
   position: absolute;
   top: 97px;
-  .prev {
-    position: absolute;
-    left: -5px;
-  }
 
-  .next {
-    position: absolute;
-    right: -5px;
-  }
 
 }
 
+
+.prev {
+  position: absolute;
+  left: 5px;
+  bottom: 83px;
+  z-index: 9999;
+}
+
+.next {
+  position: absolute;
+  right: 5px;
+  bottom: 83px;
+  z-index: 9999;
+
+}
 
 .Svg1{
   //-webkit-mask: url(/i/slide41.svg) no-repeat center;
