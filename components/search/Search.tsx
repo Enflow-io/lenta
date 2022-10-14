@@ -75,9 +75,24 @@ const Search = (props: SearchProps) => {
 
 
                 // Добавление местоположения на карту.
-                if (result.geoObjects.get(0).getLocalities()[0]) {
-                    props.onLocation(result.geoObjects.get(0).getLocalities()[0]);
+                // if (result.geoObjects.get(0).getLocalities()[0]) {
+                //     debugger
+                //     props.onLocation(result.geoObjects.get(0).getLocalities()[0]);
+                // }
+
+                var data = result.geoObjects.get(0).properties.get('metaDataProperty').GeocoderMetaData;
+                var administrativeAreaName = data.AddressDetails.Country.AdministrativeArea.AdministrativeAreaName; // region
+
+                if ('SubAdministrativeArea' in data.AddressDetails.Country.AdministrativeArea) {
+                    var localityName = data.AddressDetails.Country.AdministrativeArea.SubAdministrativeArea.Locality.LocalityName; // city
+                } else {
+                    var localityName = data.AddressDetails.Country.AdministrativeArea.Locality.LocalityName; // city
                 }
+
+                props.onLocation(localityName || administrativeAreaName);
+
+
+
                 // alert(result.geoObjects.get(0).getLocalities()[0])
                 // console.log(result.geoObjects.position)
                 // debugger
