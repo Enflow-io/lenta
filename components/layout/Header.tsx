@@ -7,7 +7,6 @@ import Popup from "reactjs-popup";
 import 'reactjs-popup/dist/index.css';
 import Form from "../form/Form";
 import {slide as Menu} from 'react-burger-menu'
-import Head from "next/head";
 
 interface HeaderInterface {
 
@@ -16,13 +15,10 @@ interface HeaderInterface {
 const Header = (props: HeaderInterface) => {
     // @ts-ignore
     return <div className={classesHeader.HeaderContainer}>
-        <Head>
-            <link rel="shortcut icon" href="/i/favicon.ico" type="image/x-icon" />
-        </Head>
         <div className={classesHeader.Header}>
             <div className={classesHeader.Logo}>
                 <a href={'/'}>
-                    <img src={'/i/lenta-big-logo.svg'} width={95} height={87}/>
+                    <img src={'/i/lenta-big-logo.svg'} width={'100%'} />
                 </a>
                 {/*<Image src="/i/logo.marks" alt="logo" width={95} height={87}/>*/}
             </div>
