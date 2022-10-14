@@ -8,6 +8,7 @@ interface IBlock1Props {
     label: string
     text?: string
     icon: any
+    top: number
 }
 
 const Block1: FC<IBlock1Props> = ({stickerSrc, label, ...props}) => {
@@ -17,12 +18,14 @@ const Block1: FC<IBlock1Props> = ({stickerSrc, label, ...props}) => {
             <div className={classes.container}>
                 <h1>{label || "Почему классно работать на производстве «ЛЕНТЫ»?"}</h1>
                 <div className={classes.Header}>
-                    <h2>ЛЕНТА</h2>
+                    <h2 style={{
+                        top: props.top
+                    }}>ЛЕНТА</h2>
                     <div className={classes.MobileIcon}>
                         {/*<Image  src={stickerSrc}/>*/}
                         {/*<img src={stickerSrc} />*/}
                         {/*<Icon1 />*/}
-                        <Icon />
+                        <Icon  />
                     </div>
 
                 </div>
