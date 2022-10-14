@@ -7,6 +7,7 @@ import stickerSrcOld from '../../public/i/stickers/sticker2.svg'
 
 import Block3 from '../../components/Block3/Block3';
 import {MenuAll} from "../../components/layout/Layout";
+import FooterMobile from "../../components/layout/FooterMobile";
 
 const ProductionPage = () => {
 
@@ -19,6 +20,8 @@ const ProductionPage = () => {
             <Block1 icon={Icon1} stickerSrc={stickerSrc} label={"Почему классно работать на производстве «ЛЕНТЫ»?"}/>
             <Block2 youtubeSrc='https://www.youtube.com/embed/cpFRDVivFFg'/>
             <Block3/>
+            <FooterMobile/>
+
             <Footer/>
         </div>
     );

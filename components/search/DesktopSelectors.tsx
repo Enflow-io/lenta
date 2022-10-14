@@ -23,7 +23,7 @@ const DesktopSelectors = (props: DesktopSelectorsProps) => {
             <div className={classes.Line}>
                 <div className={classes.Selector}>
                     <label>Ключевое слово</label>
-                    <input placeholder={"Поиск"} className={classes.SimpleInput}/>
+                    <input placeholder={"Ключевое слово"} className={classes.SimpleInput}/>
 
                 </div>
                 <div className={classes.Selector}>

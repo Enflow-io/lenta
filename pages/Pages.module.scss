@@ -16,9 +16,17 @@
 .CookiePage{
   h2{
     font-size: 38px;
+    @media (max-width: 1000px) {
+      margin-top: 0em;
+
+    }
   }
   padding-top: 3em;
-  margin-bottom: 3em;
+  @media (max-width: 1000px) {
+    padding-top: 0em;
+
+  }
+    margin-bottom: 3em;
   max-width: 1080px;
   width: 100%;
   font-family: 'Futura PT';

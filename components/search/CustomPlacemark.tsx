@@ -50,9 +50,20 @@ const CustomPlacemark = (props: any) => {
                             });
 
 
+                        this.applyElementOffset();
 
                     },
 
+                    applyElementOffset: function () {
+                        // this.element.css({
+                        //     position: 'absolute',
+                        //     left: -(this.element[0].offsetWidth)
+                        // })
+                        // this.element.css({
+                        //     left: -(this.element[0].offsetWidth),
+                        //     // top: -(this.element[0].offsetHeight + this.element.find('.arrow')[0].offsetHeight)
+                        // });
+                    },
                     clear: function () {
                         this.element
                             // .find('#placemark-balloon__profile-btn_user-id_' + props.user.id)
@@ -112,7 +123,7 @@ const CustomPlacemark = (props: any) => {
                 options={{
                     balloonContentLayout: makeLayout(ymaps.templateLayoutFactory),
                     balloonPanelMaxMapArea: 0,
-                    balloonShadow: false,
+                    balloonShadow: true,
                     balloonLayout: balloonLayout(ymaps.templateLayoutFactory),
                     ...props.options,
                 }}

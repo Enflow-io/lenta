@@ -6,6 +6,7 @@ import Footer from '../../components/layout/Footer';
 import stickerSrc from '../../public/i/stickers/sticker4.svg'
 import Block3 from '../../components/Block3/Block3';
 import {MenuAll} from "../../components/layout/Layout";
+import FooterMobile from "../../components/layout/FooterMobile";
 
 const EconomyPage = () => {
     return (
@@ -15,6 +16,8 @@ const EconomyPage = () => {
             <Block1 icon={Icon1} text={`....  это высокотехнологичные распределительные центры с адресной системой хранения и современный автопарк. Мы гордимся тем, что наши сотрудники работают в отличных условиях и могут доверять своей компании. И мы можем гарантировать: если вы работаете в «ЛЕНТЕ», размер дохода зависит только от вас.`} stickerSrc={stickerSrc} label={"Почему классно работать в автохозяйстве «ЛЕНТЫ»?"}/>
             <Block2 youtubeSrc='https://www.youtube.com/embed/j9BQGEYs88g' />
             <Block3/>
+            <FooterMobile/>
+
             <Footer/>
         </div>
     );

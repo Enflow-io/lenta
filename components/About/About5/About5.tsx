@@ -8,7 +8,7 @@ const About5 = () => {
         <div  className={classes.Container}>
             <div>
                 <div  className={classes.H3Line}>
-                    <h3>Есть вопросы? У нас найдутся ответы!</h3>
+                    <h3 id={'faq'}>Есть вопросы? У нас найдутся ответы!</h3>
 
                     <svg width="129" height="97" viewBox="0 0 129 97" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M86.1511 35.1334C86.1511 35.1334 76.1117 38.4217 75.2603 47.0224C74.4089 55.6231 76.6502 68.149 65.0273 66.4547V70.2798L90.579 70.2086L86.1511 35.1334Z" fill="#35219A"/>

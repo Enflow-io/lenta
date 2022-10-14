@@ -251,6 +251,7 @@ const Table = (props: TableProps) => {
                     nextLabel="»"
                     onPageChange={() => {
                     }}
+                    marginPagesDisplayed={1}
                     pageRangeDisplayed={5}
                     pageCount={25}
                     previousLabel="«"

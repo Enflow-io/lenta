@@ -14,6 +14,7 @@ import {useIsMobile} from '../../hooks/useIsMobile';
 import Form from "../form/Form";
 import Popup from "reactjs-popup";
 import ShareVacancy from "../ShareVacancy/ShareVacancy";
+import {useRouter} from "next/router";
 
 interface SearchProps {
     onLocation: (location: string) => void
@@ -24,6 +25,7 @@ const Search = (props: SearchProps) => {
     const [isLoading, setIsLoading] = useState(false)
     const {isMobile} = useIsMobile()
 
+    const router = useRouter();
     const [selectedVacancy, setSelectedVacancy] = useState<undefined | number | string>(undefined)
 
     const size = useWindowSize();
@@ -73,7 +75,7 @@ const Search = (props: SearchProps) => {
 
 
                 // Добавление местоположения на карту.
-                if(result.geoObjects.get(0).getLocalities()[0]){
+                if (result.geoObjects.get(0).getLocalities()[0]) {
                     props.onLocation(result.geoObjects.get(0).getLocalities()[0]);
                 }
                 // alert(result.geoObjects.get(0).getLocalities()[0])
@@ -123,73 +125,76 @@ const Search = (props: SearchProps) => {
                 }} className={isMap ? undefined : classes.Active} href={'#'}>Список</a>
             </div>
 
-            {isMap && !selectedVacancy &&
-            <div className={`${classes.Map} ${isLoading ? classes.Loading : undefined}`}>
+            <div id={'list'}>
+                {isMap && !selectedVacancy &&
+                <div className={`${classes.Map} ${isLoading ? classes.Loading : undefined}`}>
 
-                <YMaps query={{
-                    apikey: 'c733189d-e58b-4b16-a6ce-50860ef72788',
-                }}
+                    <YMaps query={{
+                        apikey: 'c733189d-e58b-4b16-a6ce-50860ef72788',
+                    }}
 
-                    // onApiAvaliable={(ymaps: any) => handleApiAvaliable(ymaps)}
-                >
-                    <Map
-                        modules={["geolocation", "geocode"]}
-                        onLoad={(inst) => onLoadMap(inst)}
-                        instanceRef={ref => {
-                            // @ts-ignore
-                            ref && ref.behaviors.enable('scrollZoom');
-                        }}
-                        // defaultState={{
-                        //     center: center,
-                        //     zoom: 14,
-                        //
-                        // }}
-
-                        // center={center}
-                        state={{
-                            center: center,
-                            zoom: 14
-                        }}
-                        width={'100%'}
-                        height={435}
-                        // options={{
-                        //     scrollZoom: false
-                        // }
-                        // }
-
-
+                        // onApiAvaliable={(ymaps: any) => handleApiAvaliable(ymaps)}
                     >
+                        <Map
+                            modules={["geolocation", "geocode"]}
+                            behaviors={['default', 'scrollZoom']}
+                            onLoad={(inst) => onLoadMap(inst)}
+                            instanceRef={ref => {
+                                // @ts-ignore
+                                ref && ref.behaviors.enable('scrollZoom');
+                            }}
+                            // defaultState={{
+                            //     center: center,
+                            //     zoom: 14,
+                            //
+                            // }}
+
+                            // center={center}
+                            state={{
+                                center: center,
+                                zoom: 14
+                            }}
+                            width={'100%'}
+                            height={435}
+                            // options={{
+                            //     scrollZoom: false
+                            // }
+                            // }
 
 
-                        <CustomPlacemark geometry={center}
-                                         options={{
-                                             iconLayout: 'default#image',
-                                             iconImageHref: '/i/lenta-icon.svg',
-                                             iconImageSize: [40, 40],
+                        >
 
-                                             iconColor: '#ff0000',
-                                             hideIconOnBalloonOpen: false,
-                                             balloonMaxWidth: 200,
-                                         }}
-                                         user={{
-                                             id: 0,
-                                         }}
-                                         openModel={(id: any) => {
-                                             // alert(id)
-                                             setSelectedVacancy(2)
-                                         }}
-                                         myClick={() => alert('!')}/>
-                    </Map>
 
-                </YMaps>
+                            <CustomPlacemark geometry={center}
+                                             options={{
+                                                 iconLayout: 'default#image',
+                                                 iconImageHref: '/i/lenta-icon.svg',
+                                                 iconImageSize: [38, 37],
 
+                                                 iconColor: '#ff0000',
+                                                 hideIconOnBalloonOpen: false,
+                                                 balloonMaxWidth: 200,
+                                             }}
+                                             user={{
+                                                 id: 0,
+                                             }}
+                                             openModel={(id: any) => {
+                                                 // alert(id)
+                                                 setSelectedVacancy(2)
+                                             }}
+                                             myClick={() => alert('!')}/>
+                        </Map>
+
+                    </YMaps>
+
+                </div>
+                }
+                {!isMap && !selectedVacancy && <div className={classes.Table}>
+                    <Table onSelect={(id: string) => {
+                        setSelectedVacancy(id)
+                    }}/>
+                </div>}
             </div>
-            }
-            {!isMap && !selectedVacancy && <div className={classes.Table}>
-                <Table onSelect={(id: string) => {
-                    setSelectedVacancy(id)
-                }}/>
-            </div>}
 
 
             {selectedVacancy && <div className={classes.Vacancy}>
@@ -255,7 +260,7 @@ const Search = (props: SearchProps) => {
                 </div>
                 <div className={classes.VacancyFooter}>
                     <div className={classes.BtnCont}>
-                        <button className={classes.Submit}>Откликнуться</button>
+                        <button className={classes.Submit}>Заполнить анкету</button>
                     </div>
                     <div className={`${classes.BtnCont} ${classes.BtnCont2}`}>
                         <Popup
@@ -280,7 +285,8 @@ const Search = (props: SearchProps) => {
                         </Popup>
 
                         <button onClick={() => {
-                            setSelectedVacancy(undefined)
+                            setSelectedVacancy(undefined);
+                            router.push("/#list")
                         }} className={classes.Back}>Назад к списку вакансий
                         </button>
                     </div>

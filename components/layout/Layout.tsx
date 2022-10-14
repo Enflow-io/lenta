@@ -13,7 +13,7 @@ import Link from "next/link";
 import classes from "./Layout.module.scss"
 import MenuArrow from "./Arrow";
 import GeoLocation from "../GeoLocation/GeoLocation";
-
+import Head from 'next/head';
 interface LayoutProps {
     children: any
     location: string | undefined
@@ -66,6 +66,7 @@ export const MenuStyles = {
 }
 
 export const MenuAll  = ()=>{
+
     return <Menu
         customBurgerIcon={<img src='/i/menu_mobile.svg'/>}
         right={true}
@@ -126,6 +127,10 @@ const Layout = (props: LayoutProps) => {
         }
     }, [props.location])
     return <>
+        <Head>
+            <link rel="shortcut icon" href="/i/favicon.ico" type="image/x-icon" />
+        </Head>
+
         {isLocationShown && !isLocationSaved && <GeoLocation
             onLocationSaved={()=>{setIsLocationSaved(true)}}
             location={props.location}
