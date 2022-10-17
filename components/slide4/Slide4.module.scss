@@ -6,16 +6,20 @@
   background: white;
   display: flex;
   justify-content: center;
+
+  width: calc(100% - 100px);
+  left: 50px;
   //overflow-y: hidden;
 }
 
 
 .Slide {
-  position: relative;
   max-width: $mainWidth;
   height: 380px;
   width: 100%;
 
+  position: relative;
+  left: 32px;
   @media (max-width: 1000px) {
     & {
       display: flex !important;
@@ -132,7 +136,7 @@
     }
     p {
       margin: 0 17px 0 0;
-      font-weight: 450;
+      font-weight: 400;
       font-size: 24px;
       line-height: 32px;
       color: #000000;
