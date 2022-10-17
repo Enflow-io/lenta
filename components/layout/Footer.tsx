@@ -48,7 +48,9 @@ const Footer = () => {
                         borderRadius: 6,
 
                         width: 'calc(100% - 10px)',
-                        border: "none"
+                        border: "none",
+                        maxWidth: '800px',
+
                     }} trigger={<a href={'#'}>Оценить работу сайта</a>
                     } modal>
                         {
