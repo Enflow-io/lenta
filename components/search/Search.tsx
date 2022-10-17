@@ -140,7 +140,9 @@ const Search = (props: SearchProps) => {
                 }} className={isMap ? undefined : classes.Active} href={'#'}>Список</a>
             </div>
 
-            <div id={'list'}>
+            <div id={'list'} style={{
+                width: "calc(100% - 75px)"
+            }}>
                 {isMap && !selectedVacancy &&
                 <div className={`${classes.Map} ${isLoading ? classes.Loading : undefined}`}>
 

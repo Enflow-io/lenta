@@ -215,7 +215,8 @@
   margin-top: 18px;
   margin-bottom: 112px;
 
-  width: calc(100% - 65px);
+  //width: calc(100% - 65px);
+  width: calc(100%);
 
 
   @media (max-width: 1000px) {
