@@ -32,9 +32,9 @@ const Search = (props: SearchProps) => {
 
     useEffect(() => {
         if ((size?.width || 1000) < 600) {
-            setIsMap(false);
+            // setIsMap(false);
         } else {
-            setIsMap(true);
+            // setIsMap(true);
 
         }
     }, [size]);
@@ -301,7 +301,7 @@ const Search = (props: SearchProps) => {
 
                         <button onClick={() => {
                             setSelectedVacancy(undefined);
-                            router.push("/#list")
+                            router.push("/#search")
                         }} className={classes.Back}>Назад к списку вакансий
                         </button>
                     </div>
