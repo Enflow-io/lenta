@@ -2,8 +2,12 @@
   display: flex;
   justify-content: center;
   margin-top: 90px;
+  @media (max-width: 800px) {
+    margin-top: 50px;
 
-  h1 {
+  }
+
+    h1 {
     margin-bottom: 70px;
     @media (max-width: 1000px) {
       margin: 0 20px;

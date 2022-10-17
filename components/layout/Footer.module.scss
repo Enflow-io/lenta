@@ -161,6 +161,11 @@
   align-items: flex-end;
   align-items: flex-end;
   padding-top: 15px;
+  @media (max-width: 800px) {
+    margin-bottom: 1.7em;
+
+  }
+
 
   a {
     display: block;
@@ -288,6 +293,18 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    @media (max-width: 800px) {
+      margin-bottom: 1em;
+      letter-spacing: -0.015em;
+      font-family: "Futura Light";
+
+      color: #231F20;
+
+      opacity: 0.8;
+      font-size: 10px;
+      line-height: 12px;
+
+    }
   }
 
   .Links{

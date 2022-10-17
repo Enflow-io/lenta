@@ -141,7 +141,7 @@ const Search = (props: SearchProps) => {
             </div>
 
             <div id={'list'} style={{
-                width: "calc(100% - 75px)"
+
             }}>
                 {isMap && !selectedVacancy &&
                 <div className={`${classes.Map} ${isLoading ? classes.Loading : undefined}`}>

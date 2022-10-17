@@ -13,8 +13,13 @@
   margin-top: 83px;
   position: relative;
   height: 387px;
+  @media (max-width: 800px) {
+    height: 300px;
+
+  }
   width: 100%;
-  background: url("/i/bg_banner_2.png") 100% 100% no-repeat; background-size: cover;
+  background: url("/i/bg_banner_2.png") 100% 100% no-repeat;
+  background-size: cover;
 
 
   h2 {
@@ -25,8 +30,12 @@
     z-index: 5;
     color: #FFFFFF;
 
-    @media (max-width: 1000px) {
+    @media (max-width: 800px) {
+      margin-top: 65px;
       text-align: center;
+      font-size: 33px;
+      line-height: 45px;
+      width: 260px;
     }
   }
 
@@ -46,15 +55,26 @@
 
     color: #35219A;
     border: none;
-    &:hover{
+
+    &:hover {
       background: #35219A;
       color: white;
     }
+
     @media (max-width: 1000px) {
       margin: 0 20px;
       width: calc(100% - 40px);
       margin-bottom: 2em;
 
     }
+
+    @media (max-width: 1000px) {
+
+      font-size: 16px;
+      line-height: 12px;
+      max-width: 220px;
+      height: 36px;
+    }
+
   }
 }

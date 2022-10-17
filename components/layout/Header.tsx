@@ -65,22 +65,7 @@ const Header = (props: HeaderInterface) => {
                 </div>
                 <div className={classesHeader.RightPart}>
                     <div className={classesHeader.Button}>
-                        <Popup
-                            lockScroll={ true}
-                            contentStyle={{
-                            // minWidth: '600px',
-                            maxWidth: '800px',
-                                borderRadius: 6,
-
-                            width: 'calc(100% - 10px)',
-                                border: "none"
-                        }} trigger={<button>Заполнить анкету</button>} modal>
-                            {
-                                // @ts-ignore
-                                (close: any) => (<Form close={()=>{close()}} />)
-                            }
-
-                        </Popup>
+                        <button>Заполнить анкету</button>
 
                     </div>
                     <div className={classesHeader.Phone}><a href={'tel:8 800 770-00-30'}>8 800 770-00-30</a></div>

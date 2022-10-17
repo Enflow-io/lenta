@@ -118,7 +118,7 @@
 }
 
 .DesktopIcon {
-  >span{
+  > span {
     display: block;
     @media (max-width: 1000px) {
       display: none;
@@ -129,6 +129,13 @@
 
 
 .MobileLine {
+  @media (max-width: 600px) {
+    width: 100%;
+    > span, > p {
+      width: 50%
+    }
+  }
+
   > span {
     display: none;
   }
@@ -136,8 +143,10 @@
   > span {
     @media (max-width: 600px) {
       display: block;
-      svg{
+      svg {
         max-width: 150px;
+        position: relative;
+        top: 10px;
 
       }
 
@@ -168,9 +177,17 @@
   width: 100%;
 
 
+  @media (max-width: 600px) {
+    display: block;
+    >div{
+      width: 100%;
+    }
+  }
+
   > svg {
     @media (max-width: 600px) {
       display: none;;
+
     }
   }
 
