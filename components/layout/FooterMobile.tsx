@@ -48,9 +48,10 @@ const FooterMobile = ()=>{
             <div className={classes.Buttons}>
                 <a href={'/about#faq'}>Есть вопросы?</a>
                 <Popup contentStyle={{
-                    // minWidth: '600px',
-                    maxWidth: '800px',
-                    width: '100%'
+                    borderRadius: 6,
+
+                    width: 'calc(100% - 10px)',
+                    border: "none"
                 }} trigger={<a href={'#'}>Оценить работу сайта</a>
                 } modal>
                     {
