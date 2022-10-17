@@ -18,7 +18,9 @@ const Header = (props: HeaderInterface) => {
         <div className={classesHeader.Header}>
             <div className={classesHeader.Logo}>
                 <a href={'/'}>
-                    <img src={'/i/lenta-big-logo.svg'} width={'100%'} />
+                    <img src={'/i/logo_v.svg'} width={'100%'} style={{
+                        maxWidth: 90
+                    }} />
                 </a>
                 {/*<Image src="/i/logo.marks" alt="logo" width={95} height={87}/>*/}
             </div>
