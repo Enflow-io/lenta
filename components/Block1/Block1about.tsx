@@ -37,7 +37,7 @@ const Block1About: FC<IBlock1Props> = ({stickerSrc, label}) => {
 
                 <div className={classes.Lists}>
                     <ul>
-                        <li><Bullet/>Лучшие топ-менеджеры России и зарубежья</li>
+                        <li><Bullet/><div>Лучшие топ-менеджеры России и зарубежья</div></li>
                         <li><Bullet/>Новые знания и технологии</li>
                         <li><Bullet/>Равные возможности карьерного роста</li>
                         <li><Bullet/>Современные технологии и автоматизация</li>

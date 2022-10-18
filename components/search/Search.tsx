@@ -185,7 +185,7 @@ const Search = (props: SearchProps) => {
                             <CustomPlacemark geometry={center}
                                              options={{
                                                  iconLayout: 'default#image',
-                                                 iconImageHref: '/i/lenta-icon.svg',
+                                                 iconImageHref: '/i/lent_map.svg',
                                                  iconImageSize: [38, 37],
 
                                                  iconColor: '#ff0000',

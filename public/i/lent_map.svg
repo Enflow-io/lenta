@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="478px" height="478px" viewBox="0 0 478 478" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Untitled</title>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <circle id="Oval" stroke="#979797" fill="#003C96" cx="239" cy="239" r="238.5"></circle>
+        <g id="LENTA_SYMBOL_COL_BLU_RGB" transform="translate(104.000000, 92.000000)" fill-rule="nonzero">
+            <g id="Graphics">
+                <path d="M0,203.45 C22.8988078,257.227418 75.7003119,292.131908 134.15,292.13 C111.249066,238.354354 58.4488913,203.45 0,203.45 Z" id="Path" fill="#00BE64"></path>
+                <circle id="Oval" fill="#FFB900" cx="134.14" cy="109.94" r="109.32"></circle>
+                <path d="M134.15,292.14 C177.042073,292.1386 215.971172,267.056607 233.7,228 C190.807183,227.998872 151.876834,253.081671 134.15,292.14 Z" id="Path" fill="#00BE64"></path>
+                <circle id="Oval" fill="#003C96" cx="134.14" cy="109.94" r="54.66"></circle>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -62,7 +62,7 @@ const FooterMobile = ()=>{
                     }
 
                 </Popup>
-                <a className={classes.LentaLabel} href={'#'}>lenta.com</a>
+                <a target={"_blank"} className={classes.LentaLabel} href={'https://lenta.com'}>lenta.com</a>
             </div>
 
 
