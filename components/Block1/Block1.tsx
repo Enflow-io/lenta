@@ -16,8 +16,11 @@ const Block1: FC<IBlock1Props> = ({stickerSrc, label, ...props}) => {
     useEffect(()=>{
         const ref = myRefname;
         // debugger
-        // @ts-ignore
-        myRefname.current.click();
+        setTimeout(()=>{
+            // @ts-ignore
+            myRefname.current.click();
+        }, 200)
+
     });
 
     const Icon = props.icon;
