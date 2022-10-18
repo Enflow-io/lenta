@@ -21,7 +21,7 @@ interface SearchProps {
 }
 
 const Search = (props: SearchProps) => {
-    const [isMap, setIsMap] = useState(true)
+    const [isMap, setIsMap] = useState(false)
     const [isLoading, setIsLoading] = useState(false)
     const {isMobile} = useIsMobile()
 

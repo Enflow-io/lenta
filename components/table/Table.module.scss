@@ -2,55 +2,83 @@
   width: 100%;
   //width: calc(100% - 75px);
 
-  td[data-id=vacancy]{
+  td[data-id=vacancy] {
     font-family: "Futura PT";
+
+    @media (max-width: 600px) {
+      font-family: "Futura Light";
+
+
+    }
   }
 
   thead {
     background: #EEEEEE;
 
-    th{
-      >div{
+    th {
+      > div {
         cursor: pointer;
+        white-space: nowrap;
+      }
+
+      @media (max-width: 600px){
+
+        border-bottom: 1px solid #EEEEEE;
       }
     }
   }
 
   @media (max-width: 600px) {
-    thead{
-      tr{
+
+    .aboveTable {
+      align-items: flex-start;
+
+
+    }
+
+
+    thead {
+      tr {
         height: 25px;
-        th{
+
+        th {
           height: 25px;
-          >div{
-            text-align: center;
+          padding-right: 10px;
+
+          > div {
+            text-align: left;
           }
 
+        }
+
+        th:nth-child(1) {
+          padding-left: 22px;
         }
       }
     }
 
-    tbody{
-      tr:nth-child(1){
+    tbody {
+      tr:nth-child(1) {
         height: 30px;
       }
     }
-    .PageSizer{
+    .PageSizer {
       margin: 5px 0;
     }
   }
 
-  tbody{
+  tbody {
 
-    tr{
-      &:hover{
-        td{
+    tr {
+      &:hover {
+        td {
           color: #FEBE10;
           cursor: pointer;
         }
       }
     }
   }
+
   th {
     padding: 0 5px;
     height: 41px;
@@ -106,13 +134,20 @@
     line-height: 14px;
 
     td {
-        padding-left: 14px;
+      padding-left: 14px;
       padding-bottom: 10px;
       border-bottom: 1px solid #EEEEEE;
+      @media (max-width: 600px){
+        padding-bottom: 5px;
+        padding-top: 5px;
+
+      }
+
 
     }
+
     @media (max-width: 1000px) {
-      td{
+      td {
         padding-left: 0;
         padding-right: 5px;
       }
@@ -143,7 +178,8 @@
       margin-right: 4px;
       cursor: pointer;
     }
-    label{
+
+    label {
       cursor: pointer;
       color: #231F20;
       font-size: 12px;
@@ -179,13 +215,15 @@
 }
 
 
-.Paginator{
+.Paginator {
   display: flex;
   justify-content: flex-end;
-  ul{
+
+  ul {
     list-style: none;
     display: flex;
-    li{
+
+    li {
       padding: 5px 7px;
       font-family: "Futura Light";
       font-size: 12px;
@@ -194,19 +232,20 @@
       cursor: pointer;
     }
 
-    li:last-child{
+    li:last-child {
       border-right: 1px solid lightgray;
 
     }
   }
-  .ActiveLi{
+
+  .ActiveLi {
     background: #35219A;
     color: white;
     font-family: "Futura PT";
   }
 }
 
-.Tooltip{
+.Tooltip {
   background: white !important;
   color: #35219A !important;;
   border: 1px solid #35219A !important;;
@@ -218,10 +257,11 @@
   }
 }
 
-.Row{
+.Row {
   display: flex;
   align-items: center;
-  svg{
+
+  svg {
     margin-right: .5em;
     @media (min-width: 600px) {
       display: none;
@@ -230,3 +270,53 @@
   }
 }
 
+
+.ControlsTr {
+  @media (max-width: 600px) {
+    display: none;
+
+  }
+}
+
+.Reset {
+  @media (max-width: 600px) {
+    position: relative;
+    top: -7px;
+  }
+
+}
+
+.Container {
+
+  .MobilePageSizer {
+
+    margin: 0;
+    margin-bottom: 7px;
+    input{
+      opacity: 0.7;
+      height: 10px;
+      margin-right: 1px;
+    }
+    li{
+      margin-right: 10px;
+    }
+    label {
+      font-size: 9px;
+      font-family: "Futura Light";
+      align-items: center;
+      display: flex;
+
+
+    }
+
+    @media (max-width: 600px) {
+      display: flex;
+
+    }
+    @media (min-width: 601px) {
+      display: none;
+
+    }
+
+  }
+}

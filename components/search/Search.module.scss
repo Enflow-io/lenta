@@ -179,7 +179,7 @@
     text-decoration: none;
 
     &:hover {
-      text-decoration: underline;
+      text-decoration: none;
       color: #FFD201;
       opacity: 1 !important;
     }
@@ -198,7 +198,7 @@
   }
 
   a.Active {
-    text-decoration: underline;
+    text-decoration: none;
     //color: #FFD201;
     color: #ffffff;
     font-family: "Futura PT";
@@ -238,7 +238,13 @@
   @media (max-width: 1000px) {
     margin-bottom: 41px;
   }
+
+  @media (max-width: 800px) {
+
+  }
+
 }
+
 
 
 .ReactSelect {

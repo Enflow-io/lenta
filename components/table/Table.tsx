@@ -116,7 +116,7 @@ const Table = (props: TableProps) => {
             <a href={'#'}>
                 Всего вакансий: 2 000
             </a>
-            <div>
+            <div className={classes.Reset}>
                 <a onClick={(e) => {
                     e.preventDefault();
                     setSorting([])
@@ -124,6 +124,25 @@ const Table = (props: TableProps) => {
                 <Image src={closeIconSrc}/>
             </div>
         </div>
+
+        <ul className={`${classes.PageSizer} ${classes.MobilePageSizer}`}>
+            <li><input
+                id="pageSizer5"
+                name={'pageSizer2'} type={'radio'}/><label htmlFor="pageSizer5">5</label></li>
+            <li><input
+                id="pageSizer10"
+
+                name={'pageSizer2'} type={'radio'}/><label htmlFor="pageSizer10">10</label></li>
+            <li><input
+                checked={true}
+                value={"f"}
+                id="pageSizer20m"
+                name={'pageSizer2'} type={'radio'}/><label htmlFor="pageSizer20m">120</label></li>
+            <li><input
+                id="pageSizer50"
+
+                name={'pageSizer2'} type={'radio'}/><label htmlFor="pageSizer50">50</label></li>
+        </ul>
 
         <div className="p-2">
             <div className="h-2"/>
@@ -178,7 +197,7 @@ const Table = (props: TableProps) => {
                 </thead>
                 <tbody>
                 <tr className={classes.ControlsTr}>
-                    <td colSpan={columns.length}>
+                    <td className={classes.PageSizerDesktop} colSpan={columns.length}>
                         <ul className={classes.PageSizer}>
                             <li><input
                                 id="pageSizer5"
@@ -188,6 +207,8 @@ const Table = (props: TableProps) => {
 
                                 name={'pageSizer'} type={'radio'}/><label htmlFor="pageSizer10">10</label></li>
                             <li><input
+                                checked={true}
+                                value={""}
                                 id="pageSizer20"
                                 name={'pageSizer'} type={'radio'}/><label htmlFor="pageSizer20">20</label></li>
                             <li><input
