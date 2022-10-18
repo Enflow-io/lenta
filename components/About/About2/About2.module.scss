@@ -25,9 +25,10 @@
       li {
         font-size: 20px !important;
         margin-bottom: 1em !important;
-
+        display: flex;
         >svg{
           top: 0px !important;
+          width: 20px !important;
         }
       }
     }
