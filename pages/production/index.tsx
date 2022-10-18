@@ -17,7 +17,7 @@ const ProductionPage = () => {
             <MenuAll />
 
             <Header/>
-            <Block1 icon={Icon1} stickerSrc={stickerSrc} label={"Почему классно работать на производстве «ЛЕНТЫ»?"}/>
+            <Block1 top={0} icon={Icon1} stickerSrc={stickerSrc} label={"Почему классно работать на производстве «ЛЕНТЫ»?"}/>
             <Block2 youtubeSrc='https://www.youtube.com/embed/cpFRDVivFFg'/>
             <Block3/>
             <FooterMobile/>

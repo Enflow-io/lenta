@@ -1,4 +1,4 @@
-import React, {FC} from 'react';
+import React, {FC, useEffect, useRef} from 'react';
 import classes from './Block1.module.scss'
 import Image from 'next/image'
 import Link from "next/link";
@@ -12,11 +12,19 @@ interface IBlock1Props {
 }
 
 const Block1: FC<IBlock1Props> = ({stickerSrc, label, ...props}) => {
+    const myRefname= useRef(null);
+    useEffect(()=>{
+        const ref = myRefname;
+        // debugger
+        // @ts-ignore
+        myRefname.current.click();
+    });
+
     const Icon = props.icon;
     return (
         <div className={classes.Block1}>
             <div className={classes.container}>
-                <h1>{label || "Почему классно работать на производстве «ЛЕНТЫ»?"}</h1>
+                <h1 ref={myRefname}>{label || "Почему классно работать на производстве «ЛЕНТЫ»?"}</h1>
                 <div className={classes.Header}>
                     <h2 style={{
                         top: props.top
