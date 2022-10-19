@@ -8,7 +8,7 @@ import CustomPlacemark from "./CustomPlacemark";
 import useWindowDimensions from '../../hooks/useWindowDimensions';
 import searchIconSrc from '../../public/i/search-icon.svg'
 import Image from "next/image"
-import DesktopSelectors from './DesktopSelectors';
+import DesktopSelectors, {BusinessDirection, City, SearchResult} from './DesktopSelectors';
 import MobileSelectors from './MobileSelectors';
 import {useIsMobile} from '../../hooks/useIsMobile';
 import Form from "../form/Form";
@@ -21,7 +21,38 @@ interface SearchProps {
 }
 
 const Search = (props: SearchProps) => {
+
+    const [cities, setCities] = useState<City[]>([])
+    const [directions, setDirections] = useState<BusinessDirection[]>([])
+    const [searchResults, setSearchResults] = useState<SearchResult[]>([])
+    const getCities = async ()=>{
+        let url = 'https://lenta-career-api.axes.pro/api/v1/search/table';
+        if(selectedCityId > 0){
+            url = url+'/?cityId='+selectedCityId
+        }else{
+
+        }
+
+        if(bdsId > 0){
+            url = url + '&bds='+bdsId
+        }
+
+        const response = await fetch(url);
+        const data = await response.json()
+        const cities = data.filters.cities;
+        const businessDirections = data.filters.businessDirections;
+        const searchResults = data.searchResult.items;
+        setCities(cities);
+        setDirections(businessDirections)
+        setSearchResults(searchResults)
+        console.log(data)
+
+
+    }
+
     const [isMap, setIsMap] = useState(false)
+    const [selectedCityId, setSelectedCityId] = useState(0)
+    const [bdsId, setBdsId] = useState(0)
     const [isLoading, setIsLoading] = useState(false)
     const {isMobile} = useIsMobile()
 
@@ -38,6 +69,11 @@ const Search = (props: SearchProps) => {
 
         }
     }, [size]);
+
+
+    useEffect(()=>{
+        getCities();
+    }, [selectedCityId, bdsId]);
 
     const options = [
         {value: 'chocolate', label: 'Chocolate'},
@@ -122,7 +158,17 @@ const Search = (props: SearchProps) => {
         <div className={classes.Search}>
             {/*{isMobile ? <MobileSelectors/> : <DesktopSelectors/>}*/}
 
-            <DesktopSelectors onSearch={() => {
+            <DesktopSelectors
+                cities={cities}
+                directions={directions}
+                onCityChanged={(id)=>{
+
+                    setSelectedCityId(id);
+                }}
+                onBdsChanged={(id)=>{
+                    setBdsId(id);
+                }}
+                onSearch={() => {
                 setIsLoading(true)
                 setTimeout(() => {
                     setIsLoading(false)
@@ -207,7 +253,9 @@ const Search = (props: SearchProps) => {
                 </div>
                 }
                 {!isMap && !selectedVacancy && <div className={classes.Table}>
-                    <Table onSelect={(id: string) => {
+                    <Table
+                        results={searchResults}
+                        onSelect={(id: string) => {
                         setSelectedVacancy(id)
                     }}/>
                 </div>}

@@ -6,6 +6,7 @@ import Cites from "../MultiSelect/constants/Cities";
 import Metro from "../MultiSelect/constants/Metro";
 import Activities from "../MultiSelect/constants/Activities";
 import Vacancies from "../MultiSelect/constants/Vacancies";
+import exp from "constants";
 
 const options = [
     {value: 'chocolate', label: 'Chocolate'},
@@ -13,8 +14,46 @@ const options = [
     {value: 'vanilla', label: 'Vanilla'}
 ]
 
+export interface City {
+    cityId: number
+    count: number
+    title: string
+}
+
+export interface BusinessDirection {
+    businessDirectionId: number
+    count: number
+    title: string
+}
+
+export interface SearchResult {
+    addressId: number
+    addressTitle: string
+    businessDirectionId: number
+    businessDirectionTitle: string
+    cityId: number
+    cityTitle: string
+    conditions: string
+    metroId: number
+    metroTitle: string
+    requirements: string
+    responsibilities: string
+    salaryFrom: number
+    salaryTo: number
+    subdivisionId: number
+    subdivisionTitle: string
+    title: string
+    vacancyId: number
+    vacancyNumber: string
+}
+
+
 interface DesktopSelectorsProps {
-    onSearch: ()=>void
+    onSearch: () => void
+    cities: City[]
+    directions: BusinessDirection[]
+    onCityChanged: (cityId: number) => void
+    onBdsChanged: (bdsId: number) => void
 }
 
 const DesktopSelectors = (props: DesktopSelectorsProps) => {
@@ -28,11 +67,22 @@ const DesktopSelectors = (props: DesktopSelectorsProps) => {
                 </div>
                 <div className={classes.Selector}>
                     <label>Вакансия</label>
-                    <MultiSelect  placeholder={'Вакансия'} options={Vacancies}/>
+                    <MultiSelect placeholder={'Вакансия'} options={Vacancies}/>
                 </div>
                 <div className={classes.Selector}>
                     <label>Направление деятельности</label>
-                    <MultiSelect customHeight={80} placeholder={'Направление деятельности'} options={Activities}/>
+                    <MultiSelect customHeight={80}
+                                 placeholder={'Направление деятельности'}
+                                 onChanged={(val: number)=>{
+                                     props.onBdsChanged(val)
+                                 }}
+                                 options={props.directions.map(el => {
+                                     return {
+                                         id: el.businessDirectionId,
+                                         label: el.title,
+                                         count: el.count
+                                     }
+                                 })}/>
 
                     {/*<Select*/}
                     {/*    placeholder={<div className={classes.Placeholder}>Направление деятельности</div>}*/}
@@ -46,7 +96,19 @@ const DesktopSelectors = (props: DesktopSelectorsProps) => {
             <div className={classes.Line}>
                 <div className={classes.Selector}>
                     <label>Город</label>
-                    <MultiSelect multi={false} placeholder={'Город'} options={Cites}/>
+                    <MultiSelect
+                        onChanged={(value: any) => {
+                            props.onCityChanged(value)
+                        }}
+                        multi={false} placeholder={'Город'} options={props.cities.map(el => {
+                        return {
+                            id: el.cityId,
+                            label: el.title,
+                            count: el.count
+                        }
+                    })}
+
+                    />
                 </div>
                 <div className={classes.Selector}>
                     <label>Метро</label>

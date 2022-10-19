@@ -1,4 +1,4 @@
-import {useRef, useState} from "react";
+import {useEffect, useRef, useState} from "react";
 import classes from "./MultiSelect.module.scss";
 import {useOnClickOutside} from 'usehooks-ts'
 import useOutsideClick from "../../hooks/useOnClickOutside";
@@ -14,6 +14,7 @@ interface MultiSelectProps {
     placeholder: string
     customHeight?: number
     multi?: boolean
+    onChanged?: (value: any)=>void
 }
 const MultiSelect = (props: MultiSelectProps) => {
     const isMulti = props.multi === undefined ? true : props.multi;
@@ -44,6 +45,21 @@ const MultiSelect = (props: MultiSelectProps) => {
 
     const [selectedItems, setSelectedItems]  = useState<number[]>([]);
 
+
+    useEffect(()=>{
+        if(isMulti){
+            if(props.onChanged){
+                props.onChanged(selectedItems)
+            }
+
+        }else{
+            if(props.onChanged){
+                props.onChanged(selectedItems[0])
+            }
+
+        }
+    }, [selectedItems])
+
     return <div ref={ref} className={`${classes.MultiSelect} ${isOpened ? classes.InputOpened : undefined}`}>
         <div className={classes.Search}>
             <input
@@ -52,6 +68,7 @@ const MultiSelect = (props: MultiSelectProps) => {
                 onClick={() => {
                     setIsOpened(!isOpened);
                 }}
+
                 value={props.options.filter(el=>{
                     return selectedItems.includes(el.id)
                 }).map(el=>{

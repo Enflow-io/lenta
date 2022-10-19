@@ -12,9 +12,11 @@ import {
     useReactTable,
 } from '@tanstack/react-table'
 import ReactPaginate from "react-paginate";
+import {SearchResult} from "../search/DesktopSelectors";
 
 interface TableProps {
     onSelect: (id: string) => void
+    results: SearchResult[]
 
 }
 
@@ -51,6 +53,32 @@ const Table = (props: TableProps) => {
         ],
         []
     )
+    const data3 = React.useMemo(
+        () => (props.results || []).map(el=>{
+            return {
+                vacancy: el.title,
+                salaryFrom: el.salaryFrom,
+                salaryTo: el.salaryTo,
+                activity: el.businessDirectionTitle,
+                unit: el.subdivisionTitle,
+                address: el.addressTitle,
+                metro: el.metroTitle,
+            }
+        }),
+        [props.results]
+    )
+
+    const data2 = (props.results || []).map(el=>{
+        return {
+            vacancy: el.title,
+            salaryFrom: el.salaryFrom,
+            salaryTo: el.salaryTo,
+            activity: el.businessDirectionTitle,
+            unit: el.subdivisionTitle,
+            address: el.addressTitle,
+            metro: el.metroTitle,
+        }
+    })
 
     const rerender = React.useReducer(() => ({}), {})[1]
     const refreshData = () => {
@@ -94,7 +122,7 @@ const Table = (props: TableProps) => {
     const [sorting, setSorting] = React.useState<SortingState>([])
 
     const table = useReactTable({
-        data,
+        data: data2,
         columns,
         state: {
             sorting,
