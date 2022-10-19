@@ -106,3 +106,7 @@ a.bm-item-list {
 .popup-overlay{
   justify-content: center;
 }
+
+.__react_component_tooltip.show {
+  opacity: 1 !important;
+}

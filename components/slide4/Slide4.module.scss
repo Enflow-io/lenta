@@ -85,6 +85,15 @@
   &:hover {
     //text-decoration: underline;
   }
+
+  >span{
+    position: relative;
+    top: 4px;
+    @media (max-width: 800px) {
+      top: 2px;
+
+    }
+  }
 }
 
 .Slider {

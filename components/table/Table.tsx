@@ -265,7 +265,8 @@ const Table = (props: TableProps) => {
             <ReactTooltip arrowColor={'#35219A'}
                           // globalEventOff={'touchstart'}
                           // event={'touchstart'}
-                          className={classes.Tooltip} delayHide={1000} effect='solid'/>
+
+                          className={classes.Tooltip} delayHide={500} effect='solid'/>
             <div className={classes.Paginator}
             >
                 <ReactPaginate

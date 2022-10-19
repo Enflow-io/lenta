@@ -130,7 +130,7 @@
     width: 33.3%;
   }
 
-  @media (max-width: 1100px) {
+  @media (max-width: 1000px) {
 
     margin-bottom: 0px;
 
@@ -541,8 +541,7 @@
 
   }
 }
-
-#list{
+.List2{
   width: calc(100% - 75px);
   @media (max-width: 800px) {
     width: 100%;
