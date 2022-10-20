@@ -8,7 +8,7 @@ import CustomPlacemark from "./CustomPlacemark";
 import useWindowDimensions from '../../hooks/useWindowDimensions';
 import searchIconSrc from '../../public/i/search-icon.svg'
 import Image from "next/image"
-import DesktopSelectors, {BusinessDirection, City, SearchResult} from './DesktopSelectors';
+import DesktopSelectors, {BusinessDirection, City, SearchResult, Vacancy} from './DesktopSelectors';
 import MobileSelectors from './MobileSelectors';
 import {useIsMobile} from '../../hooks/useIsMobile';
 import Form from "../form/Form";
@@ -23,10 +23,13 @@ interface SearchProps {
 const Search = (props: SearchProps) => {
 
     const [cities, setCities] = useState<City[]>([])
+    const [vacancies, setVacancies] = useState<Vacancy[]>([])
     const [directions, setDirections] = useState<BusinessDirection[]>([])
     const [searchResults, setSearchResults] = useState<SearchResult[]>([])
+    const [keyword, setKeyword] = useState("");
+
     const getCities = async ()=>{
-        let url = 'https://lenta-career-api.axes.pro/api/v1/search/table';
+        let url = 'https://lenta-career-api.axes.pro/api/v1/search/table/?';
         if(selectedCityId > 0){
             url = url+'/?cityId='+selectedCityId
         }else{
@@ -37,14 +40,21 @@ const Search = (props: SearchProps) => {
             url = url + '&bds='+bdsId
         }
 
+        if(keyword){
+            url = url + '&key='+keyword
+
+        }
+
         const response = await fetch(url);
         const data = await response.json()
         const cities = data.filters.cities;
         const businessDirections = data.filters.businessDirections;
         const searchResults = data.searchResult.items;
+        const vacancies: Vacancy[] = data.filters.vacancies;
         setCities(cities);
         setDirections(businessDirections)
         setSearchResults(searchResults)
+        setVacancies(vacancies);
         console.log(data)
 
 
@@ -73,7 +83,7 @@ const Search = (props: SearchProps) => {
 
     useEffect(()=>{
         getCities();
-    }, [selectedCityId, bdsId]);
+    }, [selectedCityId, bdsId, keyword]);
 
     const options = [
         {value: 'chocolate', label: 'Chocolate'},
@@ -142,7 +152,6 @@ const Search = (props: SearchProps) => {
             },
             function (err: any) {
                 console.log(err)
-                debugger
 
                 console.log('Ошибка: ' + err)
             },
@@ -167,6 +176,10 @@ const Search = (props: SearchProps) => {
                 }}
                 onBdsChanged={(id)=>{
                     setBdsId(id);
+                }}
+                vacancies={vacancies}
+                onKeywordChanged={(keyword: string)=>{
+                    setKeyword(keyword)
                 }}
                 onSearch={() => {
                 setIsLoading(true)

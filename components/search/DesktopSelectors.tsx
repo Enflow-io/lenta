@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import classes from './Search.module.scss';
 import Select from 'react-select';
 import MultiSelect from "../MultiSelect/MultiSelect";
@@ -18,6 +18,11 @@ export interface City {
     cityId: number
     count: number
     title: string
+}
+
+export interface Vacancy {
+    title: string
+    vacancyId: number
 }
 
 export interface BusinessDirection {
@@ -51,29 +56,49 @@ export interface SearchResult {
 interface DesktopSelectorsProps {
     onSearch: () => void
     cities: City[]
+    vacancies: Vacancy[]
     directions: BusinessDirection[]
     onCityChanged: (cityId: number) => void
     onBdsChanged: (bdsId: number) => void
+    onKeywordChanged: (keyword: string) => void
 }
 
 const DesktopSelectors = (props: DesktopSelectorsProps) => {
+
+    const [keyword, setKeyword] = useState("");
+
+
     return (
         <div className={classes.Selectors}>
             <div className={classes.Line}>
                 <div className={classes.Selector}>
                     <label>Ключевое слово</label>
-                    <input placeholder={"Ключевое слово"} className={classes.SimpleInput}/>
+                    <input
+                        value={keyword}
+                        onChange={(input) => {
+                            setKeyword(input.target.value)
+                            props.onKeywordChanged(input.target.value);
+                        }}
+                        placeholder={"Ключевое слово"}
+                        className={classes.SimpleInput}
+                    />
 
                 </div>
                 <div className={classes.Selector}>
                     <label>Вакансия</label>
-                    <MultiSelect placeholder={'Вакансия'} options={Vacancies}/>
+                    <MultiSelect placeholder={'Вакансия'} options={props.vacancies.map(el => {
+                        return {
+                            id: el.vacancyId,
+                            label: el.title,
+                            count: 11
+                        }
+                    })}/>
                 </div>
                 <div className={classes.Selector}>
                     <label>Направление деятельности</label>
                     <MultiSelect customHeight={80}
                                  placeholder={'Направление деятельности'}
-                                 onChanged={(val: number)=>{
+                                 onChanged={(val: number) => {
                                      props.onBdsChanged(val)
                                  }}
                                  options={props.directions.map(el => {
