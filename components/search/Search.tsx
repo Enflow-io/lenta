@@ -86,15 +86,16 @@ const Search = (props: SearchProps) => {
             const searchResults = data.searchResult.items;
             const vacancies: Vacancy[] = data.filters.vacancies;
 
-
+            //
             setCities(cities);
             if (selStationsIds.length === 0) {
                 setStations(stations);
             }
-
-
+            //
+            //
             setDirections(businessDirections)
             setSearchResults(searchResults)
+            console.log(searchResults.length)
             setTotalPagesCount(data.searchResult.totalPagesCount)
             if (selectedVacanciesIds.length === 0) {
                 setVacancies(vacancies);
@@ -108,6 +109,10 @@ const Search = (props: SearchProps) => {
 
 
     }
+
+    useEffect(()=>{
+        // getCities()
+    }, []);
 
     const [isMap, setIsMap] = useState(false)
     const [selectedCityId, setSelectedCityId] = useState(0)
