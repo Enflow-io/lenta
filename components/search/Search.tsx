@@ -125,12 +125,12 @@ const Search = (props: SearchProps) => {
 
     }
 
-    // useEffect(()=>{
-    //     getCities()
-    // }, []);
+    useEffect(()=>{
+        getCities()
+    }, []);
 
     const [isMap, setIsMap] = useState(false)
-    const [selectedCityId, setSelectedCityId] = useState(0)
+    const [selectedCityId, setSelectedCityId] = useState(65)
     const [bdsId, setBdsId] = useState(0)
     const {isMobile} = useIsMobile()
 
