@@ -267,7 +267,10 @@
   >div{
     width: 15px;
     padding-right: 5px;
-
+    @media (min-width: 600px) {
+      display: none;
+      visibility: hidden;
+    }
   }
   >span{
     display: block;

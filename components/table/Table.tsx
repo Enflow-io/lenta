@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import classes from "./Table.module.scss"
 import closeIconSrc from "../../public/i/close-icon.svg"
 import Image from 'next/image'
@@ -20,6 +20,7 @@ interface TableProps {
     onPageChanged: (page: number) => void
     page: number
     totalPagesCount: number
+    onSortChanged: (sortParams: any)=>void
 
 
 }
@@ -76,14 +77,17 @@ const Table = (props: TableProps) => {
 
 
     const [sorting, setSorting] = React.useState<SortingState>([])
+    useEffect(()=>{
+        props.onSortChanged(sorting[0]);
+    }, [sorting]);
 
     const table = useReactTable({
         data: data2,
         columns,
-        // state: {
-        //     sorting,
-        // },
-        // onSortingChange: setSorting,
+        state: {
+            sorting,
+        },
+        onSortingChange: setSorting,
         getCoreRowModel: getCoreRowModel(),
         getSortedRowModel: getSortedRowModel(),
         getPaginationRowModel: getPaginationRowModel(),

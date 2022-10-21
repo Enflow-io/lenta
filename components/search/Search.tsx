@@ -27,6 +27,10 @@ const Search = (props: SearchProps) => {
     const [isLoading, setIsLoading] = useState(false)
     const [countItemsPerPage, setCountItemsPerPage] = useState(2);
     const [page, setPage] = useState(1);
+    const [sorting, setSorting] = useState<{
+        desc:boolean
+        id: string
+    } | undefined>(undefined);
     const [totalPagesCount, setTotalPagesCount] = useState(1);
     const [sortField, setSortField] = useState<string | undefined>(undefined);
     const [sortDirection, setSortDirection] = useState(1);
@@ -81,6 +85,10 @@ const Search = (props: SearchProps) => {
             for (let vc of selectedVacanciesIds) {
                 url = url + '&vcs=' + vc
             }
+        }
+
+        if(sorting?.id){
+                url = url + ("&sortField="+sorting?.id+"&sortDirection="+(sorting?.desc ? "1" : "0"))
         }
 
         try {
@@ -159,8 +167,9 @@ const Search = (props: SearchProps) => {
         selStationsIds,
         selectedVacanciesIds,
         page,
-        sortField,
-        sortDirection
+        // sortField,
+        // sortDirection,
+        sorting
     ]);
 
 
@@ -334,6 +343,10 @@ const Search = (props: SearchProps) => {
                 }
                 {!isMap && !selectedVacancy && <div className={classes.Table}>
                     <Table
+                        onSortChanged={(sortParams)=>{
+                            console.log(sortParams)
+                            setSorting(sortParams)
+                        }}
                         totalPagesCount={totalPagesCount}
                         page={page}
                         onPageChanged={(page: number)=>{
