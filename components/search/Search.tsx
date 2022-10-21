@@ -8,13 +8,15 @@ import CustomPlacemark from "./CustomPlacemark";
 import useWindowDimensions from '../../hooks/useWindowDimensions';
 import searchIconSrc from '../../public/i/search-icon.svg'
 import Image from "next/image"
-import DesktopSelectors, {BusinessDirection, City, SearchResult, Vacancy} from './DesktopSelectors';
+import DesktopSelectors, {BusinessDirection, City, SearchResult, Station, Vacancy} from './DesktopSelectors';
 import MobileSelectors from './MobileSelectors';
 import {useIsMobile} from '../../hooks/useIsMobile';
 import Form from "../form/Form";
 import Popup from "reactjs-popup";
 import ShareVacancy from "../ShareVacancy/ShareVacancy";
 import {useRouter} from "next/router";
+const axios = require('axios');
+
 
 interface SearchProps {
     onLocation: (location: string) => void
@@ -22,40 +24,87 @@ interface SearchProps {
 
 const Search = (props: SearchProps) => {
 
+    const [countItemsPerPage, setCountItemsPerPage] = useState(2);
+    const [page, setPage] = useState(1);
+    const [totalPagesCount, setTotalPagesCount] = useState(1);
+    const [sortField, setSortField] = useState<string | undefined>(undefined);
+    const [sortDirection, setSortDirection] = useState(1);
     const [cities, setCities] = useState<City[]>([])
     const [vacancies, setVacancies] = useState<Vacancy[]>([])
+    const [stations, setStations] = useState<Station[]>([])
+    const [selStationsIds, setSelStationsIds] = useState<number[]>([])
+    const [selectedVacanciesIds, setSelectedVacanciesIds] = useState<number[]>([])
     const [directions, setDirections] = useState<BusinessDirection[]>([])
     const [searchResults, setSearchResults] = useState<SearchResult[]>([])
     const [keyword, setKeyword] = useState("");
 
-    const getCities = async ()=>{
-        let url = 'https://lenta-career-api.axes.pro/api/v1/search/table/?';
-        if(selectedCityId > 0){
-            url = url+'/?cityId='+selectedCityId
-        }else{
+    const getCities = async () => {
+        console.log("page", page)
+        let url = 'https://lenta-career-api.axes.pro/api/v1/search/table';
+        if (selectedCityId > 0) {
+            url = url + '/?cityId=' + selectedCityId
+        } else {
+            url = url + "/?"
+        }
+
+        if (bdsId > 0) {
+            url = url + '&bds=' + bdsId
+        }
+
+        if (keyword) {
+            url = url + '&key=' + keyword
 
         }
 
-        if(bdsId > 0){
-            url = url + '&bds='+bdsId
+
+        if(page>1){
+            url = url + '&page=' + (page-1).toString()
         }
 
-        if(keyword){
-            url = url + '&key='+keyword
-
+        if(countItemsPerPage){
+            url = url + '&countItemsPerPage=' + countItemsPerPage
         }
 
-        const response = await fetch(url);
-        const data = await response.json()
-        const cities = data.filters.cities;
-        const businessDirections = data.filters.businessDirections;
-        const searchResults = data.searchResult.items;
-        const vacancies: Vacancy[] = data.filters.vacancies;
-        setCities(cities);
-        setDirections(businessDirections)
-        setSearchResults(searchResults)
-        setVacancies(vacancies);
-        console.log(data)
+        if (selStationsIds.length > 0) {
+            for (let st of selStationsIds) {
+                url = url + '&mtr=' + st
+            }
+        }
+        if (selectedVacanciesIds.length > 0) {
+            for (let vc of selectedVacanciesIds) {
+                url = url + '&vcs=' + vc
+            }
+        }
+
+        try {
+            // const response = await fetch(url);
+            // const data = await response.json()
+            const {data} = await axios.get(url);
+            const cities = data.filters.cities;
+            const stations = data.filters.metro;
+            const businessDirections = data.filters.businessDirections;
+            const searchResults = data.searchResult.items;
+            const vacancies: Vacancy[] = data.filters.vacancies;
+
+
+            setCities(cities);
+            if (selStationsIds.length === 0) {
+                setStations(stations);
+            }
+
+
+            setDirections(businessDirections)
+            setSearchResults(searchResults)
+            setTotalPagesCount(data.searchResult.totalPagesCount)
+            if (selectedVacanciesIds.length === 0) {
+                setVacancies(vacancies);
+            }
+            console.log(data)
+        } catch (err) {
+            console.log(err)
+            // @ts-ignore
+            console.log(err?.message)
+        }
 
 
     }
@@ -81,33 +130,21 @@ const Search = (props: SearchProps) => {
     }, [size]);
 
 
-    useEffect(()=>{
+    useEffect(() => {
+        // alert(page)
         getCities();
-    }, [selectedCityId, bdsId, keyword]);
+    }, [
+        selectedCityId,
+        bdsId,
+        keyword,
+        selStationsIds,
+        selectedVacanciesIds,
+        page,
+        sortField,
+        sortDirection
+    ]);
 
-    const options = [
-        {value: 'chocolate', label: 'Chocolate'},
-        {value: 'strawberry', label: 'Strawberry'},
-        {value: 'vanilla', label: 'Vanilla'}
-    ]
-    const customStyles = {
-        option: (provided: any, state: any) => ({
-            ...provided,
-            borderBottom: '1px dotted pink',
-            color: state.isSelected ? 'red' : 'blue',
-            padding: 20,
-        }),
-        control: () => ({
-            // none of react-select's styles are passed to <Control />
-            width: 200,
-        }),
-        singleValue: (provided: any, state: any) => {
-            const opacity = state.isDisabled ? 0.5 : 1;
-            const transition = 'opacity 300ms';
 
-            return {...provided, opacity, transition};
-        }
-    }
 
     const onLoadMap = (inst: any) => {
 
@@ -138,7 +175,6 @@ const Search = (props: SearchProps) => {
                 props.onLocation(localityName || administrativeAreaName);
 
 
-
                 // alert(result.geoObjects.get(0).getLocalities()[0])
                 // console.log(result.geoObjects.position)
                 // debugger
@@ -147,7 +183,7 @@ const Search = (props: SearchProps) => {
                 // result.geoObjects.options.set('preset', 'islands#redCircleIcon');
                 // result.geoObjects.get(0).properties.set({
                 //     balloonContentBody: 'Мое местоположение'
-                // });
+                // });t
                 // inst.geoObjects.add(result.geoObjects);
             },
             function (err: any) {
@@ -170,24 +206,36 @@ const Search = (props: SearchProps) => {
             <DesktopSelectors
                 cities={cities}
                 directions={directions}
-                onCityChanged={(id)=>{
-
+                onCityChanged={(id) => {
                     setSelectedCityId(id);
                 }}
-                onBdsChanged={(id)=>{
+                onBdsChanged={(id) => {
                     setBdsId(id);
                 }}
+                stations={stations}
+                onStationsChanged={(ids: number[]) => {
+                    setSelStationsIds(ids)
+                }}
+
                 vacancies={vacancies}
-                onKeywordChanged={(keyword: string)=>{
+                onVacancyChanged={(ids: number[]) => {
+
+                    setSelectedVacanciesIds(ids)
+                }}
+                onKeywordChanged={(keyword: string) => {
                     setKeyword(keyword)
                 }}
                 onSearch={() => {
-                setIsLoading(true)
-                setTimeout(() => {
-                    setIsLoading(false)
+                    setIsLoading(true)
+                    setTimeout(() => {
+                        setIsLoading(false)
 
-                }, 500)
-            }}/>
+                    }, 500)
+                }}
+
+
+
+            />
             <div className={classes.Switcher}>
                 <a onClick={e => {
                     e.preventDefault();
@@ -199,9 +247,7 @@ const Search = (props: SearchProps) => {
                 }} className={isMap ? undefined : classes.Active} href={'#'}>Список</a>
             </div>
 
-            <div className={classes.List2} id={'list'} style={{
-
-            }}>
+            <div className={classes.List2} id={'list'} style={{}}>
                 {isMap && !selectedVacancy &&
                 <div className={`${classes.Map} ${isLoading ? classes.Loading : undefined}`}>
 
@@ -267,10 +313,15 @@ const Search = (props: SearchProps) => {
                 }
                 {!isMap && !selectedVacancy && <div className={classes.Table}>
                     <Table
+                        totalPagesCount={totalPagesCount}
+                        page={page}
+                        onPageChanged={(page: number)=>{
+                            setPage(page);
+                        }}
                         results={searchResults}
                         onSelect={(id: string) => {
-                        setSelectedVacancy(id)
-                    }}/>
+                            setSelectedVacancy(id)
+                        }}/>
                 </div>}
             </div>
 

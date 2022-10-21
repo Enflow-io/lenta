@@ -66,11 +66,11 @@ const MultiSelect = (props: MultiSelectProps) => {
     }, [selectedItems])
 
 
-    const getFilteredItems = ()=>{
-        return items.filter((el)=>{
-            if(text.length>0){
+    const getFilteredItems = () => {
+        return items.filter((el) => {
+            if (text.length > 0) {
                 return el.label.toLowerCase().includes(text.toLowerCase())
-            }else{
+            } else {
                 return true
             }
         });
@@ -84,11 +84,11 @@ const MultiSelect = (props: MultiSelectProps) => {
                 onClick={() => {
                     setIsOpened(!isOpened);
                 }}
-                onChange={(e)=>{
+                onChange={(e) => {
                     setText(e.target.value)
                 }}
 
-                value={selectedItems.length > 0 ?  props.options.filter(el => {
+                value={selectedItems.length > 0 ? props.options.filter(el => {
                     return selectedItems.includes(el.id)
                 }).map(el => {
                     return el.label
@@ -141,7 +141,9 @@ const MultiSelect = (props: MultiSelectProps) => {
                             </div>
                             <div className={classes.Label}>{item.label}</div>
                         </div>
+                        {item.count > -1 &&
                         <div className={classes.Counter}><span>{item.count}</span></div>
+                        }
                     </div>;
                 })
                 }

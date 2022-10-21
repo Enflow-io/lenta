@@ -14,6 +14,12 @@ const options = [
     {value: 'vanilla', label: 'Vanilla'}
 ]
 
+export interface Station {
+    count: number
+    metroId: number
+    title: string
+}
+
 export interface City {
     cityId: number
     count: number
@@ -57,9 +63,12 @@ interface DesktopSelectorsProps {
     onSearch: () => void
     cities: City[]
     vacancies: Vacancy[]
+    stations: Station[]
     directions: BusinessDirection[]
     onCityChanged: (cityId: number) => void
     onBdsChanged: (bdsId: number) => void
+    onStationsChanged: (stationId: number[]) => void
+    onVacancyChanged: (vacancyId: number[]) => void
     onKeywordChanged: (keyword: string) => void
 }
 
@@ -86,13 +95,19 @@ const DesktopSelectors = (props: DesktopSelectorsProps) => {
                 </div>
                 <div className={classes.Selector}>
                     <label>Вакансия</label>
-                    <MultiSelect placeholder={'Вакансия'} options={props.vacancies.map(el => {
-                        return {
-                            id: el.vacancyId,
-                            label: el.title,
-                            count: 11
-                        }
-                    })}/>
+                    <MultiSelect
+                        placeholder={'Вакансия'}
+                        options={props.vacancies.map(el => {
+                            return {
+                                id: el.vacancyId,
+                                label: el.title,
+                                count: -1
+                            }
+                        })}
+                        onChanged={(input: number[]) => {
+                            props.onVacancyChanged(input)
+                        }}
+                    />
                 </div>
                 <div className={classes.Selector}>
                     <label>Направление деятельности</label>
@@ -137,7 +152,20 @@ const DesktopSelectors = (props: DesktopSelectorsProps) => {
                 </div>
                 <div className={classes.Selector}>
                     <label>Метро</label>
-                    <MultiSelect placeholder={'Метро'} options={Metro}/>
+                    <MultiSelect
+                        placeholder={'Метро'}
+                        options={props.stations.map(el => {
+                            return {
+                                id: el.metroId,
+                                label: el.title,
+                                count: el.count
+                            }
+                        })}
+                        onChanged={(input: number[]) => {
+                            props.onStationsChanged(input)
+
+                        }}
+                    />
                 </div>
 
                 <div className={classes.Selector}>

@@ -17,6 +17,10 @@ import {SearchResult} from "../search/DesktopSelectors";
 interface TableProps {
     onSelect: (id: string) => void
     results: SearchResult[]
+    onPageChanged: (page: number)=>void
+    page: number
+    totalPagesCount: number
+
 
 }
 
@@ -301,11 +305,13 @@ const Table = (props: TableProps) => {
                     activeClassName={classes.ActiveLi}
                     breakLabel="..."
                     nextLabel="»"
-                    onPageChange={() => {
+                    onPageChange={(page) => {
+                        props.onPageChanged(page.selected + 1)
                     }}
+                    forcePage={props.page - 1}
                     marginPagesDisplayed={1}
                     pageRangeDisplayed={5}
-                    pageCount={25}
+                    pageCount={props.totalPagesCount}
                     previousLabel="«"
                     renderOnZeroPageCount={() => {
                     }}
