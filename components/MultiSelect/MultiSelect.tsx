@@ -17,6 +17,7 @@ interface MultiSelectProps {
     customHeight?: number
     multi?: boolean
     onChanged?: (value: any) => void
+    selectedId?: number
 }
 
 const MultiSelect = (props: MultiSelectProps) => {
@@ -48,7 +49,8 @@ const MultiSelect = (props: MultiSelectProps) => {
     const items = props.options;
 
 
-    const [selectedItems, setSelectedItems] = useState<number[]>([]);
+    const defaultValue = props.selectedId ? [props.selectedId] : []
+    const [selectedItems, setSelectedItems] = useState<number[]>(defaultValue);
 
 
     useEffect(() => {
@@ -130,6 +132,7 @@ const MultiSelect = (props: MultiSelectProps) => {
                             }
                         } else {
                             setSelectedItems([item.id])
+                            setIsOpened(false)
                         }
                         setText("")
 

@@ -25,52 +25,7 @@ interface TableProps {
 }
 
 const Table = (props: TableProps) => {
-    const data = React.useMemo(
-        () => [
-            {
-                vacancy: 'Продавец / Работник торгового зала',
-                salaryFrom: '30 000',
-                salaryTo: '40 000',
-                activity: 'Супермаркет',
-                unit: 'Торговый зал',
-                address: 'Левашовский пр., д.21',
-                metro: 'м. Чкаловская',
-            },
-            {
-                vacancy: 'Продавец / Работник торгового зала',
-                salaryFrom: '30 010',
-                salaryTo: '40 000',
-                activity: 'Супермаркет',
-                unit: 'Торговый зал',
-                address: 'Левашовский пр., д.21',
-                metro: 'м. Чкаловская',
-            },
-            {
-                vacancy: 'Продавец / Работник торгового зала',
-                salaryFrom: '30 030',
-                salaryTo: '40 000',
-                activity: 'Супермаркет',
-                unit: 'Торговый зал',
-                address: 'Левашовский пр., д.21',
-                metro: 'м. Чкаловская',
-            },
-        ],
-        []
-    )
-    const data3 = React.useMemo(
-        () => (props.results || []).map(el=>{
-            return {
-                vacancy: el.title,
-                salaryFrom: el.salaryFrom,
-                salaryTo: el.salaryTo,
-                activity: el.businessDirectionTitle,
-                unit: el.subdivisionTitle,
-                address: el.addressTitle,
-                metro: el.metroTitle,
-            }
-        }),
-        [props.results]
-    )
+
 
     const data2 = (props.results || []).map(el=>{
         return {
@@ -136,6 +91,9 @@ const Table = (props: TableProps) => {
         getSortedRowModel: getSortedRowModel(),
         getPaginationRowModel: getPaginationRowModel(),
         debugTable: true,
+        onStateChange: ()=>{
+            ReactTooltip.rebuild();
+        }
     });
 
 
@@ -250,6 +208,12 @@ const Table = (props: TableProps) => {
                         </ul>
                     </td>
                 </tr>
+                {props.results.length === 0 && <tr>
+                    <td colSpan={columns.length} className={classes.NoData}><div >
+                        <label>Всего вакансий: 0</label>
+                        <p>На текущий момент нет открытых вакансий по выбранному городу, Вы можете нажать в правом верхнем углу на кнопку “Заполнить анкету” и оставить свой отклик для занесения Вас в резерв. </p>
+                    </div></td>
+                </tr>}
                 {table
                     .getRowModel()
                     .rows.slice(0, 10)

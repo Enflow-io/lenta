@@ -137,7 +137,9 @@ const DesktopSelectors = (props: DesktopSelectorsProps) => {
                 <div className={classes.Selector}>
                     <label>Город</label>
                     <MultiSelect
+                        selectedId={65}
                         onChanged={(value: any) => {
+                            console.log(value)
                             props.onCityChanged(value)
                         }}
                         multi={false} placeholder={'Город'} options={props.cities.map(el => {
