@@ -16,7 +16,7 @@ import Popup from "reactjs-popup";
 import ShareVacancy from "../ShareVacancy/ShareVacancy";
 import {useRouter} from "next/router";
 const axios = require('axios');
-
+const controller = new AbortController();
 
 interface SearchProps {
     onLocation: (location: string) => void
@@ -24,6 +24,7 @@ interface SearchProps {
 
 const Search = (props: SearchProps) => {
 
+    const [isLoading, setIsLoading] = useState(false)
     const [countItemsPerPage, setCountItemsPerPage] = useState(2);
     const [page, setPage] = useState(1);
     const [totalPagesCount, setTotalPagesCount] = useState(1);
@@ -39,6 +40,12 @@ const Search = (props: SearchProps) => {
     const [keyword, setKeyword] = useState("");
 
     const getCities = async () => {
+        // controller.abort()
+        if(isLoading){
+            return;
+        }
+
+        setIsLoading(true)
         console.log("page", page)
         let url = 'https://lenta-career-api.axes.pro/api/v1/search/table';
         if (selectedCityId > 0) {
@@ -77,32 +84,40 @@ const Search = (props: SearchProps) => {
         }
 
         try {
-            // const response = await fetch(url);
-            // const data = await response.json()
-            const {data} = await axios.get(url);
-            const cities = data.filters.cities;
-            const stations = data.filters.metro;
-            const businessDirections = data.filters.businessDirections;
-            const searchResults = data.searchResult.items;
-            const vacancies: Vacancy[] = data.filters.vacancies;
+            axios.get(url, {
+                signal: controller.signal
+            }).then((res: any)=>{
+                const data = res.data;
+                console.log(data)
+                const cities = data.filters.cities;
+                const stations = data.filters.metro;
+                const businessDirections = data.filters.businessDirections;
+                const searchResults = data.searchResult.items;
+                const vacancies: Vacancy[] = data.filters.vacancies;
 
-            //
-            setCities(cities);
-            if (selStationsIds.length === 0) {
-                setStations(stations);
-            }
-            //
-            //
-            setDirections(businessDirections)
-            setSearchResults(searchResults)
-            console.log(searchResults.length)
-            setTotalPagesCount(data.searchResult.totalPagesCount)
-            if (selectedVacanciesIds.length === 0) {
-                setVacancies(vacancies);
-            }
-            console.log(data)
+                //
+                setCities(cities);
+                if (selStationsIds.length === 0) {
+                    setStations(stations);
+                }
+                // //
+                // //
+                setDirections(businessDirections)
+                setSearchResults(searchResults)
+                console.log(searchResults.length)
+                setTotalPagesCount(data.searchResult.totalPagesCount)
+                if (selectedVacanciesIds.length === 0) {
+                    setVacancies(vacancies);
+                }
+                console.log(data)
+                setIsLoading(false)
+            });
+
+
         } catch (err) {
             console.log(err)
+            setIsLoading(false)
+
             // @ts-ignore
             console.log(err?.message)
         }
@@ -110,14 +125,13 @@ const Search = (props: SearchProps) => {
 
     }
 
-    useEffect(()=>{
-        // getCities()
-    }, []);
+    // useEffect(()=>{
+    //     getCities()
+    // }, []);
 
     const [isMap, setIsMap] = useState(false)
     const [selectedCityId, setSelectedCityId] = useState(0)
     const [bdsId, setBdsId] = useState(0)
-    const [isLoading, setIsLoading] = useState(false)
     const {isMobile} = useIsMobile()
 
     const router = useRouter();
@@ -230,12 +244,14 @@ const Search = (props: SearchProps) => {
                 onKeywordChanged={(keyword: string) => {
                     setKeyword(keyword)
                 }}
-                onSearch={() => {
-                    setIsLoading(true)
-                    setTimeout(() => {
-                        setIsLoading(false)
 
-                    }, 500)
+                onSearch={async () => {
+                    await getCities();
+                    // setIsLoading(true)
+                    // setTimeout(() => {
+                    //     setIsLoading(false)
+                    //
+                    // }, 500)
                 }}
 
 
