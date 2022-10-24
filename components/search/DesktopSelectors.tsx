@@ -31,6 +31,27 @@ export interface Vacancy {
     vacancyId: number
 }
 
+export interface VacancyModel {
+    addressId: number
+    addressTitle: string
+    businessDirectionId: number
+    businessDirectionTitle: string
+    cityId: number
+    cityTitle: string
+    conditions: string
+    metroId: number
+    metroTitle: string
+    requirements: string
+    responsibilities: string
+    salaryFrom: number
+    salaryTo: number
+    subdivisionId: number
+    subdivisionTitle: string
+    title: string
+    vacancyId: number
+    vacancyNumber: string
+}
+
 export interface BusinessDirection {
     businessDirectionId: number
     count: number

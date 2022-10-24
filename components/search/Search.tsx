@@ -8,13 +8,21 @@ import CustomPlacemark from "./CustomPlacemark";
 import useWindowDimensions from '../../hooks/useWindowDimensions';
 import searchIconSrc from '../../public/i/search-icon.svg'
 import Image from "next/image"
-import DesktopSelectors, {BusinessDirection, City, SearchResult, Station, Vacancy} from './DesktopSelectors';
+import DesktopSelectors, {
+    BusinessDirection,
+    City,
+    SearchResult,
+    Station,
+    Vacancy,
+    VacancyModel
+} from './DesktopSelectors';
 import MobileSelectors from './MobileSelectors';
 import {useIsMobile} from '../../hooks/useIsMobile';
 import Form from "../form/Form";
 import Popup from "reactjs-popup";
 import ShareVacancy from "../ShareVacancy/ShareVacancy";
 import {useRouter} from "next/router";
+
 const axios = require('axios');
 const controller = new AbortController();
 
@@ -25,15 +33,16 @@ interface SearchProps {
 const Search = (props: SearchProps) => {
 
     const [isLoading, setIsLoading] = useState(false)
-    const [countItemsPerPage, setCountItemsPerPage] = useState(2);
+    const [countItemsPerPage, setCountItemsPerPage] = useState(20);
     const [page, setPage] = useState(1);
     const [sorting, setSorting] = useState<{
-        desc:boolean
+        desc: boolean
         id: string
     } | undefined>(undefined);
+    const [pageSize, setPageSize] = useState(5);
     const [totalPagesCount, setTotalPagesCount] = useState(1);
-    const [sortField, setSortField] = useState<string | undefined>(undefined);
-    const [sortDirection, setSortDirection] = useState(1);
+    // const [sortField, setSortField] = useState<string | undefined>(undefined);
+    // const [sortDirection, setSortDirection] = useState(1);
     const [cities, setCities] = useState<City[]>([])
     const [vacancies, setVacancies] = useState<Vacancy[]>([])
     const [stations, setStations] = useState<Station[]>([])
@@ -43,14 +52,94 @@ const Search = (props: SearchProps) => {
     const [searchResults, setSearchResults] = useState<SearchResult[]>([])
     const [keyword, setKeyword] = useState("");
 
-    const getCities = async () => {
+    const [mapPoints, setMapPoints] = useState<any[]>([])
+
+    const getMapData = async () => {
+        if (isLoading) {
+            return;
+        }
+        setIsLoading(true)
+        let url = 'https://lenta-career-api.axes.pro/api/v1/search/map';
+        if (selectedCityId > 0) {
+            url = url + '/?cityId=' + selectedCityId
+        } else {
+            url = url + "/?"
+        }
+
+
+        if (bdsId > 0) {
+            url = url + '&bds=' + bdsId
+        }
+
+        if (keyword) {
+            url = url + '&key=' + keyword
+
+        }
+
+
+        if (selStationsIds.length > 0) {
+            for (let st of selStationsIds) {
+                url = url + '&mtr=' + st
+            }
+        }
+        if (selectedVacanciesIds.length > 0) {
+            for (let vc of selectedVacanciesIds) {
+                url = url + '&vcs=' + vc
+            }
+        }
+
+        try {
+            axios.get(url, {
+                signal: controller.signal
+            }).then((res: any) => {
+                const data = res.data;
+                const cities = data.filters.cities;
+                const stations = data.filters.metro;
+                const businessDirections = data.filters.businessDirections;
+                const searchResults = data.searchResult.items;
+                const vacancies: Vacancy[] = data.filters.vacancies;
+
+                setCities(cities);
+
+
+                if (selStationsIds.length === 0) {
+                    setStations(stations);
+                }
+                setDirections(businessDirections)
+                setSearchResults(searchResults)
+                console.log(searchResults.length)
+                setTotalPagesCount(data.searchResult.totalPagesCount)
+                if (selectedVacanciesIds.length === 0) {
+                    setVacancies(vacancies);
+                }
+
+                const points = data.searchResult.items.map((el: any) => {
+                    return {
+                        ...el
+                    }
+                })
+                setMapPoints(points);
+                setCenter([points[0].lat, points[0].lng])
+                setIsLoading(false)
+            });
+
+
+        } catch (err) {
+            console.log(err)
+            setIsLoading(false)
+
+            // @ts-ignore
+            console.log(err?.message)
+        }
+    };
+
+    const getTableData = async () => {
         // controller.abort()
-        if(isLoading){
+        if (isLoading) {
             return;
         }
 
         setIsLoading(true)
-        console.log("page", page)
         let url = 'https://lenta-career-api.axes.pro/api/v1/search/table';
         if (selectedCityId > 0) {
             url = url + '/?cityId=' + selectedCityId
@@ -68,11 +157,11 @@ const Search = (props: SearchProps) => {
         }
 
 
-        if(page>1){
-            url = url + '&page=' + (page-1).toString()
+        if (page > 1) {
+            url = url + '&page=' + (page - 1).toString()
         }
 
-        if(countItemsPerPage){
+        if (countItemsPerPage) {
             url = url + '&countItemsPerPage=' + countItemsPerPage
         }
 
@@ -87,14 +176,14 @@ const Search = (props: SearchProps) => {
             }
         }
 
-        if(sorting?.id){
-                url = url + ("&sortField="+sorting?.id+"&sortDirection="+(sorting?.desc ? "1" : "0"))
+        if (sorting?.id) {
+            url = url + ("&sortField=" + sorting?.id + "&sortDirection=" + (sorting?.desc ? "1" : "0"))
         }
 
         try {
             axios.get(url, {
                 signal: controller.signal
-            }).then((res: any)=>{
+            }).then((res: any) => {
                 const data = res.data;
                 console.log(data)
                 const cities = data.filters.cities;
@@ -103,8 +192,9 @@ const Search = (props: SearchProps) => {
                 const searchResults = data.searchResult.items;
                 const vacancies: Vacancy[] = data.filters.vacancies;
 
-                //
                 setCities(cities);
+
+
                 if (selStationsIds.length === 0) {
                     setStations(stations);
                 }
@@ -133,8 +223,8 @@ const Search = (props: SearchProps) => {
 
     }
 
-    useEffect(()=>{
-        getCities()
+    useEffect(() => {
+        getTableData()
     }, []);
 
     const [isMap, setIsMap] = useState(false)
@@ -143,9 +233,16 @@ const Search = (props: SearchProps) => {
     const {isMobile} = useIsMobile()
 
     const router = useRouter();
-    const [selectedVacancy, setSelectedVacancy] = useState<undefined | number | string>(undefined)
+    const [selectedVacancy, setSelectedVacancy] = useState<undefined | VacancyModel>(undefined)
 
     const size = useWindowSize();
+
+
+    useEffect(() => {
+        if (isMap) {
+            getMapData();
+        }
+    }, [isMap]);
 
     useEffect(() => {
         if ((size?.width || 1000) < 600) {
@@ -159,7 +256,7 @@ const Search = (props: SearchProps) => {
 
     useEffect(() => {
         // alert(page)
-        getCities();
+        getTableData();
     }, [
         selectedCityId,
         bdsId,
@@ -169,9 +266,9 @@ const Search = (props: SearchProps) => {
         page,
         // sortField,
         // sortDirection,
-        sorting
+        sorting,
+        pageSize
     ]);
-
 
 
     const onLoadMap = (inst: any) => {
@@ -255,14 +352,13 @@ const Search = (props: SearchProps) => {
                 }}
 
                 onSearch={async () => {
-                    await getCities();
+                    await getTableData();
                     // setIsLoading(true)
                     // setTimeout(() => {
                     //     setIsLoading(false)
                     //
                     // }, 500)
                 }}
-
 
 
             />
@@ -316,25 +412,28 @@ const Search = (props: SearchProps) => {
 
                         >
 
+                            {mapPoints.map(el => {
+                                return <CustomPlacemark geometry={[el.lat, el.lng]}
+                                                        options={{
+                                                            iconLayout: 'default#image',
+                                                            iconImageHref: '/i/lent_map.svg',
+                                                            iconImageSize: [38, 37],
 
-                            <CustomPlacemark geometry={center}
-                                             options={{
-                                                 iconLayout: 'default#image',
-                                                 iconImageHref: '/i/lent_map.svg',
-                                                 iconImageSize: [38, 37],
+                                                            iconColor: '#ff0000',
+                                                            hideIconOnBalloonOpen: false,
+                                                            balloonMaxWidth: 200,
+                                                        }}
+                                                        user={{
+                                                            id: 0,
+                                                        }}
+                                                        openModel={(id: any) => {
+                                                            // alert(id)
+                                                            // setSelectedVacancy(2)
+                                                        }}
+                                                        myClick={() => alert('!')}/>
+                            })
+                            })
 
-                                                 iconColor: '#ff0000',
-                                                 hideIconOnBalloonOpen: false,
-                                                 balloonMaxWidth: 200,
-                                             }}
-                                             user={{
-                                                 id: 0,
-                                             }}
-                                             openModel={(id: any) => {
-                                                 // alert(id)
-                                                 setSelectedVacancy(2)
-                                             }}
-                                             myClick={() => alert('!')}/>
                         </Map>
 
                     </YMaps>
@@ -343,19 +442,24 @@ const Search = (props: SearchProps) => {
                 }
                 {!isMap && !selectedVacancy && <div className={classes.Table}>
                     <Table
-                        onSortChanged={(sortParams)=>{
-                            console.log(sortParams)
+                        onSortChanged={(sortParams) => {
                             setSorting(sortParams)
                         }}
                         totalPagesCount={totalPagesCount}
                         page={page}
-                        onPageChanged={(page: number)=>{
+                        onPageChanged={(page: number) => {
                             setPage(page);
                         }}
                         results={searchResults}
-                        onSelect={(id: string) => {
-                            setSelectedVacancy(id)
-                        }}/>
+                        onSelect={(row: VacancyModel) => {
+                            setSelectedVacancy(row)
+                        }}
+                        pageSize={pageSize}
+                        onPageSizeChanged={(size: number) => {
+                            setPageSize(size)
+                            setPage(1)
+                        }}
+                    />
                 </div>}
             </div>
 
@@ -372,53 +476,40 @@ const Search = (props: SearchProps) => {
                               stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
                 </div>
-                <h2>Название вакансии</h2>
+                <h2>{selectedVacancy?.title}</h2>
 
                 <div className={classes.VacancyCont}>
                     <div className={classes.Lists}>
                         <div className={classes.List}>
-                            <label>Обязанности</label>
-                            <ul>
-                                <li>-Обязанности</li>
-                                <li>-Обязанности</li>
-                                <li>-Обязанности</li>
-                            </ul>
+                            <label>Условия</label>
+                            <div dangerouslySetInnerHTML={{__html: selectedVacancy.conditions}}/>
+                        </div>
+                        <div className={classes.List}>
+                            <label>Требования</label>
+                            <div dangerouslySetInnerHTML={{__html: selectedVacancy.requirements}}/>
+
                         </div>
                         <div className={classes.List}>
                             <label>Обязанности</label>
-                            <ul>
-                                <li>-Обязанности</li>
-                                <li>-Обязанности</li>
-                                <li>-Обязанности</li>
-                            </ul>
-                        </div>
-                        <div className={classes.List}>
-                            <label>Обязанности</label>
-                            <ul>
-                                <li>-Обязанности</li>
-                                <li>-Обязанности</li>
-                                <li>-Обязанности</li>
-                            </ul>
+                            <div dangerouslySetInnerHTML={{__html: selectedVacancy.responsibilities}}/>
+
                         </div>
 
                     </div>
                     <div className={classes.Infos}>
                         <div className={classes.Info}>
                             <label>Номер вакансии</label>
-                            <div>090909</div>
+                            <div>{selectedVacancy?.vacancyId}</div>
                         </div>
-                        <div className={classes.Info}>
-                            <label>Номер вакансии</label>
-                            <div>090909</div>
-                        </div>
-                        <div className={classes.Info}>
-                            <label>Номер вакансии</label>
-                            <div>090909</div>
-                        </div>
-                        <div className={classes.Info}>
-                            <label>Номер вакансии</label>
-                            <div>090909</div>
-                        </div>
+                        {/*<div className={classes.Info}>*/}
+                        {/*    <label>Зарплата от</label>*/}
+                        {/*    <div>{selectedVacancy?.salaryFrom}</div>*/}
+                        {/*</div>*/}
+                        {/*<div className={classes.Info}>*/}
+                        {/*    <label>Зарплата до</label>*/}
+                        {/*    <div>{selectedVacancy?.salaryTo}</div>*/}
+                        {/*</div>*/}
+
                     </div>
                 </div>
                 <div className={classes.VacancyFooter}>

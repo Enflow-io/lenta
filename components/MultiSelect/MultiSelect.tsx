@@ -24,6 +24,7 @@ const MultiSelect = (props: MultiSelectProps) => {
     const isMulti = props.multi === undefined ? true : props.multi;
     const ref = useRef(null)
     const [isOpened, setIsOpened] = useState(false);
+    const [isFocused, setIsFocused] = useState(false)
     const handleClickOutside = () => {
         // Your custom logic here
         // alert('!')
@@ -81,16 +82,27 @@ const MultiSelect = (props: MultiSelectProps) => {
     return <div ref={ref} className={`${classes.MultiSelect} ${isOpened ? classes.InputOpened : undefined}`}>
         <div className={classes.Search}>
             <input
+                onFocus={()=>{
+                    setIsFocused(true)
+                }}
+                onBlur={()=>{
+                    setIsFocused(false)
+
+                }}
                 className={isOpened ? classes.InputOpened : undefined}
                 placeholder={props.placeholder}
                 onClick={() => {
-                    setIsOpened(!isOpened);
+                    // if(!isFocused){
+                    //     setIsOpened(!isOpened);
+                    //
+                    // }
+                    setIsOpened(true)
                 }}
                 onChange={(e) => {
                     setText(e.target.value)
                 }}
 
-                value={selectedItems.length > 0 ? props.options.filter(el => {
+                value={(!isFocused && selectedItems.length > 0) ? props.options.filter(el => {
                     return selectedItems.includes(el.id)
                 }).map(el => {
                     return el.label

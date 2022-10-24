@@ -12,15 +12,17 @@ import {
     useReactTable,
 } from '@tanstack/react-table'
 import ReactPaginate from "react-paginate";
-import {SearchResult} from "../search/DesktopSelectors";
+import {SearchResult, Vacancy, VacancyModel} from "../search/DesktopSelectors";
 
 interface TableProps {
-    onSelect: (id: string) => void
+    onSelect: (id: VacancyModel) => void
     results: SearchResult[]
     onPageChanged: (page: number) => void
     page: number
     totalPagesCount: number
-    onSortChanged: (sortParams: any)=>void
+    onSortChanged: (sortParams: any) => void
+    onPageSizeChanged: (size: number) => void
+    pageSize: number
 
 
 }
@@ -77,7 +79,7 @@ const Table = (props: TableProps) => {
 
 
     const [sorting, setSorting] = React.useState<SortingState>([])
-    useEffect(()=>{
+    useEffect(() => {
         props.onSortChanged(sorting[0]);
     }, [sorting]);
 
@@ -98,9 +100,12 @@ const Table = (props: TableProps) => {
     });
 
 
-    const selectRow = (id: any) => {
-        props.onSelect(id)
-    };
+    const changePageSize = (params: any) => {
+        const size = parseInt(params.target.id.replace(/[^0-9]/g, ''));
+        props.onPageSizeChanged(size)
+
+    }
+
 
     return <div className={classes.Container}>
         <div className={classes.aboveTable}>
@@ -119,20 +124,27 @@ const Table = (props: TableProps) => {
         <ul className={`${classes.PageSizer} ${classes.MobilePageSizer}`}>
             <li><input
                 id="pageSizer5"
-                name={'pageSizer2'} type={'radio'}/><label htmlFor="pageSizer5">5</label></li>
+                name={'pageSizer2'} checked={props.pageSize===5} onChange={changePageSize} type={'radio'}/><label htmlFor="pageSizer5">5</label></li>
             <li><input
                 id="pageSizer10"
 
-                name={'pageSizer2'} type={'radio'}/><label htmlFor="pageSizer10">10</label></li>
+                name={'pageSizer2'}
+                checked={props.pageSize===10}
+                onChange={changePageSize} type={'radio'}/><label htmlFor="pageSizer10">10</label>
+            </li>
             <li><input
-                checked={true}
+                checked={props.pageSize===20}
                 value={"f"}
                 id="pageSizer20m"
-                name={'pageSizer2'} type={'radio'}/><label htmlFor="pageSizer20m">20</label></li>
+                name={'pageSizer2'}
+                onChange={changePageSize}
+                type={'radio'}/><label htmlFor="pageSizer20m">20</label></li>
             <li><input
+                checked={props.pageSize===50}
                 id="pageSizer50"
-
-                name={'pageSizer2'} type={'radio'}/><label htmlFor="pageSizer50">50</label></li>
+                onChange={changePageSize}
+                name={'pageSizer2'}
+                type={'radio'}/><label htmlFor="pageSizer50">50</label></li>
         </ul>
 
         <div className="p-2">
@@ -190,22 +202,37 @@ const Table = (props: TableProps) => {
                 <tr className={classes.ControlsTr}>
                     <td className={classes.PageSizerDesktop} colSpan={columns.length}>
                         <ul className={classes.PageSizer}>
-                            <li><input
-                                id="pageSizer5"
-                                name={'pageSizer'} type={'radio'}/><label htmlFor="pageSizer5">5</label></li>
-                            <li><input
-                                id="pageSizer10"
+                            <li>
+                                <input
+                                    onChange={changePageSize}
+                                    id="pageSizer5d"
+                                    checked={props.pageSize===5}
 
-                                name={'pageSizer'} type={'radio'}/><label htmlFor="pageSizer10">10</label></li>
-                            <li><input
-                                checked={true}
-                                value={""}
-                                id="pageSizer20"
-                                name={'pageSizer'} type={'radio'}/><label htmlFor="pageSizer20">20</label></li>
-                            <li><input
-                                id="pageSizer50"
+                                    name={'pageSizerD'} type={'radio'}/><label htmlFor="pageSizer5d">5</label></li>
+                            <li>
+                                <input
+                                    id="pageSizer10d"
+                                    checked={props.pageSize===10}
 
-                                name={'pageSizer'} type={'radio'}/><label htmlFor="pageSizer50">50</label></li>
+                                    onChange={changePageSize}
+                                    name={'pageSizerD'} type={'radio'}/><label htmlFor="pageSizer10d">10</label></li>
+                            <li>
+                                <input
+                                    onChange={changePageSize}
+                                    // checked={true}
+                                    checked={props.pageSize===20}
+
+                                    value={""}
+                                    id="pageSizer20d"
+                                    name={'pageSizerD'}
+                                    type={'radio'}/><label htmlFor="pageSizer20d">20</label></li>
+                            <li><input
+                                onChange={changePageSize}
+
+                                id="pageSizer50d"
+                                checked={props.pageSize===50}
+
+                                name={'pageSizerD'} type={'radio'}/><label htmlFor="pageSizer50d">50</label></li>
                         </ul>
                     </td>
                 </tr>
@@ -223,7 +250,7 @@ const Table = (props: TableProps) => {
                     .map((row, id) => {
                         return (
                             <tr key={id} onClick={e => {
-                                selectRow(id)
+                                props.onSelect(row);
                             }}>
 
                                 <>
@@ -231,7 +258,8 @@ const Table = (props: TableProps) => {
                                         <div className={classes.Row}>
                                             <div>
                                                 <svg onClick={e => {
-                                                    selectRow(id)
+                                                    props.onSelect(row);
+
                                                 }} width="30" height="30" viewBox="0 0 27 26" fill="none"
                                                      xmlns="http://www.w3.org/2000/svg">
                                                     <circle cx="13.0039" cy="13" r="13" fill="#35219A"/>
