@@ -365,3 +365,21 @@
     color: #000000;
   }
 }
+
+.Mobile{
+  display: inline;
+  @media (min-width: 600px) {
+    display: none;
+  }
+}
+
+
+.Desktop{
+  display: inline;
+  @media (max-width: 600px) {
+    display: none;
+
+
+  }
+}
+

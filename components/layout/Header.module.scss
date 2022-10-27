@@ -127,7 +127,7 @@
 
 .Menu {
   ul {
-    max-width: 1037px;
+    max-width: 1048px;
     position: relative;
     left: -1px;
     @media (max-width: 1000px) {
@@ -144,7 +144,7 @@
 
     li {
       font-size: 18px;
-      padding: 3px 5px;
+      padding: 3px 5px 3px 2px;
 
     }
 
@@ -167,6 +167,11 @@
     //  padding: 3px 5px;
     //  border-radius: 4px;
     //}
+
+    li:nth-child(4){
+      position: relative;
+      right: -6px;
+    }
 
     li {
       -webkit-transition: all 0.3s ease;;
@@ -307,8 +312,12 @@
   align-items: center;
   justify-content: center;
   position: relative;
-  bottom: -3px;
-  left: -4px;
+  bottom: -10px;
+  @media (max-width: 600px) {
+    bottom: 0px;
+
+  }
+    left: -4px;
 
   @media (max-width: 1000px) {
     margin-right: 0px;

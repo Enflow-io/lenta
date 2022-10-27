@@ -280,7 +280,7 @@ const Table = (props: TableProps) => {
                                             {row.title}</span>
                                         </div>
                                     </td>
-                                    <td data-id={"salaryFrom"}>{row.salaryFrom || "–"}</td>
+                                    <td data-id={"salaryFrom"}><span className={classes.Mobile}>{row.salaryFrom ? row.salaryFrom+" - "+row.salaryTo+"₽" : "–"}</span><span className={classes.Desktop}>{row.salaryFrom || "–"}</span></td>
                                     <td data-id={"salaryTo"}>{row.salaryTo || "–"}</td>
                                     <td data-id={"businessDirectionTitle"}>{row.businessDirectionTitle}</td>
                                     <td data-id={"activity"}>{row.subdivisionTitle}</td>

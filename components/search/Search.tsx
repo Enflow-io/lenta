@@ -1,6 +1,6 @@
 import classes from "./Search.module.scss";
 import {Map, Placemark, YMaps} from "@pbe/react-yandex-maps";
-import React, {useEffect, useState} from "react";
+import React, {useContext, useEffect, useRef, useState} from "react";
 import Table from "../table/Table";
 import Select from 'react-select'
 import makeAnimated from 'react-select/animated';
@@ -8,6 +8,7 @@ import CustomPlacemark from "./CustomPlacemark";
 import useWindowDimensions from '../../hooks/useWindowDimensions';
 import searchIconSrc from '../../public/i/search-icon.svg'
 import Image from "next/image"
+
 import DesktopSelectors, {
     BusinessDirection,
     City,
@@ -31,7 +32,10 @@ interface SearchProps {
 }
 
 const Search = (props: SearchProps) => {
+    const ymaps = useRef(null);
 
+    const [ymapsInstance, setYmapsInstance] = useState<any>();
+    let refMap = useRef();
     const [isLoading, setIsLoading] = useState(false)
     const [countItemsPerPage, setCountItemsPerPage] = useState(20);
     const [page, setPage] = useState(1);
@@ -118,8 +122,21 @@ const Search = (props: SearchProps) => {
                         ...el
                     }
                 })
+                // console.log(points)
+                // debugger
                 setMapPoints(points);
-                setCenter([points[0].lat, points[0].lng])
+
+                // console.log(ymapsInstance)
+
+                // ymapsInstance.add(new ymaps.Placemark([55.833436, 37.715175], {
+                //     balloonContent: '<strong>greyish-brownish-maroon</strong> color'
+                // }
+
+                // console.log(ymapsInstance)
+                // debugger
+                // setCenter([points[0].lat, points[0].lng])
+                // console.log(refMap)
+                // debugger
                 setIsLoading(false)
             });
 
@@ -133,6 +150,11 @@ const Search = (props: SearchProps) => {
         }
     };
 
+
+    // useEffect(()=>{
+    //     console.log("refMap", refMap);
+    // debugger
+    // }, [refMap]);
     const getTableData = async () => {
         // controller.abort()
         if (isLoading) {
@@ -273,6 +295,9 @@ const Search = (props: SearchProps) => {
 
     const onLoadMap = (inst: any) => {
 
+
+
+        ymaps.current = inst
         // @ts-ignore
         var location = inst.geolocation.get(
             {provider: "yandex", mapStateAutoApply: true}
@@ -373,23 +398,53 @@ const Search = (props: SearchProps) => {
                 }} className={isMap ? undefined : classes.Active} href={'#'}>Список</a>
             </div>
 
-            <div className={classes.List2} id={'list'} style={{}}>
+            <div className={classes.List2} id={'list'}>
                 {isMap && !selectedVacancy &&
                 <div className={`${classes.Map} ${isLoading ? classes.Loading : undefined}`}>
 
-                    <YMaps query={{
-                        apikey: 'c733189d-e58b-4b16-a6ce-50860ef72788',
-                    }}
+                    <YMaps
+
+                        query={{
+                            apikey: 'c733189d-e58b-4b16-a6ce-50860ef72788',
+                        }}
 
                         // onApiAvaliable={(ymaps: any) => handleApiAvaliable(ymaps)}
                     >
                         <Map
-                            modules={["geolocation", "geocode"]}
+                            modules={["geolocation", "geocode", "util.bounds"]}
                             behaviors={['default', 'scrollZoom']}
                             onLoad={(inst) => onLoadMap(inst)}
+                            // instanceRef={ref => {
+                            //     // @ts-ignore
+                            //     ref && ref.behaviors.enable('scrollZoom');
+                            //     console.log("mapRef", ref);
+                            //     // debugger
+                            //     // setMapRef(ref);
+                            // }}
                             instanceRef={ref => {
-                                // @ts-ignore
-                                ref && ref.behaviors.enable('scrollZoom');
+                                console.log("ref-", ref)
+                                // debugger
+
+
+                                if (ref && ymaps.current) {
+                                    // refMap.current = ref;
+                                    setYmapsInstance(ref);
+                                    if(mapPoints.length>0){
+                                        const points = mapPoints.map(point=>{
+                                            // return [point.lng, point.lat]
+                                            return [point.lat, point.lng]
+                                        })
+
+                                        // @ts-ignore
+                                        const bounds = ymaps.current.util.bounds.fromPoints(points)
+                                        ref.setBounds(bounds)
+                                        ref.setZoom(ref.getZoom()-.6)
+
+                                    }
+                                        // ref.setBounds(ref.geoObjects.getBounds())
+
+
+                                }
                             }}
                             // defaultState={{
                             //     center: center,
@@ -412,8 +467,8 @@ const Search = (props: SearchProps) => {
 
                         >
 
-                            {mapPoints.map(el => {
-                                return <CustomPlacemark geometry={[el.lat, el.lng]}
+                            {mapPoints.map((el: any, index: number) => {
+                                return <CustomPlacemark key={index} geometry={[el.lat, el.lng]}
                                                         options={{
                                                             iconLayout: 'default#image',
                                                             iconImageHref: '/i/lent_map.svg',
@@ -432,7 +487,7 @@ const Search = (props: SearchProps) => {
                                                         }}
                                                         myClick={() => alert('!')}/>
                             })
-                            })
+                            }
 
                         </Map>
 
