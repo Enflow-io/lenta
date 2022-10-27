@@ -11,7 +11,11 @@ const Openable = (props: OpenableProps) => {
     return <div style={{
         marginBottom: 20
     }}>
-        <div className={`${classes.Openable} ${isOpened ? classes.Opened : undefined}`}>
+        <div onClick={(e) => {
+            e.preventDefault();
+            setIsOpened(!isOpened)
+        }
+        } className={`${classes.Openable} ${isOpened ? classes.Opened : undefined}`}>
             <span>{props.question}</span>
             <a href={'#'} onClick={(e) => {
                 e.preventDefault();
