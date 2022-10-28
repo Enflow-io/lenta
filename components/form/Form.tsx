@@ -39,7 +39,8 @@ const PreviewsWithClear = () => {
     return <>
         <div style={{
             paddingLeft: '1em'
-        }} className={classes.FileName}>Название файла</div>
+        }} className={classes.FileName}>Название файла
+        </div>
         {previews.map((el: any, index: number) => {
             return <div key={index}>{el?.name}</div>
         })}
@@ -67,6 +68,8 @@ const Form = (props: PropsForm) => {
         // other logic
     }
 
+    const [isSent, setIsSent] = useState(false);
+
     const changed = (e: any) => {
         const typed = e.target.value.length;
         const max = 1000;
@@ -83,44 +86,58 @@ const Form = (props: PropsForm) => {
             </svg>
         </div>
 
-        <h1>Оцените карьерную страницу</h1>
-        <p>Пожалуйста, поставьте Вашу оценку. Обратная связь от Вас поможет нам стать лучше: *</p>
-        <Rating className={classes.Rating} style={{
-            position: 'relative',
-            left: -3
-        }} size={25} onClick={handleRating} ratingValue={rating} /* Available Props */ />
-
-        <div style={{
-            position: "relative"
+        {isSent && <div style={{
+            padding: "2em 0"
         }}>
-            <span className={classes.Counter}>{leftChars}/1000</span>
-            <textarea onChange={changed} style={{
-                resize: "none"
-            }} className={classes.Text} placeholder={'Ваш отзыв'}>
+            <h1>Спасибо!</h1>
+            <p>Благодаря Вам наша страница становится лучше!</p>
+
+
+        </div>}
+        {!isSent && <>
+            <h1>Оцените карьерную страницу</h1>
+            <p>Пожалуйста, поставьте Вашу оценку. Обратная связь от Вас поможет нам стать лучше: *</p>
+            <Rating className={classes.Rating} style={{
+                position: 'relative',
+                left: -3
+            }} size={25} onClick={handleRating} ratingValue={rating} /* Available Props */ />
+
+            <div style={{
+                position: "relative"
+            }}>
+                <span className={classes.Counter}>{leftChars}/1000</span>
+                <textarea onChange={changed} style={{
+                    resize: "none"
+                }} className={classes.Text} placeholder={'Ваш отзыв'}>
 
         </textarea>
 
-        </div>
+            </div>
 
 
-        <div className={classes.Footer}>
-            <div>
-                <div style={{
-                    display: "flex",
-                    alignItems: "center"
-                }}>
-                    <Uploady destination={{url: "https://localhost"}}>
-                        <DivUploadButton/>
-                        <PreviewsWithClear/>
-                    </Uploady>
+            <div className={classes.Footer}>
+                <div>
+                    <div style={{
+                        display: "flex",
+                        alignItems: "center"
+                    }}>
+                        <Uploady destination={{url: "https://localhost"}}>
+                            <DivUploadButton/>
+                            <PreviewsWithClear/>
+                        </Uploady>
+                    </div>
+                    <p>Размер файла не более 1 Мб (png, jpeg)</p>
                 </div>
-                <p>Размер файла не более 1 Мб (png, jpeg)</p>
-            </div>
-            <div className={classes.BtnCont}>
-                <button>Отправить</button>
-            </div>
+                <div className={classes.BtnCont}>
+                    <button  onClick={() => {
+                        setIsSent(true)
+                    }
+                    }>Отправить
+                    </button>
+                </div>
 
-        </div>
+            </div>
+        </>}
     </div>
 }
 
