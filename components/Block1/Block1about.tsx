@@ -16,6 +16,23 @@ export const Bullet = () => {
     </svg>
 
 }
+export const VBullet = () => {
+    return <svg style={{
+        position: "relative",
+        top: 0
+    }} width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <g clipPath="url(#clip0_480_502)">
+            <path d="M17.7285 1.58776C15.0919 3.86964 12.8613 6.04183 10.8191 8.87589C9.91848 10.1259 8.91692 11.5971 8.26223 12.9862C7.88848 13.7228 7.21473 14.8737 6.98504 15.9803C5.72879 14.8115 4.37942 13.485 2.99879 12.4459C2.01473 11.7056 -0.819644 13.215 0.334106 14.0831C2.40192 15.6384 4.12161 17.5756 6.13286 19.2003C6.97411 19.879 8.83848 18.405 9.27661 17.7865C10.7147 15.749 10.9113 13.2584 11.9594 11.0359C13.5597 7.63683 16.3979 4.84464 19.2 2.41995C21.0566 0.688389 19.1391 0.369014 17.7313 1.58776" fill="#FFD200"/>
+        </g>
+        <defs>
+            <clipPath id="clip0_480_502">
+                <rect width="20" height="20" fill="white"/>
+            </clipPath>
+        </defs>
+    </svg>
+
+
+}
 const Block1About: FC<IBlock1Props> = ({stickerSrc, label}) => {
     return (
         <div className={classes.Block1}>

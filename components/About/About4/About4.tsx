@@ -1,5 +1,5 @@
 import classes from "./About4.module.scss"
-import {Bullet} from "../../Block1/Block1about";
+import {Bullet, VBullet} from "../../Block1/Block1about";
 import React from "react";
 
 const About4 = () => {
@@ -19,20 +19,20 @@ const About4 = () => {
                 <div>
                     <ul>
                         <li>
-                            <div><Bullet/></div>
+                            <div><VBullet /></div>
                             <div>Мы развиваем инфраструктуру и создаем привлекательные рабочие места.</div>
                         </li>
                         <li>
-                            <div><Bullet/></div>
+                            <div><VBullet/></div>
                             <div>Мы сотрудничаем с локальными поставщиками.</div>
                         </li>
                         <li>
-                            <div><Bullet/></div>
+                            <div><VBullet/></div>
                             <div>Мы реализуем программы сортировки и переработки отходов, организуем сбор
                                 использованных батареек и аккумуляторов, повышаем энергоэффективность помещений.</div>
                         </li>
                         <li>
-                            <div><Bullet/></div>
+                            <div><VBullet/></div>
                             <div>Мы строго следим за соблюдением норм охраны труда и производственной безопасности.</div>
                         </li>
                     </ul>
