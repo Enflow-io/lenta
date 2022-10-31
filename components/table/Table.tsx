@@ -13,6 +13,8 @@ import {
 } from '@tanstack/react-table'
 import ReactPaginate from "react-paginate";
 import {SearchResult, Vacancy, VacancyModel} from "../search/DesktopSelectors";
+import Tippy from '@tippyjs/react';
+import 'tippy.js/dist/tippy.css';
 
 interface TableProps {
     onSelect: (id: VacancyModel) => void
@@ -81,6 +83,8 @@ const Table = (props: TableProps) => {
     const [sorting, setSorting] = React.useState<SortingState>([])
     useEffect(() => {
         props.onSortChanged(sorting[0]);
+        // ReactTooltip.rebuild();
+        // alert('!')
     }, [sorting]);
 
     const table = useReactTable({
@@ -95,10 +99,13 @@ const Table = (props: TableProps) => {
         getPaginationRowModel: getPaginationRowModel(),
         debugAll: true,
         onStateChange: () => {
-            // ReactTooltip.rebuild();
+            ReactTooltip.rebuild();
         }
     });
 
+    useEffect(() => {
+        ReactTooltip.rebuild();
+    });
 
     const changePageSize = (params: any) => {
         const size = parseInt(params.target.id.replace(/[^0-9]/g, ''));
@@ -124,23 +131,24 @@ const Table = (props: TableProps) => {
         <ul className={`${classes.PageSizer} ${classes.MobilePageSizer}`}>
             <li><input
                 id="pageSizer5"
-                name={'pageSizer2'} checked={props.pageSize===5} onChange={changePageSize} type={'radio'}/><label htmlFor="pageSizer5">5</label></li>
+                name={'pageSizer2'} checked={props.pageSize === 5} onChange={changePageSize} type={'radio'}/><label
+                htmlFor="pageSizer5">5</label></li>
             <li><input
                 id="pageSizer10"
 
                 name={'pageSizer2'}
-                checked={props.pageSize===10}
+                checked={props.pageSize === 10}
                 onChange={changePageSize} type={'radio'}/><label htmlFor="pageSizer10">10</label>
             </li>
             <li><input
-                checked={props.pageSize===20}
+                checked={props.pageSize === 20}
                 value={"f"}
                 id="pageSizer20m"
                 name={'pageSizer2'}
                 onChange={changePageSize}
                 type={'radio'}/><label htmlFor="pageSizer20m">20</label></li>
             <li><input
-                checked={props.pageSize===50}
+                checked={props.pageSize === 50}
                 id="pageSizer50"
                 onChange={changePageSize}
                 name={'pageSizer2'}
@@ -206,13 +214,13 @@ const Table = (props: TableProps) => {
                                 <input
                                     onChange={changePageSize}
                                     id="pageSizer5d"
-                                    checked={props.pageSize===5}
+                                    checked={props.pageSize === 5}
 
                                     name={'pageSizerD'} type={'radio'}/><label htmlFor="pageSizer5d">5</label></li>
                             <li>
                                 <input
                                     id="pageSizer10d"
-                                    checked={props.pageSize===10}
+                                    checked={props.pageSize === 10}
 
                                     onChange={changePageSize}
                                     name={'pageSizerD'} type={'radio'}/><label htmlFor="pageSizer10d">10</label></li>
@@ -220,7 +228,7 @@ const Table = (props: TableProps) => {
                                 <input
                                     onChange={changePageSize}
                                     // checked={true}
-                                    checked={props.pageSize===20}
+                                    checked={props.pageSize === 20}
 
                                     value={""}
                                     id="pageSizer20d"
@@ -230,7 +238,7 @@ const Table = (props: TableProps) => {
                                 onChange={changePageSize}
 
                                 id="pageSizer50d"
-                                checked={props.pageSize===50}
+                                checked={props.pageSize === 50}
 
                                 name={'pageSizerD'} type={'radio'}/><label htmlFor="pageSizer50d">50</label></li>
                         </ul>
@@ -249,14 +257,15 @@ const Table = (props: TableProps) => {
                 {props.results
                     .map((row, id) => {
                         return (
-                            <tr key={id} onClick={e => {
+                            <tr  key={id} onClick={e => {
                                 props.onSelect(row);
                             }}>
 
-                                <>
-                                    <td>
-                                        <div className={classes.Row}>
-                                            <div>
+
+                                <td>
+                                    <div className={classes.Row}>
+                                        <Tippy content="Hello">
+                                            <><div>
                                                 <svg onClick={e => {
                                                     props.onSelect(row);
 
@@ -277,27 +286,30 @@ const Table = (props: TableProps) => {
                                                 </svg>
                                             </div>
                                             <span>
-                                            {row.title}</span>
-                                        </div>
-                                    </td>
-                                    <td data-id={"salaryFrom"}><span className={classes.Mobile}>{row.salaryFrom ? row.salaryFrom+" - "+row.salaryTo+"₽" : "–"}</span><span className={classes.Desktop}>{row.salaryFrom || "–"}</span></td>
-                                    <td data-id={"salaryTo"}>{row.salaryTo || "–"}</td>
-                                    <td data-id={"businessDirectionTitle"}>{row.businessDirectionTitle}</td>
-                                    <td data-id={"activity"}>{row.subdivisionTitle}</td>
-                                    <td data-id={"addressTitle"}>{row.addressTitle}</td>
-                                    <td data-id={"metroTitle"}>{row.metroTitle}</td>
-                                </>
+                                            {row.title}</span></>
+                                        </Tippy>
+                                    </div>
+                                </td>
+                                <td data-id={"salaryFrom"}><span
+                                    className={classes.Mobile}>{row.salaryFrom ? row.salaryFrom + " - " + row.salaryTo + "₽" : "–"}</span><span
+                                    className={classes.Desktop}>{row.salaryFrom || "–"}</span></td>
+                                <td data-id={"salaryTo"}>{row.salaryTo || "–"}</td>
+                                <td data-id={"businessDirectionTitle"}>{row.businessDirectionTitle}</td>
+                                <td data-id={"activity"}>{row.subdivisionTitle}</td>
+                                <td data-id={"addressTitle"}>{row.addressTitle}</td>
+                                <td data-id={"metroTitle"}>{row.metroTitle}</td>
+
 
                             </tr>
                         )
                     })}
                 </tbody>
             </table>
-            {/*<ReactTooltip arrowColor={'#35219A'}*/}
-            {/*              // globalEventOff={'touchstart'}*/}
-            {/*              // event={'touchstart'}*/}
+            <ReactTooltip arrowColor={'#35219A'}
+                // globalEventOff={'touchstart'}
+                // event={'touchstart'}
 
-            {/*              className={classes.Tooltip} delayHide={500} effect='solid'/>*/}
+                          className={classes.Tooltip} delayHide={500} effect='solid'/>
             <div className={classes.Paginator}
             >
                 <ReactPaginate

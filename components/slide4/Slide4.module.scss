@@ -10,6 +10,11 @@
   width: calc(100% - 100px);
   left: 50px;
   //overflow-y: hidden;
+  @media (max-width: 600px) {
+    height: 350px;
+    width: 100%;
+    left: 0;
+  }
 }
 
 
@@ -17,6 +22,8 @@
   max-width: $mainWidth;
   height: 380px;
   width: 100%;
+
+
 
   position: relative;
   left: 32px;
@@ -97,6 +104,12 @@
 }
 
 .Slider {
+
+  @media (max-width: 600px) {
+    position: absolute;
+    top: -70px;
+
+  }
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -165,14 +178,16 @@
 
 .prev {
   position: absolute;
-  left: 5px;
+  left: -2px;
+  top: -70;
   bottom: 83px;
   z-index: 9999;
 }
 
 .next {
   position: absolute;
-  right: 5px;
+  right: -2px;
+  top: -70;
   bottom: 83px;
   z-index: 9999;
 
