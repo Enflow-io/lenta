@@ -132,7 +132,7 @@ const MultiSelect = (props: MultiSelectProps) => {
             <Scrollbars
                 renderThumbVertical={renderThumb}
                 className={classes.List} style={{width: '100%', height: (getFilteredItems().length * 26) || 26}}>
-                {getFilteredItems().map((item, index) => {
+                {getFilteredItems().sort((a, b)=>{return +selectedItems.includes(b.id)-(+selectedItems.includes(a.id)) }).map((item, index) => {
                     return <div onClick={(e) => {
                         e.preventDefault();
                         e.stopPropagation();
