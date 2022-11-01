@@ -14,9 +14,10 @@
     }
   }
 
+  padding-top: 2em;
 
   @media (max-width: 600px) {
-
+    padding-top: 0em;
 
     ul {
       margin-bottom: 0;
@@ -38,7 +39,8 @@
 
   padding-bottom: 4em;
 
-  >div{
+
+    >div{
     max-width: 977px;
     width: 100%;
     display: flex;
@@ -48,10 +50,15 @@
 
   h2 {
 
-    font-family: 'Futura PT';
+    //font-family: 'Futura PT';
+    font-family: 'Futura MediumC';
     font-style: normal;
-    font-weight: 500;
+    //font-weight: 500;
     font-size: 38px;
+    @media (max-width: 600px) {
+      font-size: 30px;
+
+    }
 
     display: flex;
     align-items: center;
@@ -61,9 +68,15 @@
   }
 
   h3{
-    font-family: 'Futura PT';
+    //font-family: 'Futura PT';
     font-style: normal;
+    font-family: 'Futura MediumC';
     font-size: 34px;
+    @media (max-width: 600px) {
+      font-size: 22px;
+      margin-top: 3em;
+
+    }
     /* identical to box height */
 
     display: flex;
@@ -96,15 +109,21 @@
 .H3Line{
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  h3{
-    font-size: 30px;
-    @media (max-width: 600px) {
-      font-size: 24px;
-    }
-  }
+  align-items: flex-start;
+  position: relative;
   >span{
     max-width: 200px;
+    position: absolute;
+    right: 0px;
+    @media (max-width: 600px) {
+
+      //position: relative;
+      //right: unset;
+      //right: 20px;
+
+      top: -30px;
+
+    }
     >svg{
       width: 100%;
 

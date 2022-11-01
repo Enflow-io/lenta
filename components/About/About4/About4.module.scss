@@ -29,18 +29,28 @@
 
   h3 {
 
-    font-family: 'Futura PT';
+
     font-style: normal;
-    font-weight: 400;
+    font-family: 'Futura MediumC';
     font-size: 34px;
-    line-height: 28px;
+    @media (max-width: 600px) {
+      width: 60%;
+      font-size: 22px;
+      margin-top: 3em;
+
+    }
 
 
   }
 
-  p{
+  p {
     font-family: "Futura Light";
     font-size: 24px;
+    @media (max-width: 600px) {
+      margin-top: 0;
+      font-size: 16px;
+
+    }
   }
 
   ul{
@@ -49,7 +59,11 @@
     li{
       display: flex;
       font-size: 24px;
-      font-family: "Futura Light";
+      @media (max-width: 600px) {
+        font-size: 14px;
+
+      }
+        font-family: "Futura Light";
       margin-bottom: 1em;
       svg{
         padding-right: 20px;
@@ -67,12 +81,21 @@
   justify-content: space-between;
   align-items: center;
   h3{
-    font-size: 22px !important;
-    line-height: 130% !important;
+    //font-size: 22px !important;
+    //line-height: 130% !important;
   }
+
+  padding-top: 4em;
+  padding-bottom: 1em;
+  position: relative;
   >span{
-    max-width: 200px;
-    >svg{
+    max-width: 150px;
+    position: absolute;
+    right: 0;
+    @media (max-width: 600px) {
+      top: 50px;
+    }
+      >svg{
       width: 100%;
 
       //display: none;

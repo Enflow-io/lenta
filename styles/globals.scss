@@ -15,6 +15,15 @@ body {
 }
 
 @font-face {
+  font-family: 'Futura MediumC';
+  font-weight: 500;
+  font-style: normal;
+  //src: url('/f/FuturaPT/FuturaPT-Heavy.woff');
+  src: url('/f/FuturaPT/FuturaMediumC.woff');
+  //src: url('/f/FuturaPT/FuturaPT-Light.woff');
+}
+
+@font-face {
   font-family: 'Futura Light';
   //src: url('/f/FuturaPT/FuturaPT-Heavy.woff');
   src: url('/f/FuturaPT/FuturaPT-Light.woff');

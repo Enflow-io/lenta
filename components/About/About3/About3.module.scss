@@ -4,6 +4,9 @@
   justify-content: center;
   //flex-direction: column;
 
+  @media (max-width: 600px) {
+    margin-top: 0px !important;
+  }
 
   @media (max-width: 1000px) {
     //height: 63px;
@@ -11,7 +14,7 @@
     margin: 20px;
 
 
-    ul{
+    ul {
       padding: 0;
     }
   }
@@ -22,52 +25,89 @@
     align-items: center;
   }
 
-  >div{
+  > div {
     max-width: 977px;
     width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
   }
-  p{
+
+  p {
     border-left: 2px solid #FFD200;
     padding: 0px 0 5px 30px;
     max-width: 700px;
-    font-family: "Futura PT";
+    font-family: "Futura MediumC";
     font-size: 24px;
+    >span{
+      color: #35219A;
+    }
+    @media (max-width: 600px) {
+      font-size: 14px;
+      line-height: 140%;
+      padding: 0px 0 5px 15px;
+
+    }
+
     margin-top: 0;
   }
 
 
   h3 {
 
-    font-family: 'Futura PT';
-    font-style: normal;
-    font-weight: 400;
+    font-family: 'Futura MediumC';
     font-size: 34px;
+    @media (max-width: 600px) {
+      font-size: 22px;
+
+    }
+    font-weight: bold;
+
+    font-style: normal;
     line-height: 28px;
 
+    margin-bottom: 0;
 
   }
 }
 
-.BG{
+.BG {
   background: #EEEEEE;
   padding: 2em 0;
+  margin-top: 1em;
+  @media (max-width: 600px) {
+    padding-top: 0px;
+  }
 }
 
 
-.H3Line{
+.H3Line {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  h3{
-    font-size: 22px !important;
+
+  position: relative;
+  h3 {
+    //font-size: 22px !important;
     line-height: 130% !important;
+    padding-bottom: 1em;
+
+
+
   }
-  >span{
+
+  > span {
     max-width: 200px;
-    >svg{
+    position: absolute;
+    right: 0;
+    @media (max-width: 600px) {
+      position: relative;
+      svg{
+        height: 120px;
+      }
+    }
+
+      > svg {
       width: 100%;
 
       //display: none;
