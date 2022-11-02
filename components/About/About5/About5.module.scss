@@ -22,7 +22,8 @@
   }
 
   > div {
-    max-width: 900px;
+    //max-width: 900px;
+    max-width: 977px;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -34,10 +35,17 @@
 
   h3 {
 
-    font-family: 'Futura PT';
+    font-family: 'Futura Heavy';
     font-style: normal;
     font-weight: 400;
-    font-size: 34px;
+    //font-size: 34px;
+    font-size: 38px;
+    @media (max-width: 600px) {
+      font-size: 22px;
+
+    }
+
+    padding-bottom: 1em;
     line-height: 28px;
 
 
@@ -70,8 +78,8 @@
   justify-content: space-between;
   align-items: center;
   h3{
-    font-size: 24px !important;
-    line-height: 130% !important;
+    //font-size: 24px !important;
+    //line-height: 130% !important;
   }
 
   >span{

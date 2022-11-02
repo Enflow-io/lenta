@@ -44,7 +44,9 @@
   }
 
   p {
-    font-family: "Futura Light";
+    //font-family: "Futura Light";
+    font-family: 'Futura MediumC';
+
     font-size: 24px;
     @media (max-width: 600px) {
       margin-top: 0;
@@ -56,6 +58,7 @@
   ul{
     list-style: none;
     padding-left: 0;
+    padding-bottom: 1em;
     li{
       display: flex;
       font-size: 24px;
@@ -63,7 +66,9 @@
         font-size: 14px;
 
       }
-        font-family: "Futura Light";
+        //font-family: "Futura Light";
+      font-family: 'Futura MediumC';
+
       margin-bottom: 1em;
       svg{
         padding-right: 20px;
@@ -86,14 +91,19 @@
   }
 
   padding-top: 4em;
-  padding-bottom: 1em;
+  @media (max-width: 600px) {
+    padding-top: 0em;
+
+  }
+    padding-bottom: 1em;
   position: relative;
   >span{
     max-width: 150px;
     position: absolute;
     right: 0;
     @media (max-width: 600px) {
-      top: 50px;
+      //top: 50px;
+      top: -29px;
     }
       >svg{
       width: 100%;

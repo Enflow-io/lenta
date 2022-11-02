@@ -8,7 +8,7 @@ const About5 = () => {
         <div  className={classes.Container}>
             <div>
                 <div  className={classes.H3Line}>
-                    <h3 id={'faq'}>Есть вопросы? У нас найдутся ответы!</h3>
+                    <h3 id={'faq'}>Есть вопросы? У нас <br />найдутся ответы!</h3>
 
                     <Icon3 />
 
