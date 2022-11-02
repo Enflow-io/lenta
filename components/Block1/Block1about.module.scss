@@ -4,7 +4,11 @@
   align-items: center;
   position: relative;
   min-height: 660px;
-  background: #EEEEEE;
+  @media (max-width: 600px) {
+    min-height: 600px;
+
+  }
+    background: #EEEEEE;
   @media (max-width: 1000px) {
     padding: 20px;
     font-size: 15px;
