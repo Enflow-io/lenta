@@ -32,7 +32,7 @@
 
     font-style: normal;
     font-family: 'Futura MediumC';
-    font-size: 34px;
+    font-size: 32px;
     @media (max-width: 600px) {
       width: 60%;
       font-size: 22px;
@@ -98,12 +98,20 @@
     padding-bottom: 1em;
   position: relative;
   >span{
-    max-width: 150px;
+    //max-width: 150px;
+    //position: absolute;
+    //right: 0;
+
+    max-width: 192px;
     position: absolute;
-    right: 0;
+    right: 11px;
     @media (max-width: 600px) {
       //top: 50px;
+      max-width: 150px;
+
       top: -29px;
+      right: 0px;
+
     }
       >svg{
       width: 100%;

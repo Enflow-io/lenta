@@ -65,9 +65,11 @@
 
 
     font-family: 'Futura MediumC';
-    font-size: 34px;
+    font-size: 32px;
     @media (max-width: 600px) {
       font-size: 22px;
+      //padding-bottom: 10em;
+
 
     }
     font-weight: bold;
@@ -139,6 +141,14 @@
 .DesktopIcon {
   > span {
     display: block;
+    top: -22px;
+    position: relative;
+    left: 71px;
+    @media (min-width: 1000px) {
+      position: relative;
+
+      top: 20px;
+    }
     @media (max-width: 1000px) {
       display: none;
     }
@@ -165,7 +175,8 @@
       svg {
         max-width: 150px;
         position: relative;
-        top: 10px;
+        top: -10px;
+        left: 45px;
 
       }
 
@@ -232,7 +243,7 @@
 
 
   @media (max-width: 600px) {
-    margin-top: 1.5em;
+    //margin-top: 1.5em;
     flex-direction: column;
     ul:nth-child(2) {
       padding: 0 !important;
