@@ -9,7 +9,8 @@ const Cookie = () => {
 
     useEffect(() => {
         const isVis = Lockr.get('cookie') !== true;
-        setIsVisible(isVis)
+        // setIsVisible(isVis)
+        setIsVisible(true)
     }, [])
 
     if (!isVisible) {

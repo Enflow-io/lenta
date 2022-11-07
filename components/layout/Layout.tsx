@@ -14,6 +14,7 @@ import classes from "./Layout.module.scss"
 import MenuArrow from "./Arrow";
 import GeoLocation from "../GeoLocation/GeoLocation";
 import Head from 'next/head';
+import CookieNew from "../cookie/CookieNew";
 interface LayoutProps {
     children: any
     location: string | undefined
@@ -149,7 +150,7 @@ const Layout = (props: LayoutProps) => {
         <Slide5/>
         <Footer/>
         <FooterMobile/>
-        <Cookie/>
+        <CookieNew/>
     </>
 
 }
