@@ -9,6 +9,7 @@ interface IBlock1Props {
     text?: string
     icon: any
     top: number
+    anchor: string
 }
 
 const Block1: FC<IBlock1Props> = ({stickerSrc, label, ...props}) => {
@@ -55,7 +56,7 @@ const Block1: FC<IBlock1Props> = ({stickerSrc, label, ...props}) => {
                     </div>
                 </div>
             </div>
-            <Link href={"/"}>
+            <Link href={"/?"+props.anchor}>
                 <button>К списку вакансий</button>
             </Link>
         </div>

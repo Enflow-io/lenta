@@ -29,6 +29,7 @@ const controller = new AbortController();
 
 interface SearchProps {
     onLocation: (location: string) => void
+    // preSelected: string
 }
 
 const Search = (props: SearchProps) => {
@@ -158,7 +159,7 @@ const Search = (props: SearchProps) => {
     const getTableData = async () => {
         // controller.abort()
         if (isLoading) {
-            return;
+            // return;
         }
 
         setIsLoading(true)
@@ -223,6 +224,8 @@ const Search = (props: SearchProps) => {
                 // //
                 // //
                 setDirections(businessDirections)
+
+
                 setSearchResults(searchResults)
                 console.log(searchResults.length)
                 setTotalPagesCount(data.searchResult.totalPagesCount)
@@ -278,6 +281,9 @@ const Search = (props: SearchProps) => {
 
     useEffect(() => {
         // alert(page)
+
+        // alert('sdf')
+
         getTableData();
     }, [
         selectedCityId,
@@ -360,6 +366,7 @@ const Search = (props: SearchProps) => {
                     setSelectedCityId(id);
                 }}
                 onBdsChanged={(id) => {
+                    // alert(id)
                     setBdsId(id);
                 }}
                 stations={stations}

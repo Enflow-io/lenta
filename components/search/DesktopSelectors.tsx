@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import classes from './Search.module.scss';
 import Select from 'react-select';
 import MultiSelect from "../MultiSelect/MultiSelect";
@@ -7,6 +7,7 @@ import Metro from "../MultiSelect/constants/Metro";
 import Activities from "../MultiSelect/constants/Activities";
 import Vacancies from "../MultiSelect/constants/Vacancies";
 import exp from "constants";
+import {useRouter} from "next/router";
 
 const options = [
     {value: 'chocolate', label: 'Chocolate'},
@@ -97,6 +98,24 @@ const DesktopSelectors = (props: DesktopSelectorsProps) => {
 
     const [keyword, setKeyword] = useState("");
 
+    const router = useRouter();
+
+    const preSelected: string = router.query?.direction ? router.query?.direction.toString() : "";
+    const map = {
+        "store": 1,
+        "production": 2,
+        "centres": 3
+    }
+
+    useEffect(()=>{
+        const preSelected: string = router.query?.direction ? router.query?.direction.toString() : "";
+
+        setTimeout(()=>{
+            // @ts-ignore
+            props.onBdsChanged(map[preSelected])
+        }, 1000)
+
+    }, [router])
 
     return (
         <div className={classes.Selectors}>
@@ -143,7 +162,10 @@ const DesktopSelectors = (props: DesktopSelectorsProps) => {
                                          label: el.title,
                                          count: el.count
                                      }
-                                 })}/>
+                                 })}
+                        // @ts-ignore
+                                 selectedId={(preSelected !== "" && map[preSelected]) ? map[preSelected] : undefined}
+                    />
 
                     {/*<Select*/}
                     {/*    placeholder={<div className={classes.Placeholder}>Направление деятельности</div>}*/}

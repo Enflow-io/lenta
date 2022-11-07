@@ -7,6 +7,7 @@ import Layout from "../components/layout/Layout";
 import React, {useState} from "react";
 import GeoLocation from "../components/GeoLocation/GeoLocation";
 import dynamic from "next/dynamic";
+import {useRouter} from "next/router";
 const Search = dynamic(
     () => import("../components/search/Search"), // replace '@components/map' with your component's location
     { ssr: false } // This line is important. It's what prevents server-side render
@@ -18,10 +19,13 @@ const Home: NextPage = () => {
         setLoc(loc)
     }
 
+
     return (
         <Layout location={loc}>
 
-            <Search onLocation={onLocation} />
+            <Search
+
+                onLocation={onLocation} />
         </Layout>
     )
 }

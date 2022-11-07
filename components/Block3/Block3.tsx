@@ -2,7 +2,10 @@ import React, {FC} from 'react';
 import classes from './Block3.module.scss'
 import {useRouter} from "next/router";
 
-const Block3: FC = () => {
+interface Block3Props {
+    anchor?: string
+}
+const Block3 = (props: Block3Props) => {
     const router = useRouter();
     return (
         <div >
@@ -10,7 +13,14 @@ const Block3: FC = () => {
                 <div className={classes.BG}/>
                 <h2>Присоединяйтесь к команде ЛЕНТЫ</h2>
                 <button onClick={async ()=>{
-                    await router.push("/")
+
+                    if(props.anchor){
+                        await router.push("/?"+props.anchor)
+
+                    }else{
+                        await router.push("/")
+
+                    }
                 }}>К списку вакансий</button>
             </div>
         </div>
