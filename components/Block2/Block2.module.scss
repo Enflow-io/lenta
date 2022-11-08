@@ -55,33 +55,42 @@
 }
 
 
-
-.List{
+.List {
 
   @media (max-width: 600px) {
-      padding-left: 0;
-      li{
-        padding: 0 20px;
-        margin-bottom: 10px;
+    padding-left: 0;
+    li {
+      padding: 0 20px;
+      margin-bottom: 10px;
 
-        p{
-          font-size: 12px;
-          line-height: 13px;
-        }
+      p {
+        font-size: 12px;
+        line-height: 13px;
       }
+    }
 
   }
 
-  svg{
+  svg {
     height: 86px;
   }
 
   @media (max-width: 1000px) {
-    svg{
+    svg {
       width: 40%;
       height: unset;
     }
 
+
+  }
+}
+
+.Video {
+  padding-left: 30px;
+  width: calc(100% - 30px);
+  @media (max-width: 800px) {
+    padding-left: 0px;
+    width: calc(100% );
 
 
   }

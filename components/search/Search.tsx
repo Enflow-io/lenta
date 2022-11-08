@@ -104,6 +104,7 @@ const Search = (props: SearchProps) => {
                 const searchResults = data.searchResult.items;
                 const vacancies: Vacancy[] = data.filters.vacancies;
 
+
                 setCities(cities);
 
 
@@ -111,8 +112,16 @@ const Search = (props: SearchProps) => {
                     setStations(stations);
                 }
                 setDirections(businessDirections)
-                setSearchResults(searchResults)
-                console.log(searchResults.length)
+
+
+
+                let items: any = []
+                for(let res of searchResults){
+                    items = [...items, ...res.vacancies];
+                }
+
+                setSearchResults(items)
+
                 setTotalPagesCount(data.searchResult.totalPagesCount)
                 if (selectedVacanciesIds.length === 0) {
                     setVacancies(vacancies);
@@ -125,6 +134,7 @@ const Search = (props: SearchProps) => {
                 })
                 // console.log(points)
                 // debugger
+                console.log("points", points)
                 setMapPoints(points);
 
                 // console.log(ymapsInstance)
@@ -284,7 +294,12 @@ const Search = (props: SearchProps) => {
 
         // alert('sdf')
 
-        getTableData();
+        if(isMap){
+            getMapData();
+        }else{
+            getTableData();
+
+        }
     }, [
         selectedCityId,
         bdsId,
@@ -384,7 +399,13 @@ const Search = (props: SearchProps) => {
                 }}
 
                 onSearch={async () => {
-                    await getTableData();
+                    if(isMap){
+                        await getMapData();
+
+                    }else{
+                        await getTableData();
+
+                    }
                     // setIsLoading(true)
                     // setTimeout(() => {
                     //     setIsLoading(false)
@@ -408,7 +429,6 @@ const Search = (props: SearchProps) => {
             <div className={classes.List2} id={'list'}>
                 {isMap && !selectedVacancy &&
                 <div className={`${classes.Map} ${isLoading ? classes.Loading : undefined}`}>
-
                     <YMaps
 
                         query={{
@@ -474,6 +494,7 @@ const Search = (props: SearchProps) => {
 
                         >
 
+
                             {mapPoints.map((el: any, index: number) => {
                                 return <CustomPlacemark key={index} geometry={[el.lat, el.lng]}
                                                         options={{
@@ -485,12 +506,12 @@ const Search = (props: SearchProps) => {
                                                             hideIconOnBalloonOpen: false,
                                                             balloonMaxWidth: 200,
                                                         }}
-                                                        user={{
-                                                            id: 0,
-                                                        }}
+                                                        user={el}
                                                         openModel={(id: any) => {
-                                                            // alert(id)
-                                                            // setSelectedVacancy(2)
+                                                            const found = searchResults.find(el=> el.vacancyId === parseInt(id));
+                                                            console.log(id)
+                                                            console.log(searchResults)
+                                                            setSelectedVacancy(found)
                                                         }}
                                                         myClick={() => alert('!')}/>
                             })

@@ -254,7 +254,8 @@ const Block2: FC<IBlock2Props> = ({youtubeSrc}) => {
 
                 <h1>«ЛЕНТА» — это люди!</h1>
                 <iframe
-                    width="100%" height="520" src={youtubeSrc}
+                    className={classes.Video}
+                      height="520" src={youtubeSrc}
                     title="YouTube video player" frameBorder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowFullScreen>
