@@ -11,6 +11,7 @@ import {slide as Menu} from "react-burger-menu";
 import Link from "next/link";
 import classes from "../../components/layout/Layout.module.scss";
 import {MenuAll, MenuStyles} from "../../components/layout/Layout";
+import CookieNew from "../../components/cookie/CookieNew";
 
 const StoresPage = () => {
     return (
@@ -31,7 +32,7 @@ const StoresPage = () => {
 
             <Footer/>
             <FooterMobile/>
-            <Cookie/>
+            <CookieNew />
         </div>
     );
 };

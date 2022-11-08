@@ -16,6 +16,7 @@ import About2 from "../components/About/About2/About2";
 import About3 from "../components/About/About3/About3";
 import About4 from "../components/About/About4/About4";
 import About5 from "../components/About/About5/About5";
+import CookieNew from "../components/cookie/CookieNew";
 
 const About = () => {
     return (
@@ -32,7 +33,7 @@ const About = () => {
 
             <Footer/>
             <FooterMobile/>
-            <Cookie/>
+            <CookieNew />
         </div>
     );
 };

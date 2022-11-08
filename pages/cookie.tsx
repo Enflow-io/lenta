@@ -5,6 +5,7 @@ import FooterMobile from "../components/layout/FooterMobile";
 import Cookie from "../components/cookie/Cookie";
 import {MenuAll, MenuStyles} from "../components/layout/Layout";
 import classes from "./Pages.module.scss";
+import CookieNew from "../components/cookie/CookieNew";
 
 const CookiePage = () => {
     return (
@@ -153,7 +154,7 @@ const CookiePage = () => {
             </div>
             <Footer/>
             <FooterMobile/>
-            <Cookie/>
+            <CookieNew />
         </div>
     );
 };
