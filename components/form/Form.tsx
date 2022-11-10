@@ -96,7 +96,9 @@ const Form = (props: PropsForm) => {
         </div>}
         {!isSent && <>
             <h1>Оцените карьерную страницу</h1>
-            <p>Пожалуйста, поставьте Вашу оценку. Обратная связь от Вас поможет нам стать лучше: *</p>
+            <p>Пожалуйста, поставьте Вашу оценку. Обратная связь от Вас поможет нам стать лучше: <span style={{
+                color: "#E81919"
+            }}>*</span></p>
             <Rating className={classes.Rating} style={{
                 position: 'relative',
                 left: -3

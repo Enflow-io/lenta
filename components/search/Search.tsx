@@ -262,7 +262,7 @@ const Search = (props: SearchProps) => {
         getTableData()
     }, []);
 
-    const [isMap, setIsMap] = useState(false)
+    const [isMap, setIsMap] = useState(true)
     const [selectedCityId, setSelectedCityId] = useState(65)
     const [bdsId, setBdsId] = useState(0)
     const {isMobile} = useIsMobile()
@@ -465,7 +465,12 @@ const Search = (props: SearchProps) => {
                                         // @ts-ignore
                                         const bounds = ymaps.current.util.bounds.fromPoints(points)
                                         ref.setBounds(bounds)
-                                        ref.setZoom(ref.getZoom()-.6)
+                                        if((ref.getZoom()-.6 ) <15){
+                                            ref.setZoom(ref.getZoom()-.6)
+                                        }else{
+                                            ref.setZoom(14)
+                                        }
+
 
                                     }
                                         // ref.setBounds(ref.geoObjects.getBounds())
