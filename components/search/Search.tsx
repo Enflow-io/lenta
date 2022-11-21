@@ -194,8 +194,8 @@ const Search = (props: SearchProps) => {
             url = url + '&page=' + (page - 1).toString()
         }
 
-        if (countItemsPerPage) {
-            url = url + '&countItemsPerPage=' + countItemsPerPage
+        if (pageSize) {
+            url = url + '&countItemsPerPage=' + pageSize
         }
 
         if (selStationsIds.length > 0) {
@@ -273,11 +273,11 @@ const Search = (props: SearchProps) => {
     const size = useWindowSize();
 
 
-    useEffect(() => {
-        if (isMap) {
-            getMapData();
-        }
-    }, [isMap]);
+    // useEffect(() => {
+    //     if (isMap) {
+    //         getMapData();
+    //     }
+    // }, [isMap]);
 
     useEffect(() => {
         if ((size?.width || 1000) < 600) {
@@ -310,7 +310,8 @@ const Search = (props: SearchProps) => {
         // sortField,
         // sortDirection,
         sorting,
-        pageSize
+        pageSize,
+        isMap
     ]);
 
 
@@ -434,10 +435,16 @@ const Search = (props: SearchProps) => {
                         query={{
                             apikey: 'c733189d-e58b-4b16-a6ce-50860ef72788',
                         }}
+                        
 
                         // onApiAvaliable={(ymaps: any) => handleApiAvaliable(ymaps)}
                     >
                         <Map
+                            onError={(error)=>{
+                                setIsMap(false)
+                                console.log(error.message)
+                            }}
+
                             modules={["geolocation", "geocode", "util.bounds"]}
                             behaviors={['default', 'scrollZoom']}
                             onLoad={(inst) => onLoadMap(inst)}
@@ -619,7 +626,9 @@ const Search = (props: SearchProps) => {
                             }} trigger={<button className={classes.Share}>Поделиться</button>} modal>
                             {
                                 // @ts-ignore
-                                (close: any) => (<ShareVacancy close={() => {
+                                (close: any) => (<ShareVacancy 
+                                    title={selectedVacancy?.title || ""}
+                                    close={() => {
                                     close()
                                 }}/>)
                             }

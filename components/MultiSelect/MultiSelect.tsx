@@ -126,7 +126,7 @@ const MultiSelect = (props: MultiSelectProps) => {
         }
         {isOpened &&
         <div className={classes.List}>
-            {getFilteredItems().length === 0 && <div className={classes.NoRes}>По подходящим фильтрам нет опций</div>}
+            {getFilteredItems().length === 0 && <div className={classes.NoRes}>Результаты не найдены</div>}
 
             {items.length > 0 &&
             <Scrollbars

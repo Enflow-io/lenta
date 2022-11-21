@@ -2,6 +2,7 @@ import classes from "./ShareVacancy.module.scss";
 
 interface ShareVacancyProps {
     close: () => void
+    title: string
 }
 
 const ShareVacancy = (props: ShareVacancyProps) => {
@@ -18,7 +19,7 @@ const ShareVacancy = (props: ShareVacancyProps) => {
         <div className={classes.Line}></div>
         <ul className={classes.List}>
             <li>
-                <a target={"_blank"} href={'mailto:email@address.com?subject=Hello world&body=Line one%0DLine two'}>
+                <a target={"_blank"} href={`mailto:email@address.com?subject=${props.title}&body=Ссылка на вакансию - https://career.lenta.com/vacancies/151236`}>
                     <svg width="37" height="38" viewBox="0 0 37 38" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <g opacity="0.8">
                             <circle cx="18.4574" cy="19.5428" r="17.3714" fill="#4836A2"/>
@@ -30,7 +31,7 @@ const ShareVacancy = (props: ShareVacancyProps) => {
                 </a>
             </li>
             <li>
-                <a href={'https://connect.ok.ru/offer?url=http://mysite.com'} target={"_blank"}>
+                <a href={`https://connect.ok.ru/offer?title=${props.title}`} target={"_blank"}>
                     <svg width="37" height="38" viewBox="0 0 37 38" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <g opacity="0.8">
                             <circle cx="18.4574" cy="19.5428" r="17.3714" fill="#4836A2"/>
@@ -45,7 +46,7 @@ const ShareVacancy = (props: ShareVacancyProps) => {
                 </a>
             </li>
             <li>
-                <a href={'http://vk.com/share.php?'} target={"_blank"} onClick={e => {
+                <a href={'http://vk.com/share.php?title='+props.title} target={"_blank"} onClick={e => {
                     // e.preventDefault();
 
                 }}>
