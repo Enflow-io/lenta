@@ -15,11 +15,15 @@ interface HeaderInterface {
 const Header = (props: HeaderInterface) => {
     // @ts-ignore
     return <div className={classesHeader.HeaderContainer}>
+
         <div className={classesHeader.Header}>
             <div className={classesHeader.Logo}>
-                <a href={'/'}>
+                <a style={{
+                    maxHeight: '100%'
+                }} href={'/'}>
                     <img src={'/i/logo_v.svg'} width={'100%'} style={{
-                        maxWidth: 90
+                        // maxWidth: 120
+
                     }} />
                 </a>
                 {/*<Image src="/i/logo.marks" alt="logo" width={95} height={87}/>*/}

@@ -14,7 +14,7 @@ import {
 import ReactPaginate from "react-paginate";
 import {SearchResult, Vacancy, VacancyModel} from "../search/DesktopSelectors";
 import Tippy from '@tippyjs/react';
-import 'tippy.js/dist/tippy.css';
+// import 'tippy.js/dist/tippy.css';
 
 interface TableProps {
     onSelect: (id: VacancyModel) => void
@@ -99,7 +99,7 @@ const Table = (props: TableProps) => {
         getPaginationRowModel: getPaginationRowModel(),
         debugAll: true,
         onStateChange: () => {
-            ReactTooltip.rebuild();
+            // ReactTooltip.rebuild();
         }
     });
 
@@ -285,7 +285,7 @@ const Table = (props: TableProps) => {
                                                     </defs>
                                                 </svg>
                                             </div>
-                                            <span>
+                                            <span data-delay-hide='500' data-tip="Нажми, чтобы узнать больше">
                                             {row.title}</span></>
                                         </Tippy>
                                     </div>
