@@ -1,6 +1,6 @@
 import classes from "./Search.module.scss";
-import {Map, Placemark, YMaps} from "@pbe/react-yandex-maps";
-import React, {useContext, useEffect, useRef, useState} from "react";
+import { Map, Placemark, YMaps } from "@pbe/react-yandex-maps";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import Table from "../table/Table";
 import Select from 'react-select'
 import makeAnimated from 'react-select/animated';
@@ -18,11 +18,11 @@ import DesktopSelectors, {
     VacancyModel
 } from './DesktopSelectors';
 import MobileSelectors from './MobileSelectors';
-import {useIsMobile} from '../../hooks/useIsMobile';
+import { useIsMobile } from '../../hooks/useIsMobile';
 import Form from "../form/Form";
 import Popup from "reactjs-popup";
 import ShareVacancy from "../ShareVacancy/ShareVacancy";
-import {useRouter} from "next/router";
+import { useRouter } from "next/router";
 
 const axios = require('axios');
 const controller = new AbortController();
@@ -46,6 +46,7 @@ const Search = (props: SearchProps) => {
     } | undefined>(undefined);
     const [pageSize, setPageSize] = useState(5);
     const [totalPagesCount, setTotalPagesCount] = useState(1);
+    const [totalQnt, setTotalQnt] = useState(0);
     // const [sortField, setSortField] = useState<string | undefined>(undefined);
     // const [sortDirection, setSortDirection] = useState(1);
     const [cities, setCities] = useState<City[]>([])
@@ -116,7 +117,7 @@ const Search = (props: SearchProps) => {
 
 
                 let items: any = []
-                for(let res of searchResults){
+                for (let res of searchResults) {
                     items = [...items, ...res.vacancies];
                 }
 
@@ -239,6 +240,7 @@ const Search = (props: SearchProps) => {
                 setSearchResults(searchResults)
                 console.log(searchResults.length)
                 setTotalPagesCount(data.searchResult.totalPagesCount)
+                setTotalQnt(data.searchResult.totalCount)
                 if (selectedVacanciesIds.length === 0) {
                     setVacancies(vacancies);
                 }
@@ -265,7 +267,7 @@ const Search = (props: SearchProps) => {
     const [isMap, setIsMap] = useState(true)
     const [selectedCityId, setSelectedCityId] = useState(65)
     const [bdsId, setBdsId] = useState(0)
-    const {isMobile} = useIsMobile()
+    const { isMobile } = useIsMobile()
 
     const router = useRouter();
     const [selectedVacancy, setSelectedVacancy] = useState<undefined | VacancyModel>(undefined)
@@ -294,9 +296,9 @@ const Search = (props: SearchProps) => {
 
         // alert('sdf')
 
-        if(isMap){
+        if (isMap) {
             getMapData();
-        }else{
+        } else {
             getTableData();
 
         }
@@ -322,7 +324,7 @@ const Search = (props: SearchProps) => {
         ymaps.current = inst
         // @ts-ignore
         var location = inst.geolocation.get(
-            {provider: "yandex", mapStateAutoApply: true}
+            { provider: "yandex", mapStateAutoApply: true }
         )
         // Асинхронная обработка ответа.
         location.then(
@@ -400,10 +402,10 @@ const Search = (props: SearchProps) => {
                 }}
 
                 onSearch={async () => {
-                    if(isMap){
+                    if (isMap) {
                         await getMapData();
 
-                    }else{
+                    } else {
                         await getTableData();
 
                     }
@@ -429,114 +431,115 @@ const Search = (props: SearchProps) => {
 
             <div className={classes.List2} id={'list'}>
                 {isMap && !selectedVacancy &&
-                <div className={`${classes.Map} ${isLoading ? classes.Loading : undefined}`}>
-                    <YMaps
+                    <div className={`${classes.Map} ${isLoading ? classes.Loading : undefined}`}>
+                        <YMaps
 
-                        query={{
-                            apikey: 'c733189d-e58b-4b16-a6ce-50860ef72788',
-                        }}
-                        
-
-                        // onApiAvaliable={(ymaps: any) => handleApiAvaliable(ymaps)}
-                    >
-                        <Map
-                            onError={(error)=>{
-                                setIsMap(false)
-                                console.log(error.message)
+                            query={{
+                                apikey: 'c733189d-e58b-4b16-a6ce-50860ef72788',
                             }}
 
-                            modules={["geolocation", "geocode", "util.bounds"]}
-                            behaviors={['default', 'scrollZoom']}
-                            onLoad={(inst) => onLoadMap(inst)}
-                            // instanceRef={ref => {
-                            //     // @ts-ignore
-                            //     ref && ref.behaviors.enable('scrollZoom');
-                            //     console.log("mapRef", ref);
-                            //     // debugger
-                            //     // setMapRef(ref);
-                            // }}
-                            instanceRef={ref => {
-                                console.log("ref-", ref)
-                                // debugger
+
+                        // onApiAvaliable={(ymaps: any) => handleApiAvaliable(ymaps)}
+                        >
+                            <Map
+                                onError={(error) => {
+                                    setIsMap(false)
+                                    console.log(error.message)
+                                }}
+
+                                modules={["geolocation", "geocode", "util.bounds"]}
+                                behaviors={['default', 'scrollZoom']}
+                                onLoad={(inst) => onLoadMap(inst)}
+                                // instanceRef={ref => {
+                                //     // @ts-ignore
+                                //     ref && ref.behaviors.enable('scrollZoom');
+                                //     console.log("mapRef", ref);
+                                //     // debugger
+                                //     // setMapRef(ref);
+                                // }}
+                                instanceRef={ref => {
+                                    console.log("ref-", ref)
+                                    // debugger
 
 
-                                if (ref && ymaps.current) {
-                                    // refMap.current = ref;
-                                    setYmapsInstance(ref);
-                                    if(mapPoints.length>0){
-                                        const points = mapPoints.map(point=>{
-                                            // return [point.lng, point.lat]
-                                            return [point.lat, point.lng]
-                                        })
+                                    if (ref && ymaps.current) {
+                                        // refMap.current = ref;
+                                        setYmapsInstance(ref);
+                                        if (mapPoints.length > 0) {
+                                            const points = mapPoints.map(point => {
+                                                // return [point.lng, point.lat]
+                                                return [point.lat, point.lng]
+                                            })
 
-                                        // @ts-ignore
-                                        const bounds = ymaps.current.util.bounds.fromPoints(points)
-                                        ref.setBounds(bounds)
-                                        if((ref.getZoom()-.6 ) <15){
-                                            ref.setZoom(ref.getZoom()-.6)
-                                        }else{
-                                            ref.setZoom(14)
+                                            // @ts-ignore
+                                            const bounds = ymaps.current.util.bounds.fromPoints(points)
+                                            ref.setBounds(bounds)
+                                            if ((ref.getZoom() - .6) < 15) {
+                                                ref.setZoom(ref.getZoom() - .6)
+                                            } else {
+                                                ref.setZoom(14)
+                                            }
+
+
                                         }
-
-
-                                    }
                                         // ref.setBounds(ref.geoObjects.getBounds())
 
 
-                                }
-                            }}
-                            // defaultState={{
-                            //     center: center,
-                            //     zoom: 14,
-                            //
-                            // }}
+                                    }
+                                }}
+                                // defaultState={{
+                                //     center: center,
+                                //     zoom: 14,
+                                //
+                                // }}
 
-                            // center={center}
-                            state={{
-                                center: center,
-                                zoom: 14
-                            }}
-                            width={'100%'}
-                            height={435}
+                                // center={center}
+                                state={{
+                                    center: center,
+                                    zoom: 14
+                                }}
+                                width={'100%'}
+                                height={435}
                             // options={{
                             //     scrollZoom: false
                             // }
                             // }
 
 
-                        >
+                            >
 
 
-                            {mapPoints.map((el: any, index: number) => {
-                                return <CustomPlacemark key={index} geometry={[el.lat, el.lng]}
-                                                        options={{
-                                                            iconLayout: 'default#image',
-                                                            iconImageHref: '/i/lent_map.svg',
-                                                            iconImageSize: [38, 37],
+                                {mapPoints.map((el: any, index: number) => {
+                                    return <CustomPlacemark key={index} geometry={[el.lat, el.lng]}
+                                        options={{
+                                            iconLayout: 'default#image',
+                                            iconImageHref: '/i/lent_map.svg',
+                                            iconImageSize: [38, 37],
 
-                                                            iconColor: '#ff0000',
-                                                            hideIconOnBalloonOpen: false,
-                                                            balloonMaxWidth: 200,
-                                                        }}
-                                                        user={el}
-                                                        openModel={(id: any) => {
-                                                            const found = searchResults.find(el=> el.vacancyId === parseInt(id));
-                                                            console.log(id)
-                                                            console.log(searchResults)
-                                                            setSelectedVacancy(found)
-                                                        }}
-                                                        myClick={() => alert('!')}/>
-                            })
-                            }
+                                            iconColor: '#ff0000',
+                                            hideIconOnBalloonOpen: false,
+                                            balloonMaxWidth: 200,
+                                        }}
+                                        user={el}
+                                        openModel={(id: any) => {
+                                            const found = searchResults.find(el => el.vacancyId === parseInt(id));
+                                            console.log(id)
+                                            console.log(searchResults)
+                                            setSelectedVacancy(found)
+                                        }}
+                                        myClick={() => alert('!')} />
+                                })
+                                }
 
-                        </Map>
+                            </Map>
 
-                    </YMaps>
+                        </YMaps>
 
-                </div>
+                    </div>
                 }
                 {!isMap && !selectedVacancy && <div className={classes.Table}>
                     <Table
+                        totalQnt={totalQnt}
                         onSortChanged={(sortParams) => {
                             setSorting(sortParams)
                         }}
@@ -548,6 +551,7 @@ const Search = (props: SearchProps) => {
                         results={searchResults}
                         onSelect={(row: VacancyModel) => {
                             setSelectedVacancy(row)
+                            console.log("VACANCY: ", row)
                         }}
                         pageSize={pageSize}
                         onPageSizeChanged={(size: number) => {
@@ -566,9 +570,9 @@ const Search = (props: SearchProps) => {
                 }}>
                     <svg width="20" height="20" viewBox="0 0 27 27" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M20.1733 20.3139L6.73828 6.87891" stroke="#35219A" stroke-width="1.28528"
-                              stroke-linecap="round" stroke-linejoin="round"/>
+                            stroke-linecap="round" stroke-linejoin="round" />
                         <path d="M6.68216 20.1792L20.1172 6.74414" stroke="#35219A" stroke-width="1.28528"
-                              stroke-linecap="round" stroke-linejoin="round"/>
+                            stroke-linecap="round" stroke-linejoin="round" />
                     </svg>
                 </div>
                 <h2>{selectedVacancy?.title}</h2>
@@ -577,16 +581,16 @@ const Search = (props: SearchProps) => {
                     <div className={classes.Lists}>
                         <div className={classes.List}>
                             <label>Условия</label>
-                            <div dangerouslySetInnerHTML={{__html: selectedVacancy.conditions}}/>
+                            <div dangerouslySetInnerHTML={{ __html: selectedVacancy.conditions }} />
                         </div>
                         <div className={classes.List}>
                             <label>Требования</label>
-                            <div dangerouslySetInnerHTML={{__html: selectedVacancy.requirements}}/>
+                            <div dangerouslySetInnerHTML={{ __html: selectedVacancy.requirements }} />
 
                         </div>
                         <div className={classes.List}>
                             <label>Обязанности</label>
-                            <div dangerouslySetInnerHTML={{__html: selectedVacancy.responsibilities}}/>
+                            <div dangerouslySetInnerHTML={{ __html: selectedVacancy.responsibilities }} />
 
                         </div>
 
@@ -596,14 +600,33 @@ const Search = (props: SearchProps) => {
                             <label>Номер вакансии</label>
                             <div>{selectedVacancy?.vacancyId}</div>
                         </div>
-                        {/*<div className={classes.Info}>*/}
-                        {/*    <label>Зарплата от</label>*/}
-                        {/*    <div>{selectedVacancy?.salaryFrom}</div>*/}
-                        {/*</div>*/}
-                        {/*<div className={classes.Info}>*/}
-                        {/*    <label>Зарплата до</label>*/}
-                        {/*    <div>{selectedVacancy?.salaryTo}</div>*/}
-                        {/*</div>*/}
+                        {selectedVacancy?.businessDirectionTitle &&
+                            <div className={classes.Info}>
+                                <label>Подразделение</label>
+                                <div>{selectedVacancy?.businessDirectionTitle}</div>
+                            </div>
+                        }
+                        {selectedVacancy?.addressTitle &&
+                            <div className={classes.Info}>
+                                <label>Адрес</label>
+                                <div>{selectedVacancy?.addressTitle}</div>
+                            </div>
+                        }
+                        {selectedVacancy?.metroTitle &&
+                            <div className={classes.Info}>
+                                <label>Метро</label>
+                                <div>{selectedVacancy?.metroTitle}</div>
+                            </div>
+                        }
+
+                        <div className={classes.Info}>
+                            <label>Зарплата от</label>
+                            <div>{selectedVacancy?.salaryFrom}</div>
+                        </div>
+                        <div className={classes.Info}>
+                            <label>Зарплата до</label>
+                            <div>{selectedVacancy?.salaryTo}</div>
+                        </div>
 
                     </div>
                 </div>
@@ -626,11 +649,11 @@ const Search = (props: SearchProps) => {
                             }} trigger={<button className={classes.Share}>Поделиться</button>} modal>
                             {
                                 // @ts-ignore
-                                (close: any) => (<ShareVacancy 
+                                (close: any) => (<ShareVacancy
                                     title={selectedVacancy?.title || ""}
                                     close={() => {
-                                    close()
-                                }}/>)
+                                        close()
+                                    }} />)
                             }
 
                         </Popup>

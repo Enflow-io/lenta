@@ -25,6 +25,7 @@ interface TableProps {
     onSortChanged: (sortParams: any) => void
     onPageSizeChanged: (size: number) => void
     pageSize: number
+    totalQnt: number
 
 
 }
@@ -117,7 +118,7 @@ const Table = (props: TableProps) => {
     return <div className={classes.Container}>
         <div className={classes.aboveTable}>
             <a href={'#'}>
-                Всего вакансий: 2 000
+                Всего вакансий: {props.totalQnt}
             </a>
             <div className={classes.Reset}>
                 <a onClick={(e) => {
