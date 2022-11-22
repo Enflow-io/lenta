@@ -46,7 +46,7 @@
 
 .Button {
 
-  width: calc(100% - 195px);
+  width: calc(100% - 176px);
   @media (max-width: 1000px) {
     width: calc(100% - 125px);
     left: 0;
@@ -58,7 +58,7 @@
   justify-content: center;
   align-items: center;
   position: relative;
-  left: 14px;
+  left: 15px;
   button {
     letter-spacing: -0.015em;
     position: relative;
@@ -259,7 +259,7 @@
 }
 
 .Phone {
-  padding: 0 0 0 28px;
+  padding: 0 0 0 18px;
   font-family: 'Futura PT';
   font-style: normal;
   font-weight: 500;
