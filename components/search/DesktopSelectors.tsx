@@ -84,6 +84,7 @@ export interface SearchResult {
 interface DesktopSelectorsProps {
     onSearch: () => void
     cities: City[]
+    selectedCity: any
     vacancies: Vacancy[]
     stations: Station[]
     directions: BusinessDirection[]
@@ -106,6 +107,8 @@ const DesktopSelectors = (props: DesktopSelectorsProps) => {
         "production": 2,
         "centres": 3
     }
+
+    // const selectedCityId = props.selectedCity ? props.selectedCity.id : 65;
 
     useEffect(()=>{
         const preSelected: string = router.query?.direction ? router.query?.direction.toString() : "";
@@ -179,8 +182,9 @@ const DesktopSelectors = (props: DesktopSelectorsProps) => {
             <div className={classes.Line}>
                 <div className={classes.Selector}>
                     <label>Город</label>
+                    
                     <MultiSelect
-                        selectedId={65}
+                        selectedId={props?.selectedCity || 99}
                         onChanged={(value: any) => {
                             console.log(value)
                             props.onCityChanged(value)

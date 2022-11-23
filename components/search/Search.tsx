@@ -29,6 +29,7 @@ const controller = new AbortController();
 
 interface SearchProps {
     onLocation: (location: string) => void
+    city?: any
     // preSelected: string
 }
 
@@ -374,10 +375,12 @@ const Search = (props: SearchProps) => {
 
 
     return <div id={'search'} className={classes.Container}>
+        
         <div className={classes.Search}>
             {/*{isMobile ? <MobileSelectors/> : <DesktopSelectors/>}*/}
-
+            
             <DesktopSelectors
+                selectedCity={props?.city?.id}
                 cities={cities}
                 directions={directions}
                 onCityChanged={(id) => {

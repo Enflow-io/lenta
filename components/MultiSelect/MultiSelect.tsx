@@ -50,6 +50,10 @@ const MultiSelect = (props: MultiSelectProps) => {
     const items = props.options;
 
 
+    useEffect(()=>{
+        const defaultValue = props.selectedId ? [props.selectedId] : []
+        setSelectedItems(defaultValue)
+    }, [props.selectedId])
     const defaultValue = props.selectedId ? [props.selectedId] : []
     const [selectedItems, setSelectedItems] = useState<number[]>(defaultValue);
 
