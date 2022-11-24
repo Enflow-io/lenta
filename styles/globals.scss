@@ -119,3 +119,11 @@ a.bm-item-list {
 .__react_component_tooltip.show {
   opacity: 1 !important;
 }
+
+
+.tooltip {
+	display: none; position: absolute; padding: 10px;
+	color: #35219A; background-color: #fff; border: 1px solid #35219A; 
+	box-shadow: 0 1px 3px 1px rgba(0,0,0,0.2); border-radius: 3px;
+  font-size: 12px;;
+	}

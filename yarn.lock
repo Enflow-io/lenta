@@ -1857,7 +1857,7 @@
   "resolved" "https://registry.npmjs.org/isexe/-/isexe-2.0.0.tgz"
   "version" "2.0.0"
 
-"jquery@^3.6.1":
+"jquery@^3.3.1", "jquery@^3.6.1":
   "integrity" "sha512-opJeO4nCucVnsjiXOE+/PcCgYw9Gwpvs/a6B1LL/lQhwWwpbVEVYDZ1FokFr8PRc7ghYlrFPuyHuiiDNTQxmcw=="
   "resolved" "https://registry.npmjs.org/jquery/-/jquery-3.6.1.tgz"
   "version" "3.6.1"
@@ -2255,6 +2255,13 @@
     "loose-envify" "^1.4.0"
     "object-assign" "^4.1.1"
     "react-is" "^16.13.1"
+
+"protip@^1.4.21":
+  "integrity" "sha512-lAta7RcNaskcHYioqWUZQwYiqrcrMV/W1jF2nodtf728vEUAIFv/24xWCoHwPs8jPQXuKACyH/78HcgWcQEpUg=="
+  "resolved" "https://registry.npmjs.org/protip/-/protip-1.4.21.tgz"
+  "version" "1.4.21"
+  dependencies:
+    "jquery" "^3.3.1"
 
 "proxy-from-env@^1.1.0":
   "integrity" "sha512-D+zkORCbA9f1tdWRK0RaCR3GPv50cMxcrz4X8k5LTSUD1Dkw47mKJEZQNunItRTkWwgtaUSo1RVFRIG9ZXiFYg=="
