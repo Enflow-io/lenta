@@ -78,7 +78,7 @@ const Subscribe = (props: SubscribeProps) => {
             "email": email,
             "subscriptionFrequencyId": frequency,
             "key": "sddaew",
-            "cityId": savedCity.id,
+            "cityId": savedCity,
             "businessDirectionIdList": [
                 // 1, 3
             ],

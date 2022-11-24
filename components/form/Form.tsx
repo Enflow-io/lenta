@@ -1,16 +1,18 @@
 import classes from "./Form.module.scss"
-import {useCallback, useRef, useState} from "react";
-import {Rating} from "react-simple-star-rating/dist";
+import { useCallback, useRef, useState } from "react";
+import { Rating } from "react-simple-star-rating/dist";
 import Uploady from "@rpldy/uploady";
-import {asUploadButton} from "@rpldy/upload-button";
+import { asUploadButton } from "@rpldy/upload-button";
 import UploadPreview from "@rpldy/upload-preview";
+import axios from "axios";
+import React from "react";
 
 const DivUploadButton = asUploadButton((props: any) => {
     return <div {...props} className={classes.UploadBtn}>
         <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path
                 d="M29.6178 11.9664C29.3746 11.7317 29.0449 11.5999 28.7011 11.5999C28.3572 11.5999 28.0275 11.7317 27.7844 11.9664L13.6616 25.6615C13.0596 26.2429 12.3449 26.7041 11.5583 27.0187C10.7717 27.3334 9.92866 27.4953 9.07723 27.4954C7.35771 27.4955 5.70856 26.8361 4.49259 25.6622C3.27662 24.4882 2.59342 22.896 2.5933 21.2357C2.59318 19.5754 3.27614 17.9831 4.49194 16.809L18.1699 3.54828C18.9014 2.85331 19.8875 2.46555 20.9137 2.46947C21.9399 2.47339 22.9228 2.86866 23.6485 3.56919C24.3742 4.26972 24.7838 5.21876 24.7881 6.20957C24.7924 7.20038 24.3911 8.15269 23.6715 8.85907L9.99348 22.1198C9.7468 22.3479 9.41839 22.4753 9.07678 22.4753C8.73516 22.4753 8.40675 22.3479 8.16007 22.1198C7.91699 21.885 7.78044 21.5666 7.78044 21.2346C7.78044 20.9027 7.91699 20.5843 8.16007 20.3495L20.3379 8.53731C20.5741 8.30119 20.7048 7.98495 20.7018 7.65669C20.6989 7.32843 20.5625 7.01442 20.3221 6.7823C20.0817 6.55018 19.7565 6.41851 19.4165 6.41566C19.0765 6.41281 18.749 6.539 18.5045 6.76705L6.32665 18.5792C5.96538 18.928 5.67879 19.3421 5.48327 19.7978C5.28775 20.2535 5.18711 20.742 5.18711 21.2353C5.18711 21.7285 5.28775 22.217 5.48327 22.6727C5.67879 23.1284 5.96538 23.5425 6.32665 23.8913C7.06782 24.5742 8.05294 24.9552 9.07743 24.9552C10.1019 24.9552 11.087 24.5742 11.8282 23.8913L25.5049 10.6293C26.6952 9.45037 27.3565 7.86608 27.3456 6.21966C27.3347 4.57324 26.6524 2.99727 25.4465 1.83313C24.2407 0.668995 22.6084 0.0104391 20.9032 0.000123039C19.1981 -0.010193 17.5574 0.628561 16.3365 1.77802L2.65853 15.0387C0.9563 16.6823 -2.53651e-08 18.9115 0 21.2359C2.53651e-08 23.5603 0.9563 25.7895 2.65853 27.4331C4.36075 29.0766 6.66946 30 9.07678 30C11.4841 30 13.7928 29.0766 15.495 27.4331L29.6178 13.7417C29.7389 13.6253 29.835 13.487 29.9006 13.3347C29.9662 13.1824 30 13.019 30 12.854C30 12.6891 29.9662 12.5257 29.9006 12.3734C29.835 12.2211 29.7389 12.0828 29.6178 11.9664Z"
-                fill="#35219A"/>
+                fill="#35219A" />
         </svg>
         &nbsp;&nbsp;&nbsp;Прикрепить скриншот
     </div>
@@ -59,30 +61,111 @@ const PreviewsWithClear = () => {
 interface PropsForm {
     close: () => void
 }
-
+const MAX = 100;
 const Form = (props: PropsForm) => {
     const [rating, setRating] = useState(0);
+    const [fileName, setFileName] = useState("");
+    const [file, setFile] = useState(undefined);
     const [leftChars, setLeftChars] = useState(0)
+    const [message, setMessage] = useState('')
+    const hiddenFileInput = React.useRef(null);
+    const handleClick = (event: any) => {
+        // @ts-ignore
+        hiddenFileInput.current.click();
+    };
+
+    const handleChange = (event: any) => {
+        const fileUploaded = event.target.files[0];
+        console.log(fileUploaded);
+        setFileName(fileUploaded.name)
+        setFile(fileUploaded);
+        // props.handleFile(fileUploaded);
+    };
+
     const handleRating = (rate: number) => {
         setRating(rate)
         // other logic
     }
 
+    const sendReview = async () => {
+        console.log(message);
+        console.log(rating);
+
+        if (message.length < 20) {
+            alert("Слишком короткое сообщение")
+            return
+        }
+
+        if (!rating) {
+            alert("Оцените работу сайта от 1 до 5");
+            return
+        }
+
+        if(file){
+            // @ts-ignore
+            const isTooLarge = (file.size / 1000000) > 1;
+            if(isTooLarge){
+                alert("Файл не должен превышать 1MB");
+                return
+            }
+        }
+        
+
+
+
+        const bodyFormData = new FormData();
+
+        const ratingStr = (rating / 20).toString();
+        bodyFormData.append('rating', ratingStr);
+        bodyFormData.append('message', message);
+        if(file){
+            bodyFormData.append('file', file)
+        }
+        
+
+
+        const url = "https://lenta-career-api.axes.pro/api/v1/feedback";
+
+
+
+        await axios.post(url, bodyFormData, {
+            headers: {
+                "XApiKey": "ApiKey dw1cv3cXew",
+                "Content-Type": "multipart/form-data"
+            }
+        });
+
+        setIsSent(true)
+
+    }
+
     const [isSent, setIsSent] = useState(false);
 
     const changed = (e: any) => {
+        let newVal = e.target.value;
         const typed = e.target.value.length;
-        const max = 1000;
-        const left = max - typed;
-        setLeftChars(typed)
+        if (typed > 100) {
+            newVal = newVal.substring(0, MAX);
+        }
+
+        const left = MAX - newVal.length;
+
+        if (left <= 0) {
+            setLeftChars(100)
+            setMessage(newVal);
+            return
+        } else {
+            setLeftChars(typed)
+            setMessage(newVal);
+        }
     }
     return <div className={classes.Form}>
         <div className={classes.CloseBtn} onClick={props.close}>
             <svg width="20" height="20" viewBox="0 0 27 27" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M20.1733 20.3139L6.73828 6.87891" stroke="#35219A" stroke-width="1.28528"
-                      stroke-linecap="round" stroke-linejoin="round"/>
+                    stroke-linecap="round" stroke-linejoin="round" />
                 <path d="M6.68216 20.1792L20.1172 6.74414" stroke="#35219A" stroke-width="1.28528"
-                      stroke-linecap="round" stroke-linejoin="round"/>
+                    stroke-linecap="round" stroke-linejoin="round" />
             </svg>
         </div>
 
@@ -107,12 +190,12 @@ const Form = (props: PropsForm) => {
             <div style={{
                 position: "relative"
             }}>
-                <span className={classes.Counter}>{leftChars}/1000</span>
-                <textarea onChange={changed} style={{
+                <span className={classes.Counter}>{leftChars}/{MAX}</span>
+                <textarea value={message} onChange={changed} style={{
                     resize: "none"
                 }} className={classes.Text} placeholder={'Ваш отзыв'}>
 
-        </textarea>
+                </textarea>
 
             </div>
 
@@ -123,16 +206,34 @@ const Form = (props: PropsForm) => {
                         display: "flex",
                         alignItems: "center"
                     }}>
-                        <Uploady destination={{url: "https://localhost"}}>
+                        {/* <Uploady destination={{url: "https://localhost"}}>
                             <DivUploadButton/>
                             <PreviewsWithClear/>
-                        </Uploady>
+                        </Uploady> */}
+
+                        <div onClick={handleClick} className={classes.UploadBtn}>
+                            <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M29.6178 11.9664C29.3746 11.7317 29.0449 11.5999 28.7011 11.5999C28.3572 11.5999 28.0275 11.7317 27.7844 11.9664L13.6616 25.6615C13.0596 26.2429 12.3449 26.7041 11.5583 27.0187C10.7717 27.3334 9.92866 27.4953 9.07723 27.4954C7.35771 27.4955 5.70856 26.8361 4.49259 25.6622C3.27662 24.4882 2.59342 22.896 2.5933 21.2357C2.59318 19.5754 3.27614 17.9831 4.49194 16.809L18.1699 3.54828C18.9014 2.85331 19.8875 2.46555 20.9137 2.46947C21.9399 2.47339 22.9228 2.86866 23.6485 3.56919C24.3742 4.26972 24.7838 5.21876 24.7881 6.20957C24.7924 7.20038 24.3911 8.15269 23.6715 8.85907L9.99348 22.1198C9.7468 22.3479 9.41839 22.4753 9.07678 22.4753C8.73516 22.4753 8.40675 22.3479 8.16007 22.1198C7.91699 21.885 7.78044 21.5666 7.78044 21.2346C7.78044 20.9027 7.91699 20.5843 8.16007 20.3495L20.3379 8.53731C20.5741 8.30119 20.7048 7.98495 20.7018 7.65669C20.6989 7.32843 20.5625 7.01442 20.3221 6.7823C20.0817 6.55018 19.7565 6.41851 19.4165 6.41566C19.0765 6.41281 18.749 6.539 18.5045 6.76705L6.32665 18.5792C5.96538 18.928 5.67879 19.3421 5.48327 19.7978C5.28775 20.2535 5.18711 20.742 5.18711 21.2353C5.18711 21.7285 5.28775 22.217 5.48327 22.6727C5.67879 23.1284 5.96538 23.5425 6.32665 23.8913C7.06782 24.5742 8.05294 24.9552 9.07743 24.9552C10.1019 24.9552 11.087 24.5742 11.8282 23.8913L25.5049 10.6293C26.6952 9.45037 27.3565 7.86608 27.3456 6.21966C27.3347 4.57324 26.6524 2.99727 25.4465 1.83313C24.2407 0.668995 22.6084 0.0104391 20.9032 0.000123039C19.1981 -0.010193 17.5574 0.628561 16.3365 1.77802L2.65853 15.0387C0.9563 16.6823 -2.53651e-08 18.9115 0 21.2359C2.53651e-08 23.5603 0.9563 25.7895 2.65853 27.4331C4.36075 29.0766 6.66946 30 9.07678 30C11.4841 30 13.7928 29.0766 15.495 27.4331L29.6178 13.7417C29.7389 13.6253 29.835 13.487 29.9006 13.3347C29.9662 13.1824 30 13.019 30 12.854C30 12.6891 29.9662 12.5257 29.9006 12.3734C29.835 12.2211 29.7389 12.0828 29.6178 11.9664Z"
+                                    fill="#35219A" />
+                            </svg>
+                            &nbsp;&nbsp;&nbsp;Прикрепить скриншот
+                        </div>
                     </div>
+
                     <p>Размер файла не более 1 Мб (png, jpeg)</p>
                 </div>
+                <span className={classes.FileName}>{fileName}</span>
+                <input
+                    type="file"
+                    ref={hiddenFileInput}
+                    onChange={handleChange}
+                    style={{ display: 'none' }} 
+                />
                 <div className={classes.BtnCont}>
-                    <button  onClick={() => {
-                        setIsSent(true)
+                    <button onClick={async () => {
+                        await sendReview();
+
                     }
                     }>Отправить
                     </button>
