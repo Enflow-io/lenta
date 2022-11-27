@@ -92,8 +92,8 @@ const Form = (props: PropsForm) => {
         console.log(rating);
 
         if (message.length < 20) {
-            alert("Слишком короткое сообщение")
-            return
+            // alert("Слишком короткое сообщение")
+            // return
         }
 
         if (!rating) {

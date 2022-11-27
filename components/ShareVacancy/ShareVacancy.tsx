@@ -31,7 +31,7 @@ const ShareVacancy = (props: ShareVacancyProps) => {
                 </a>
             </li>
             <li>
-                <a href={`https://connect.ok.ru/offer?title=${props.title}`} target={"_blank"}>
+                <a href={`https://connect.ok.ru/offer?url=https://career.lenta.com/vacancies/149779&title=${props.title}`} target={"_blank"}>
                     <svg width="37" height="38" viewBox="0 0 37 38" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <g opacity="0.8">
                             <circle cx="18.4574" cy="19.5428" r="17.3714" fill="#4836A2"/>
