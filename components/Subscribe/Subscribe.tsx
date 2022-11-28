@@ -79,6 +79,7 @@ const Subscribe = (props: SubscribeProps) => {
         }
 
         const savedCity = Lockr.get('city');
+        const cityId = savedCity ? savedCity.id : 99;
         console.log("savedCity", savedCity)
 
         const url = "https://lenta-career-api.axes.pro/api/v1/subscription";
@@ -87,7 +88,7 @@ const Subscribe = (props: SubscribeProps) => {
             "email": email,
             "subscriptionFrequencyId": frequency,
             "key": "sddaew",
-            "cityId": savedCity,
+            "cityId": cityId,
             "businessDirectionIdList": [
                 1
             ],
