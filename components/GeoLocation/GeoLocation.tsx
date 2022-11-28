@@ -49,6 +49,7 @@ const GeoLocation = (props: LocationProps) => {
         })
 
         if (found) {
+
             setLocationShown(location);
         } else {
             setLocationShown("Санкт-Петербург");

@@ -324,6 +324,8 @@ const Search = (props: SearchProps) => {
         var location = inst.geolocation.get(
             { provider: "yandex", mapStateAutoApply: true }
         )
+        
+
         // Асинхронная обработка ответа.
         location.then(
             function (result: any) {
@@ -335,15 +337,18 @@ const Search = (props: SearchProps) => {
                 //     props.onLocation(result.geoObjects.get(0).getLocalities()[0]);
                 // }
 
+                
                 var data = result.geoObjects.get(0).properties.get('metaDataProperty').GeocoderMetaData;
                 var administrativeAreaName = data.AddressDetails.Country.AdministrativeArea.AdministrativeAreaName; // region
-
+                
                 if ('SubAdministrativeArea' in data.AddressDetails.Country.AdministrativeArea) {
                     var localityName = data.AddressDetails.Country.AdministrativeArea.SubAdministrativeArea.Locality.LocalityName; // city
                 } else {
                     var localityName = data.AddressDetails.Country.AdministrativeArea.Locality.LocalityName; // city
                 }
+                
 
+                console.log("Location from yandex: ", localityName || administrativeAreaName )
                 props.onLocation(localityName || administrativeAreaName);
 
 
@@ -359,9 +364,11 @@ const Search = (props: SearchProps) => {
                 // inst.geoObjects.add(result.geoObjects);
             },
             function (err: any) {
+                
                 console.log(err)
 
-                console.log('Ошибка: ' + err)
+                console.log('Ошибка геолокации: ' + err)
+                console.log(err.message)
             },
         )
     }
