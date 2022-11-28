@@ -89,7 +89,7 @@ interface DesktopSelectorsProps {
     stations: Station[]
     directions: BusinessDirection[]
     onCityChanged: (cityId: number) => void
-    onBdsChanged: (bdsId: number) => void
+    onBdsChanged: (bdsId: number[]) => void
     onStationsChanged: (stationId: number[]) => void
     onVacancyChanged: (vacancyId: number[]) => void
     onKeywordChanged: (keyword: string) => void
@@ -156,7 +156,7 @@ const DesktopSelectors = (props: DesktopSelectorsProps) => {
                     <label>Направление деятельности</label>
                     <MultiSelect customHeight={80}
                                  placeholder={'Направление деятельности'}
-                                 onChanged={(val: number) => {
+                                 onChanged={(val: number[]) => {
                                      props.onBdsChanged(val)
                                  }}
                                  options={props.directions.map(el => {

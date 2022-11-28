@@ -3,6 +3,8 @@ import Select from "react-select";
 import React, { useState } from "react";
 import axios from "axios";
 import * as Lockr from "lockr";
+import { $bds, $city, $keyword, $stations } from "../../store";
+import { useStore } from "effector-react";
 const options = [
     { value: '1', label: 'Один раз в день' },
     { value: '3', label: 'Один раз в неделю' },
@@ -63,6 +65,12 @@ const Subscribe = (props: SubscribeProps) => {
     const [email, setEmail] = useState("");
     const [frequency, setFrequency] = useState(1);
 
+    const keyword = useStore($keyword);
+    const city = useStore($city);
+    const savedCity = Lockr.get('city');
+    const bds = useStore($bds);
+    const stations = useStore($stations);
+
     const subscribe = async () => {
 
         if(!validateEmail(email)){
@@ -70,7 +78,8 @@ const Subscribe = (props: SubscribeProps) => {
             return;
         }
 
-        const savedCity = Lockr.get('city', {id: 99});
+        const savedCity = Lockr.get('city');
+        console.log("savedCity", savedCity)
 
         const url = "https://lenta-career-api.axes.pro/api/v1/subscription";
         const data = {
@@ -149,7 +158,18 @@ const Subscribe = (props: SubscribeProps) => {
             </div>
 
             <p>Вы можете подписаться на рассылку новых вакансий, для этого заполните, пожалуйста, поля выше. Подписка
-                будет создана с учетом следующих параметров – Город</p>
+                будет создана с учетом следующих параметров: <br /><br />
+                {savedCity && <div>Город – {savedCity.city}</div>}
+                {keyword && <div>Ключевое слово – "{keyword}"</div>}
+                
+                {bds.length > 0 && <div>Направления – {bds.map(el=>{
+                    return el.title;
+                }).join(", ")}</div>}
+
+                {stations.length > 0 && <div>Метро –  {stations.map(el=>{
+                    return el.title;
+                }).join(", ")}</div>}
+                </p>
             <button onClick={async () => {
                 await subscribe();
                 setIsSubscribed(true)

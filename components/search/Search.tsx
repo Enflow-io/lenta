@@ -23,6 +23,9 @@ import Form from "../form/Form";
 import Popup from "reactjs-popup";
 import ShareVacancy from "../ShareVacancy/ShareVacancy";
 import { useRouter } from "next/router";
+import { useStore } from "effector-react";
+import { $$filtersChanged, $$keywordChanged, $filters, $$bdsChanged, 
+    $$stationsChanged } from "../../store";
 
 const axios = require('axios');
 const controller = new AbortController();
@@ -30,11 +33,12 @@ const controller = new AbortController();
 interface SearchProps {
     onLocation: (location: string) => void
     city?: any
-    // preSelected: string
 }
 
 const Search = (props: SearchProps) => {
     const ymaps = useRef(null);
+
+    const filters = useStore($filters)
 
     const [ymapsInstance, setYmapsInstance] = useState<any>();
     let refMap = useRef();
@@ -74,8 +78,11 @@ const Search = (props: SearchProps) => {
         }
 
 
-        if (bdsId > 0) {
-            url = url + '&bds=' + bdsId
+        if (bdsId && bdsId.some(el=>el>0)) {
+            for(let bds of bdsId){
+                url = url + '&bds=' + bds
+            }
+            
         }
 
         if (keyword) {
@@ -134,22 +141,9 @@ const Search = (props: SearchProps) => {
                         ...el
                     }
                 })
-                // console.log(points)
-                // debugger
-                console.log("points", points)
+                
                 setMapPoints(points);
 
-                // console.log(ymapsInstance)
-
-                // ymapsInstance.add(new ymaps.Placemark([55.833436, 37.715175], {
-                //     balloonContent: '<strong>greyish-brownish-maroon</strong> color'
-                // }
-
-                // console.log(ymapsInstance)
-                // debugger
-                // setCenter([points[0].lat, points[0].lng])
-                // console.log(refMap)
-                // debugger
                 setIsLoading(false)
             });
 
@@ -182,8 +176,11 @@ const Search = (props: SearchProps) => {
             url = url + "/?"
         }
 
-        if (bdsId > 0) {
-            url = url + '&bds=' + bdsId
+        if (bdsId && bdsId.some(el=>el>0)) {
+            for(let bds of bdsId){
+                url = url + '&bds=' + bds
+            }
+            
         }
 
         if (keyword) {
@@ -220,7 +217,7 @@ const Search = (props: SearchProps) => {
                 signal: controller.signal
             }).then((res: any) => {
                 const data = res.data;
-                console.log(data)
+                
                 const cities = data.filters.cities;
                 const stations = data.filters.metro;
                 const businessDirections = data.filters.businessDirections;
@@ -239,13 +236,13 @@ const Search = (props: SearchProps) => {
 
 
                 setSearchResults(searchResults)
-                console.log(searchResults.length)
+                
                 setTotalPagesCount(data.searchResult.totalPagesCount)
                 setTotalQnt(data.searchResult.totalCount)
                 if (selectedVacanciesIds.length === 0) {
                     setVacancies(vacancies);
                 }
-                console.log(data)
+                
                 setIsLoading(false)
             });
 
@@ -267,7 +264,7 @@ const Search = (props: SearchProps) => {
 
     const [isMap, setIsMap] = useState(true)
     const [selectedCityId, setSelectedCityId] = useState(65)
-    const [bdsId, setBdsId] = useState(0)
+    const [bdsId, setBdsId] = useState<number[]>([0])
     const { isMobile } = useIsMobile()
 
     const router = useRouter();
@@ -385,14 +382,27 @@ const Search = (props: SearchProps) => {
                 directions={directions}
                 onCityChanged={(id) => {
                     setSelectedCityId(id);
+                  
                 }}
-                onBdsChanged={(id) => {
+                onBdsChanged={(id: number[]) => {
                     // alert(id)
+                    console.log("BDS", id)
+                    console.log("Directions", directions)
+                    const models = directions.filter(el=>id.includes(el.businessDirectionId))
+                    // @ts-ignore
+                    $$bdsChanged(models)
                     setBdsId(id);
                 }}
                 stations={stations}
                 onStationsChanged={(ids: number[]) => {
+                    console.log(ids)
+                    console.log(stations)
+
                     setSelStationsIds(ids)
+
+                    const models = stations.filter(el=>ids.includes(el.metroId))
+                    // @ts-ignore
+                    $$stationsChanged(models)
                 }}
 
                 vacancies={vacancies}
@@ -402,6 +412,7 @@ const Search = (props: SearchProps) => {
                 }}
                 onKeywordChanged={(keyword: string) => {
                     setKeyword(keyword)
+                    $$keywordChanged(keyword)
                 }}
 
                 onSearch={async () => {
@@ -461,7 +472,7 @@ const Search = (props: SearchProps) => {
                                 //     // setMapRef(ref);
                                 // }}
                                 instanceRef={ref => {
-                                    console.log("ref-", ref)
+                                    
                                     // debugger
 
 
@@ -526,8 +537,6 @@ const Search = (props: SearchProps) => {
                                         user={el}
                                         openModel={(id: any) => {
                                             const found = searchResults.find(el => el.vacancyId === parseInt(id));
-                                            console.log(id)
-                                            console.log(searchResults)
                                             setSelectedVacancy(found)
                                         }}
                                         myClick={() => alert('!')} />
@@ -554,7 +563,7 @@ const Search = (props: SearchProps) => {
                         results={searchResults}
                         onSelect={(row: VacancyModel) => {
                             setSelectedVacancy(row)
-                            console.log("VACANCY: ", row)
+                            
                         }}
                         pageSize={pageSize}
                         onPageSizeChanged={(size: number) => {

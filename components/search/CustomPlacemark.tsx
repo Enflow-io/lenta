@@ -9,7 +9,6 @@ import Tippy from '@tippyjs/react';
 
 
 function UserPlacemarkBalloon(props: any) {
-    console.log("UserPlacemarkBalloon", props)
     const vac = props.user.vacancies;
 
     useEffect(() => {
