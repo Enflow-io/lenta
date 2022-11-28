@@ -258,7 +258,7 @@ const Table = (props: TableProps) => {
                 {props.results
                     .map((row, id) => {
                         return (
-                            <tr  key={id} onClick={e => {
+                            <tr data-tip="Нажми, чтобы узнать больше" key={id} onClick={e => {
                                 props.onSelect(row);
                             }}>
 
@@ -286,7 +286,7 @@ const Table = (props: TableProps) => {
                                                     </defs>
                                                 </svg>
                                             </div>
-                                            <span data-delay-hide='500' data-tip="Нажми, чтобы узнать больше">
+                                            <span data-delay-hide='500' >
                                             {row.title}</span></>
                                         </Tippy>
                                     </div>
@@ -307,6 +307,7 @@ const Table = (props: TableProps) => {
                 </tbody>
             </table>
             <ReactTooltip arrowColor={'#35219A'}
+                // place={'bottom,'}
                           className={classes.Tooltip} delayHide={500} effect='solid'/>
             <div className={classes.Paginator}
             >

@@ -89,9 +89,10 @@ const Subscribe = (props: SubscribeProps) => {
             "key": "sddaew",
             "cityId": savedCity,
             "businessDirectionIdList": [
-                // 1, 3
+                1
             ],
             "metroIdList": [
+                30
             ]
         }
 
@@ -102,6 +103,7 @@ const Subscribe = (props: SubscribeProps) => {
             }
         });
 
+        setIsSubscribed(true)
 
     }
 
@@ -160,6 +162,7 @@ const Subscribe = (props: SubscribeProps) => {
             <p>Вы можете подписаться на рассылку новых вакансий, для этого заполните, пожалуйста, поля выше. Подписка
                 будет создана с учетом следующих параметров: <br /><br />
                 {savedCity && <div>Город – {savedCity.city}</div>}
+                {!savedCity && <div>Город – Санкт-Петербург</div>}
                 {keyword && <div>Ключевое слово – "{keyword}"</div>}
                 
                 {bds.length > 0 && <div>Направления – {bds.map(el=>{
@@ -172,7 +175,7 @@ const Subscribe = (props: SubscribeProps) => {
                 </p>
             <button onClick={async () => {
                 await subscribe();
-                setIsSubscribed(true)
+                
             }
             }>Подписатья на рассылку</button>
         </>}

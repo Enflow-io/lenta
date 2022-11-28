@@ -17,7 +17,7 @@ function UserPlacemarkBalloon(props: any) {
     const lis = vac.map((el: any) => {
         return ReactDOMServer.renderToStaticMarkup(<>
 
-            <li data-id={el.vacancyId} className="itemInMap" title="Нажми, чтобы узнать больше"
+            <li data-id={el.vacancyId} className="itemInMap vacancy" title="Нажми, чтобы узнать больше"
                 id="placemark-balloon__profile-btn_user-id_${props.user.id}">
                 <svg width="20" height="20" viewBox="0 0 27 26" fill="none"
                     xmlns="http://www.w3.org/2000/svg">
@@ -93,7 +93,9 @@ const CustomPlacemark = (props: any) => {
                             .on('click', { user: this.user }, (event: any) => {
 
                                 // this.events.fire('userclose');
+                                
                                 props.openModel(event.target.getAttribute("data-id"));
+                                $('.tooltip').remove();
                                 // $.proxy(this.myClick, this)
                             });
 

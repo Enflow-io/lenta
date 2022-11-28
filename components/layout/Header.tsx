@@ -21,7 +21,7 @@ const Header = (props: HeaderInterface) => {
                 <a style={{
                     maxHeight: '100%'
                 }} href={'/'}>
-                    <img src={'/i/logo_v.svg'} width={'100%'} style={{
+                    <img src={'/i/logo_v.svg'}  style={{
                         // maxWidth: 120
 
                     }} />
