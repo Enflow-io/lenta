@@ -2,6 +2,8 @@ import classes from "./GeoLocation.module.scss";
 import React, { useEffect, useState } from "react";
 import { Scrollbars } from "react-custom-scrollbars-2";
 import axios from "axios";
+import { useStore } from "effector-react";
+import { $city } from "../../store";
 
 interface CitySelectorProps {
     close: () => void
@@ -16,6 +18,8 @@ export interface City {
 const CitySelector = (props: CitySelectorProps) => {
     const [inputText, setInputText] = useState('')
     const [cities, setCities] = useState<City[]>([]);
+
+    
 
     useEffect(() => {
         let url = 'https://lenta-career-api.axes.pro/api/v1/search/table';

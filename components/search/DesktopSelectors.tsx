@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import classes from './Search.module.scss';
 import Select from 'react-select';
 import MultiSelect from "../MultiSelect/MultiSelect";
@@ -7,12 +7,15 @@ import Metro from "../MultiSelect/constants/Metro";
 import Activities from "../MultiSelect/constants/Activities";
 import Vacancies from "../MultiSelect/constants/Vacancies";
 import exp from "constants";
-import {useRouter} from "next/router";
+import { useRouter } from "next/router";
+import { useStore } from 'effector-react';
+import { $city } from '../../store';
+import * as Lockr from "lockr";
 
 const options = [
-    {value: 'chocolate', label: 'Chocolate'},
-    {value: 'strawberry', label: 'Strawberry'},
-    {value: 'vanilla', label: 'Vanilla'}
+    { value: 'chocolate', label: 'Chocolate' },
+    { value: 'strawberry', label: 'Strawberry' },
+    { value: 'vanilla', label: 'Vanilla' }
 ]
 
 export interface Station {
@@ -96,9 +99,9 @@ interface DesktopSelectorsProps {
 }
 
 const DesktopSelectors = (props: DesktopSelectorsProps) => {
-
+    const city = useStore($city);
     const [keyword, setKeyword] = useState("");
-
+    const savedCity = Lockr.get('city');
     const router = useRouter();
 
     const preSelected: string = router.query?.direction ? router.query?.direction.toString() : "";
@@ -110,15 +113,18 @@ const DesktopSelectors = (props: DesktopSelectorsProps) => {
 
     // const selectedCityId = props.selectedCity ? props.selectedCity.id : 65;
 
-    useEffect(()=>{
+    useEffect(() => {
         const preSelected: string = router.query?.direction ? router.query?.direction.toString() : "";
 
-        setTimeout(()=>{
+        setTimeout(() => {
             // @ts-ignore
             props.onBdsChanged(map[preSelected])
         }, 1000)
 
     }, [router])
+
+
+   
 
     return (
         <div className={classes.Selectors}>
@@ -155,19 +161,19 @@ const DesktopSelectors = (props: DesktopSelectorsProps) => {
                 <div className={classes.Selector}>
                     <label>Направление деятельности</label>
                     <MultiSelect customHeight={80}
-                                 placeholder={'Направление деятельности'}
-                                 onChanged={(val: number[]) => {
-                                     props.onBdsChanged(val)
-                                 }}
-                                 options={props.directions.map(el => {
-                                     return {
-                                         id: el.businessDirectionId,
-                                         label: el.title,
-                                         count: el.count
-                                     }
-                                 })}
+                        placeholder={'Направление деятельности'}
+                        onChanged={(val: number[]) => {
+                            props.onBdsChanged(val)
+                        }}
+                        options={props.directions.map(el => {
+                            return {
+                                id: el.businessDirectionId,
+                                label: el.title,
+                                count: el.count
+                            }
+                        })}
                         // @ts-ignore
-                                 selectedId={(preSelected !== "" && map[preSelected]) ? map[preSelected] : undefined}
+                        selectedId={(preSelected !== "" && map[preSelected]) ? map[preSelected] : undefined}
                     />
 
                     {/*<Select*/}
@@ -182,20 +188,21 @@ const DesktopSelectors = (props: DesktopSelectorsProps) => {
             <div className={classes.Line}>
                 <div className={classes.Selector}>
                     <label>Город</label>
-                    
+
                     <MultiSelect
-                        selectedId={props?.selectedCity || 99}
+                        selectedId={savedCity?.id || city?.cityId || 99}
+
                         onChanged={(value: any) => {
                             console.log(value)
                             props.onCityChanged(value)
                         }}
                         multi={false} placeholder={'Город'} options={props.cities.map(el => {
-                        return {
-                            id: el.cityId,
-                            label: el.title,
-                            count: el.count
-                        }
-                    })}
+                            return {
+                                id: el.cityId,
+                                label: el.title,
+                                count: el.count
+                            }
+                        })}
 
                     />
                 </div>

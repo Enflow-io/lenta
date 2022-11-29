@@ -16,7 +16,8 @@ import GeoLocation from "../GeoLocation/GeoLocation";
 import Head from 'next/head';
 import CookieNew from "../cookie/CookieNew";
 import { City } from "../GeoLocation/CitySelectorForm";
-import { $$changed } from "../../store";
+import { $$changed, $city } from "../../store";
+import { useStore } from "effector-react";
 interface LayoutProps {
     children: any
     location: string | undefined
@@ -123,7 +124,8 @@ export const MenuAll = () => {
 const Layout = (props: LayoutProps) => {
     const [isLocationShown, setIsLocationShown] = useState(false)
     const [isLocationSaved, setIsLocationSaved] = useState(false)
-    const [city, setCity] = useState<any>(undefined)
+    // const [city, setCity] = useState<any>(undefined)
+    const city = useStore($city);
     useEffect(() => {
 
         if (props.location) {
@@ -139,8 +141,8 @@ const Layout = (props: LayoutProps) => {
             onLocationSaved={(isSaved, city) => {
                 setIsLocationSaved(true)
                 console.log("onLocationSaved layout", city)
-                setCity(city)
-                $$changed(city)
+                // setCity(city)
+                // $$changed(city)
             }}
             location={props.location}
             close={() => { setIsLocationShown(false) }}

@@ -5,6 +5,8 @@ import React, { useEffect, useState } from "react";
 import CitySelector, { City } from "./CitySelectorForm";
 import axios from "axios";
 import * as Lockr from "lockr";
+import { useStore } from "effector-react";
+import { $$changed, $city } from "../../store";
 
 interface LocationProps {
     location: string | undefined
@@ -13,9 +15,10 @@ interface LocationProps {
 }
 
 const GeoLocation = (props: LocationProps) => {
-
+    const city = useStore($city);
     const [cities, setCities] = useState<City[]>([]);
     const [isVisible, setIsVisible] = useState<any>(false)
+    const [cityFromStore, setCityFromStore] = useState(Lockr.get('city'));
     useEffect(() => {
         const savedCity = Lockr.get('city');
         const hasCity = savedCity && savedCity.city && savedCity.city.length > 0;
@@ -48,14 +51,26 @@ const GeoLocation = (props: LocationProps) => {
             return el.city.toLowerCase() === location?.toLowerCase();
         })
 
-        if (found) {
+        if(cityFromStore){
+            
+            setLocationShown(cityFromStore.city);
+        }else if(city){
 
-            setLocationShown(location);
+            setLocationShown(city.city);
         } else {
             setLocationShown("Санкт-Петербург");
 
         }
-    }, [location])
+
+
+        // if(city){
+
+        //     setLocationShown(city.city);
+        // } else if (found ) {
+
+        //     setLocationShown(location);
+        // } 
+    }, [location, city, cities, cityFromStore])
     const [locationShown, setLocationShown] = useState<string | undefined>("Санкт-Петербург")
 
 
@@ -83,6 +98,9 @@ const GeoLocation = (props: LocationProps) => {
                     return;
                 }
                 Lockr.set('city', found);
+                setCityFromStore(found)
+                $$changed(found)
+                
                 props.onLocationSaved(true, found)
             }} className={classes.Primary}>Да</button>
             <Popup
@@ -98,7 +116,10 @@ const GeoLocation = (props: LocationProps) => {
                 {
                     // @ts-ignore
                     (close: any) => (<CitySelector selectedCity={(city: string) => {
-                        setLocation(city)
+                        // setLocation(city)
+                        setCityFromStore({
+                            city: city
+                        })
 
                     }
                     } close={close} />)

@@ -24,8 +24,11 @@ import Popup from "reactjs-popup";
 import ShareVacancy from "../ShareVacancy/ShareVacancy";
 import { useRouter } from "next/router";
 import { useStore } from "effector-react";
-import { $$filtersChanged, $$keywordChanged, $filters, $$bdsChanged, 
-    $$stationsChanged } from "../../store";
+import {
+    $$filtersChanged, $$keywordChanged, $filters, $$bdsChanged,
+    $$stationsChanged,
+    $$changed
+} from "../../store";
 
 const axios = require('axios');
 const controller = new AbortController();
@@ -65,6 +68,8 @@ const Search = (props: SearchProps) => {
 
     const [mapPoints, setMapPoints] = useState<any[]>([])
 
+    const [locFromYa, setLocFromYa] = useState("")
+
     const getMapData = async () => {
         if (isLoading) {
             return;
@@ -78,11 +83,11 @@ const Search = (props: SearchProps) => {
         }
 
 
-        if (bdsId && bdsId.some(el=>el>0)) {
-            for(let bds of bdsId){
+        if (bdsId && bdsId.some(el => el > 0)) {
+            for (let bds of bdsId) {
                 url = url + '&bds=' + bds
             }
-            
+
         }
 
         if (keyword) {
@@ -141,7 +146,7 @@ const Search = (props: SearchProps) => {
                         ...el
                     }
                 })
-                
+
                 setMapPoints(points);
 
                 setIsLoading(false)
@@ -176,11 +181,11 @@ const Search = (props: SearchProps) => {
             url = url + "/?"
         }
 
-        if (bdsId && bdsId.some(el=>el>0)) {
-            for(let bds of bdsId){
+        if (bdsId && bdsId.some(el => el > 0)) {
+            for (let bds of bdsId) {
                 url = url + '&bds=' + bds
             }
-            
+
         }
 
         if (keyword) {
@@ -217,7 +222,7 @@ const Search = (props: SearchProps) => {
                 signal: controller.signal
             }).then((res: any) => {
                 const data = res.data;
-                
+
                 const cities = data.filters.cities;
                 const stations = data.filters.metro;
                 const businessDirections = data.filters.businessDirections;
@@ -236,13 +241,13 @@ const Search = (props: SearchProps) => {
 
 
                 setSearchResults(searchResults)
-                
+
                 setTotalPagesCount(data.searchResult.totalPagesCount)
                 setTotalQnt(data.searchResult.totalCount)
                 if (selectedVacanciesIds.length === 0) {
                     setVacancies(vacancies);
                 }
-                
+
                 setIsLoading(false)
             });
 
@@ -288,6 +293,24 @@ const Search = (props: SearchProps) => {
         }
     }, [size]);
 
+    useEffect(() => {
+
+        const found = cities.find(el => {
+            return el.title.toLowerCase() === locFromYa?.toLowerCase();
+        })
+
+        // debugger
+        if (found) {
+            found.city = found.title;
+            // debugger
+            $$changed(found)
+
+        } else {
+            // debugger
+        }
+
+        props.onLocation(locFromYa);
+    }, [cities, locFromYa]);
 
     useEffect(() => {
         // alert(page)
@@ -324,7 +347,7 @@ const Search = (props: SearchProps) => {
         var location = inst.geolocation.get(
             { provider: "yandex", mapStateAutoApply: true }
         )
-        
+
 
         // Асинхронная обработка ответа.
         location.then(
@@ -337,19 +360,39 @@ const Search = (props: SearchProps) => {
                 //     props.onLocation(result.geoObjects.get(0).getLocalities()[0]);
                 // }
 
-                
+
                 var data = result.geoObjects.get(0).properties.get('metaDataProperty').GeocoderMetaData;
                 var administrativeAreaName = data.AddressDetails.Country.AdministrativeArea.AdministrativeAreaName; // region
-                
+
                 if ('SubAdministrativeArea' in data.AddressDetails.Country.AdministrativeArea) {
                     var localityName = data.AddressDetails.Country.AdministrativeArea.SubAdministrativeArea.Locality.LocalityName; // city
                 } else {
                     var localityName = data.AddressDetails.Country.AdministrativeArea.Locality.LocalityName; // city
                 }
-                
 
-                console.log("Location from yandex: ", localityName || administrativeAreaName )
-                props.onLocation(localityName || administrativeAreaName);
+
+                console.log("Location from yandex: ", localityName || administrativeAreaName)
+
+
+                const loc = "Москва"//localityName || administrativeAreaName;
+
+                setLocFromYa(loc);
+                // const found = cities.find(el => {
+                //     return el.title.toLowerCase() === loc?.toLowerCase();
+                // })
+
+                // // debugger
+                // if(found){
+                //     found.city = found.title;
+                //     // debugger
+                //     alert('set')
+                //     $$changed(found)   
+
+                // }else{
+                //     debugger
+                // }
+
+                // props.onLocation(loc);
 
 
                 // alert(result.geoObjects.get(0).getLocalities()[0])
@@ -364,7 +407,7 @@ const Search = (props: SearchProps) => {
                 // inst.geoObjects.add(result.geoObjects);
             },
             function (err: any) {
-                
+
                 console.log(err)
 
                 console.log('Ошибка геолокации: ' + err)
@@ -379,23 +422,26 @@ const Search = (props: SearchProps) => {
 
 
     return <div id={'search'} className={classes.Container}>
-        
+
         <div className={classes.Search}>
             {/*{isMobile ? <MobileSelectors/> : <DesktopSelectors/>}*/}
-            
+
             <DesktopSelectors
                 selectedCity={props?.city?.id}
                 cities={cities}
                 directions={directions}
                 onCityChanged={(id) => {
                     setSelectedCityId(id);
-                  
+
                 }}
                 onBdsChanged={(id: number[]) => {
+                    if (!id) {
+                        id = []
+                    }
                     // alert(id)
                     console.log("BDS", id)
                     console.log("Directions", directions)
-                    const models = directions.filter(el=>id.includes(el.businessDirectionId))
+                    const models = directions.filter(el => id.includes(el.businessDirectionId))
                     // @ts-ignore
                     $$bdsChanged(models)
                     setBdsId(id);
@@ -407,7 +453,7 @@ const Search = (props: SearchProps) => {
 
                     setSelStationsIds(ids)
 
-                    const models = stations.filter(el=>ids.includes(el.metroId))
+                    const models = stations.filter(el => ids.includes(el.metroId))
                     // @ts-ignore
                     $$stationsChanged(models)
                 }}
@@ -479,7 +525,7 @@ const Search = (props: SearchProps) => {
                                 //     // setMapRef(ref);
                                 // }}
                                 instanceRef={ref => {
-                                    
+
                                     // debugger
 
 
@@ -570,7 +616,7 @@ const Search = (props: SearchProps) => {
                         results={searchResults}
                         onSelect={(row: VacancyModel) => {
                             setSelectedVacancy(row)
-                            
+
                         }}
                         pageSize={pageSize}
                         onPageSizeChanged={(size: number) => {
