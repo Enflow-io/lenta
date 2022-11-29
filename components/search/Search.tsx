@@ -374,7 +374,8 @@ const Search = (props: SearchProps) => {
                 console.log("Location from yandex: ", localityName || administrativeAreaName)
 
 
-                const loc = "Москва"//localityName || administrativeAreaName;
+                // const loc = "Москва"//localityName || administrativeAreaName;
+                const loc = localityName || administrativeAreaName;
 
                 setLocFromYa(loc);
                 // const found = cities.find(el => {
